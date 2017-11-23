@@ -4,7 +4,8 @@
   var map = document.querySelector('.map');
   var mapFaded = '.map--faded';
   var setupSimilar = document.querySelector('.setup-similar');
-  var avatar = '';
+  var authors = [];
+  var avatars = [];
   var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
   var location;
   var address = '';
@@ -26,6 +27,10 @@
     this.author = author;
     this.offer = offer;
     this.location = location;
+  }
+
+  function Author(avatar) {
+    this.avatar = avatar;
   }
 
   function Offer(title, address, price, type, rooms, guests, checkin, checkout, features, description, photos) {
@@ -66,9 +71,20 @@
   function createAdverts() {
     var adverts = [];
     for (var i = 0; i < 8; i++) {
-      adverts.push(new Advert(getRandomTitle(), createOffer(), location));
+      adverts.push(new Advert(getAuthor(i), createOffer(), location));
     }
     return adverts;
+  }
+
+  function getAuthor(authorIndex) {
+    authors.push(avatars[authorIndex]);
+    return authors[authorIndex];
+  }
+
+  function createAvatars() {
+    for (var i = 1; i <= 8; i++) {
+      avatars.push('img/avatars/user0' + i + '.png')
+    }
   }
 
   function createOffer() {
@@ -129,6 +145,7 @@
   // }
 
   hideBlock(map, mapFaded);
+  createAvatars();
   debugger;
   createAdverts();
   // fillFragment(createAdverts());
