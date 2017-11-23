@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var setup = document.querySelector('.setup');
+  var map = document.querySelector('.map');
+  var mapFaded = '.map--faded';
   var setupSimilar = document.querySelector('.setup-similar');
   var avatar = '';
   var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
@@ -71,7 +72,7 @@
   }
 
   function createOffer() {
-    var offer = new offer(getRandomTitle(), getAddress(getLocation()), getPrice(), getType(), getNumberOfRooms(), getNumberOfGuests(), getCheckIn(), getCheckOut(), getRandomFeatures(), description, photos);
+    var offer = new Offer(getRandomTitle(), getAddress(getLocation()), getPrice(), getType(), getNumberOfRooms(), getNumberOfGuests(), getCheckIn(), getCheckOut(), getRandomFeatures(), description, photos);
     return offer;
   }
 
@@ -93,40 +94,42 @@
   }
 
   function getNumberOfRooms() {
-    return getRandomInt(1, 5);
+    rooms = getRandomInt(1, 5)
+    return rooms;
   }
 
   function getNumberOfGuests() {
-    return (rooms * 2);
+    return rooms * 2;
   }
 
   function getCheckIn() {
-    return checkins[getRandomInt(0, checkin.length)];
+    return checkins[getRandomInt(0, checkins.length)];
   }
 
   function getCheckOut() {
-    return checkouts[getRandomInt(0, checkout.length)];
+    return checkouts[getRandomInt(0, checkouts.length)];
   }
 
-  function createAdvertElement(advert) {
-    var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
-    var wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = mage.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = mage.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = mage.eyesColor;
-    return wizardElement;
-  }
+  // function createAdvertElement(advert) {
+  //   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+  //   var wizardElement = similarWizardTemplate.cloneNode(true);
+  //   wizardElement.querySelector('.setup-similar-label').textContent = mage.name;
+  //   wizardElement.querySelector('.wizard-coat').style.fill = mage.coatColor;
+  //   wizardElement.querySelector('.wizard-eyes').style.fill = mage.eyesColor;
+  //   return wizardElement;
+  // }
+  //
+  // function fillFragment(adverts) {
+  //   var fragment = document.createDocumentFragment();
+  //   var similarListElement = document.querySelector('.setup-similar-list');
+  //   for (var i = 0; i < mages.length; i++) {
+  //     fragment.appendChild(createAdvertElement(adverts[i]));
+  //   }
+  //   similarListElement.appendChild(fragment);
+  // }
 
-  function fillFragment(adverts) {
-    var fragment = document.createDocumentFragment();
-    var similarListElement = document.querySelector('.setup-similar-list');
-    for (var i = 0; i < mages.length; i++) {
-      fragment.appendChild(createAdvertElement(adverts[i]));
-    }
-    similarListElement.appendChild(fragment);
-  }
-
-  showBlock(setup);
-  fillFragment(createMages());
-  showBlock(setupSimilar);
+  hideBlock(map, mapFaded);
+  debugger;
+  createAdverts();
+  // fillFragment(createAdverts());
 }());
