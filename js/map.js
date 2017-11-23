@@ -4,7 +4,6 @@
   var map = document.querySelector('.map');
   var mapFaded = '.map--faded';
   var setupSimilar = document.querySelector('.setup-similar');
-  var authors = [];
   var avatars = [];
   var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
   var location;
@@ -77,8 +76,8 @@
   }
 
   function getAuthor(authorIndex) {
-    authors.push(avatars[authorIndex]);
-    return authors[authorIndex];
+    var author = new Author(avatars[authorIndex]);
+    return author;
   }
 
   function createAvatars() {
@@ -126,23 +125,27 @@
     return checkouts[getRandomInt(0, checkouts.length)];
   }
 
-  // function createAdvertElement(advert) {
-  //   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
-  //   var wizardElement = similarWizardTemplate.cloneNode(true);
-  //   wizardElement.querySelector('.setup-similar-label').textContent = mage.name;
-  //   wizardElement.querySelector('.wizard-coat').style.fill = mage.coatColor;
-  //   wizardElement.querySelector('.wizard-eyes').style.fill = mage.eyesColor;
-  //   return wizardElement;
-  // }
-  //
-  // function fillFragment(adverts) {
-  //   var fragment = document.createDocumentFragment();
-  //   var similarListElement = document.querySelector('.setup-similar-list');
-  //   for (var i = 0; i < mages.length; i++) {
-  //     fragment.appendChild(createAdvertElement(adverts[i]));
-  //   }
-  //   similarListElement.appendChild(fragment);
-  // }
+  function getCoordinates(location) {
+    return 'left: ' + (location.x - 44) + 'px; top: ' + (location.y - 44) + 'px;';
+  }
+
+  function createAdvertElement(advert) {
+    var similarAdvertTemplate = document.querySelector('#similar-advert-template').content;
+    var advertElement = similaradvertTemplate.cloneNode(true);
+    advertElement.querySelector('.setup-similar-label').textContent = advert.name;
+    advertElement.querySelector('.advert-coat').style.fill = mage.coatColor;
+    advertElement.querySelector('.advert-eyes').style.fill = mage.eyesColor;
+    return advertElement;
+  }
+
+  function fillFragment(adverts) {
+    var fragment = document.createDocumentFragment();
+    var similarListElement = document.querySelector('.setup-similar-list');
+    for (var i = 0; i < mages.length; i++) {
+      fragment.appendChild(createAdvertElement(adverts[i]));
+    }
+    similarListElement.appendChild(fragment);
+  }
 
   hideBlock(map, mapFaded);
   createAvatars();
