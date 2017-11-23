@@ -127,15 +127,20 @@
   }
 
   function getCoordinates(location) {
-    return 'left: ' + (location.x - 44) + 'px; top: ' + (location.y - 44) + 'px;';
+    var coords = location - 44
+    return (coords + 'px');
   }
 
   function createAdvertElement(advert) {
     var similarAdvertTemplate = document.querySelector('#similar-advert-template').content;
     var advertElement = similarAdvertTemplate.cloneNode(true);
+    // debugger;
+    advertElement.querySelector('.button__img').src = advert.author.avatar;
+    advertElement.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
+    advertElement.querySelector('.map__pin').style.top = getCoordinates(advert.location.y);
     advertElement.querySelector('.popup__title').textContent = advert.offer.title;
     advertElement.querySelector('.popup__address').textContent = 'Координаты на карте: ' + advert.offer.address;
-    advertElement.querySelector('.popup__price').textContent = 'Цена за ночь: ' + advert.offer.price;
+    advertElement.querySelector('.popup__price').textContent = 'Цена за ночь: ' + advert.offer.price + 'Y';
     advertElement.querySelector('.popup__type').textContent = 'Тип жилья: ' + advert.offer.type;
     advertElement.querySelector('.popup__rooms').textContent = 'Количество комнат: ' + advert.offer.rooms;
     advertElement.querySelector('.popup__checkin').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
@@ -143,10 +148,20 @@
     return advertElement;
   }
 
+  // function createAdvertButton(advert) {
+  //   var similarAdvertButton = document.querySelector('#similar-advert-button').content;
+  //   var advertButton = similarAdvertButton.cloneNode(true);
+  //   advertButton.querySelector('.button__img').textContent = advert.offer.avatar;
+  //   advertButton.style.left = getCoordinates(advert.location.x);
+  //   advertButton.style.top = getCoordinates(advert.location.y);
+  //   return advertButton;
+  // }
+
   function fillFragment(adverts) {
     var fragment = document.createDocumentFragment();
-    var similarPinElement = document.querySelector('.map__pinsoverlay');
+    var similarPinElement = document.querySelector('.map__pin');
     for (var i = 0; i < adverts.length; i++) {
+      // debugger;
       fragment.appendChild(createAdvertElement(adverts[i]));
     }
     similarPinElement.appendChild(fragment);
@@ -154,6 +169,6 @@
 
   hideBlock(map, mapFaded);
   createAvatars();
-  debugger;
+  // debugger;
   fillFragment(createAdverts());
 }());
