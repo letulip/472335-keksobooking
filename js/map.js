@@ -124,7 +124,6 @@
     } else {
       return 'Бунгало';
     }
-
   }
 
   function getNumberOfRooms() {
