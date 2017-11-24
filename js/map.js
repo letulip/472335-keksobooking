@@ -23,10 +23,10 @@
     element.classList.remove(className);
   }
 
-  function Advert(author, offer, loc) {
+  function Advert(author, offer, locationCoords) {
     this.author = author;
     this.offer = offer;
-    this.location = loc;
+    this.location = locationCoords;
   }
 
   function Author(avatar) {
@@ -96,8 +96,8 @@
     return location;
   }
 
-  function getAddress(loc) {
-    address = loc.x + ', ' + loc.y;
+  function getAddress(locationCoords) {
+    address = locationCoords.x + ', ' + locationCoords.y;
     return address;
   }
 
@@ -164,11 +164,11 @@
     return advertButton;
   }
 
-  function fillFragment(advs) {
+  function fillFragment(advertsArray) {
     var fragment = document.createDocumentFragment();
     var similarPinElement = document.querySelector('.map__pin');
     for (var i = 0; i < adverts.length; i++) {
-      fragment.appendChild(createAdvertButton(advs[i]));
+      fragment.appendChild(createAdvertButton(advertsArray[i]));
     }
     similarPinElement.appendChild(fragment);
   }
