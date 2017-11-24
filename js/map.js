@@ -4,7 +4,6 @@
   var map = document.querySelector('.map');
   var mapFaded = '.map--faded';
   var numOfAdverts = 8;
-  var setupSimilar = document.querySelector('.setup-similar');
   var avatars = [];
   var adverts = [];
   var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
@@ -34,18 +33,18 @@
     this.avatar = avatar;
   }
 
-  function Offer(title, address, price, type, rooms, guests, checkin, checkout, features, description, photos) {
-    this.title = title;
-    this.address = address;
-    this.price = price;
-    this.type = type;
-    this.rooms = rooms;
-    this.guests = guests;
-    this.checkin = checkin;
-    this.checkout = checkout;
-    this.features = features;
-    this.description = description;
-    this.photos = photos;
+  function Offer(offerTitle, offerAddress, offerPrice, offerType, offerRooms, offerGuests, offerCheckin, offerCheckout, offerFeatures, offerDescription, offerPhotos) {
+    this.title = offerTitle;
+    this.address = offerAddress;
+    this.price = offerPrice;
+    this.type = offerType;
+    this.rooms = offerRooms;
+    this.guests = offerGuests;
+    this.checkin = offerCheckin;
+    this.checkout = offerCheckout;
+    this.features = offerFeatures;
+    this.description = offerDescription;
+    this.photos = offerPhotos;
   }
 
   function Location(x, y) {
@@ -83,7 +82,7 @@
 
   function createAvatars() {
     for (var i = 1; i <= numOfAdverts; i++) {
-      avatars.push('img/avatars/user0' + i + '.png')
+      avatars.push('img/avatars/user0' + i + '.png');
     }
   }
 
@@ -97,12 +96,14 @@
     return location;
   }
 
-  function getAddress(location) {
-    return location.x + ', ' + location.y;
+  function getAddress(loc) {
+    address = loc.x + ', ' + loc.y;
+    return address;
   }
 
   function getPrice() {
-    return getRandomInt(1000, 1000000);
+    price = getRandomInt(1000, 1000000);
+    return price;
   }
 
   function getType() {
@@ -117,12 +118,13 @@
   }
 
   function getNumberOfRooms() {
-    rooms = getRandomInt(1, 5)
+    rooms = getRandomInt(1, 5);
     return rooms;
   }
 
   function getNumberOfGuests() {
-    return rooms * 2;
+    guests = rooms * 2;
+    return guests;
   }
 
   function getCheckIn() {
@@ -133,8 +135,8 @@
     return checkouts[getRandomInt(0, checkouts.length)];
   }
 
-  function getCoordinates(location) {
-    var coords = location - 44
+  function getCoordinates(loc) {
+    var coords = loc - 44;
     return (coords + 'px');
   }
 
@@ -162,11 +164,11 @@
     return advertButton;
   }
 
-  function fillFragment(adverts) {
+  function fillFragment(advs) {
     var fragment = document.createDocumentFragment();
     var similarPinElement = document.querySelector('.map__pin');
     for (var i = 0; i < adverts.length; i++) {
-      fragment.appendChild(createAdvertButton(adverts[i]));
+      fragment.appendChild(createAdvertButton(advs[i]));
     }
     similarPinElement.appendChild(fragment);
   }
