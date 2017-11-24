@@ -16,8 +16,8 @@
   var checkins = ['12:00', '13:00', '14:00'];
   var checkouts = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-  var description = '';
-  var photos = [];
+  // var description = '';
+  // var photos = [];
 
   function hideBlock(element, className) {
     element.classList.remove(className);
