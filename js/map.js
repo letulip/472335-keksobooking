@@ -114,9 +114,10 @@
   }
 
   function getType() {
-    if (types[getRandomInt(0, types.length)] === 'flat') {
+    var type = types[getRandomInt(0, types.length)];
+    if (type === 'flat') {
       return 'Квартира';
-    } else if (types[getRandomInt(0, types.length)] === 'house') {
+    } else if (type === 'house') {
       return 'Дом';
     } else {
       return 'Бунгало';
