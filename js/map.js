@@ -33,18 +33,18 @@
     this.avatar = avatar;
   }
 
-  function Offer(offerTitle, offerAddress, offerPrice, offerType, offerRooms, offerGuests, offerCheckin, offerCheckout, offerFeatures, offerDescription, offerPhotos) {
-    this.title = offerTitle;
-    this.address = offerAddress;
-    this.price = offerPrice;
-    this.type = offerType;
-    this.rooms = offerRooms;
-    this.guests = offerGuests;
-    this.checkin = offerCheckin;
-    this.checkout = offerCheckout;
-    this.features = offerFeatures;
-    this.description = offerDescription;
-    this.photos = offerPhotos;
+  function Offer(offerParams) {
+    this.title = offerParams.title;
+    this.address = offerParams.address;
+    this.price = offerParams.price;
+    this.type = offerParams.type;
+    this.rooms = offerParams.rooms;
+    this.guests = offerParams.guests;
+    this.checkin = offerParams.checkin;
+    this.checkout = offerParams.checkout;
+    this.features = offerParams.features;
+    this.description = offerParams.description;
+    this.photos = offerParams.photos;
   }
 
   function Location(x, y) {
@@ -86,8 +86,18 @@
   }
 
   function createOffer() {
-    var offer = new Offer(getRandomTitle(), getAddress(getLocation()), getPrice(), getType(), getNumberOfRooms(), getNumberOfGuests(), getCheckIn(), getCheckOut(), getRandomFeatures(), description, photos);
-    return offer;
+    var offer = {
+      title: getRandomTitle(),
+      address: getAddress(getLocation()),
+      price: getPrice(),
+      type: getType(),
+      rooms: getNumberOfRooms(),
+      guests: getNumberOfGuests(),
+      checkin: getCheckIn(),
+      checkout: getCheckOut(),
+      features: getRandomFeatures()
+    };
+    return new Offer(offer);
   }
 
   function getLocation() {
@@ -141,7 +151,7 @@
     advertElement.querySelector('.popup__avatar').src = advert.author.avatar;
     advertElement.querySelector('.popup__title').textContent = advert.offer.title;
     advertElement.querySelector('.popup__address').textContent = 'Координаты на карте: ' + advert.offer.address;
-    advertElement.querySelector('.popup__price').textContent = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
+    advertElement.querySelector('.popup__price').innerHTML = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
     advertElement.querySelector('.popup__type').textContent = 'Тип жилья: ' + advert.offer.type;
     advertElement.querySelector('.popup__rooms').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
     advertElement.querySelector('.popup__checkin').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
