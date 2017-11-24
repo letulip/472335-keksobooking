@@ -23,10 +23,10 @@
     element.classList.remove(className);
   }
 
-  function Advert(author, offer, location) {
+  function Advert(author, offer, loc) {
     this.author = author;
     this.offer = offer;
-    this.location = location;
+    this.location = loc;
   }
 
   function Author(avatar) {
