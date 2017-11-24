@@ -76,8 +76,7 @@
   }
 
   function getAuthor(authorIndex) {
-    var author = new Author(avatars[authorIndex]);
-    return author;
+    return new Author(avatars[authorIndex]);
   }
 
   function createAvatars() {
@@ -97,13 +96,11 @@
   }
 
   function getAddress(locationCoords) {
-    address = locationCoords.x + ', ' + locationCoords.y;
-    return address;
+    return locationCoords.x + ', ' + locationCoords.y;;
   }
 
   function getPrice() {
-    price = getRandomInt(1000, 1000000);
-    return price;
+    return getRandomInt(1000, 1000000);
   }
 
   function getType() {
@@ -123,8 +120,7 @@
   }
 
   function getNumberOfGuests() {
-    guests = rooms * 2;
-    return guests;
+    return rooms * 2;
   }
 
   function getCheckIn() {
@@ -135,9 +131,8 @@
     return checkouts[getRandomInt(0, checkouts.length)];
   }
 
-  function getCoordinates(loc) {
-    var coords = loc - 44;
-    return (coords + 'px');
+  function getCoordinates(locationCoords) {
+    return ((locationCoords - 44) + 'px');
   }
 
   function createAdvertElement(advert) {
