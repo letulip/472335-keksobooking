@@ -148,24 +148,24 @@
   }
 
   function createAdvertElement(advert) {
-    var similarAdvertTemplate = document.querySelector('#similar-advert-template').content;
+    var similarAdvertTemplate = document.querySelector('template').content;
     var advertElement = similarAdvertTemplate.cloneNode(true);
     advertElement.querySelector('.popup__avatar').src = advert.author.avatar;
-    advertElement.querySelector('.popup__title').textContent = advert.offer.title;
-    advertElement.querySelector('.popup__address').textContent = 'Координаты на карте: ' + advert.offer.address;
+    advertElement.querySelector('h3').textContent = advert.offer.title;
+    advertElement.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
     advertElement.querySelector('.popup__price').innerHTML = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
-    advertElement.querySelector('.popup__type').textContent = 'Тип жилья: ' + advert.offer.type;
-    advertElement.querySelector('.popup__rooms').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
-    advertElement.querySelector('.popup__checkin').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
+    advertElement.querySelector('h4').textContent = 'Тип жилья: ' + advert.offer.type;
+    advertElement.querySelector('h4 + p').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
+    advertElement.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
     advertElement.querySelector('.popup__features').textContent = 'Доп. опции: ' + advert.offer.features;
-    advertElement.querySelector('.popup__desc').textContent = 'Описание: ' + advert.offer.description;
+    advertElement.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
     return advertElement;
   }
 
   function createAdvertButton(advert) {
-    var similarAdvertTemplate = document.querySelector('#similar-advert-template').content;
+    var similarAdvertTemplate = document.querySelector('template').content;
     var advertButton = similarAdvertTemplate.cloneNode(true);
-    advertButton.querySelector('.button__img').src = advert.author.avatar;
+    advertButton.querySelector('.map__pin img').src = advert.author.avatar;
     advertButton.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
     advertButton.querySelector('.map__pin').style.top = getCoordinates(advert.location.y);
     return advertButton;
