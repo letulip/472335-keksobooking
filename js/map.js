@@ -98,7 +98,11 @@
   }
 
   function getLocation() {
-    location = new Location(getRandomInt(300, 900), getRandomInt(100, 500));
+    var minAreaX = 300;
+    var maxAreaX = 900;
+    var minAreaY = 100;
+    var maxAreaY = 500;
+    location = new Location(getRandomInt(minAreaX, maxAreaX), getRandomInt(minAreaY, maxAreaY));
     return location;
   }
 
@@ -107,7 +111,9 @@
   }
 
   function getPrice() {
-    return getRandomInt(1000, 1000000);
+    var minPrice = 1000;
+    var maxPrice = 1000000;
+    return getRandomInt(minPrice, maxPrice);
   }
 
   function getType() {
@@ -122,12 +128,15 @@
   }
 
   function getNumberOfRooms() {
-    rooms = getRandomInt(1, 5);
+    var minRooms = 1;
+    var maxRooms = 5;
+    rooms = getRandomInt(minRooms, maxRooms);
     return rooms;
   }
 
   function getNumberOfGuests() {
-    return rooms * 2;
+    var guestByRoom = 2;
+    return rooms * guestByRoom;
   }
 
   function getCheckIn() {
@@ -139,7 +148,8 @@
   }
 
   function getCoordinates(locationCoords) {
-    return ((locationCoords - 44) + 'px');
+    var pinShift = 44;
+    return ((locationCoords - pinShift) + 'px');
   }
 
   function createAdvertElement(advert) {
