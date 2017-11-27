@@ -8,16 +8,11 @@
   var adverts = [];
   var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
   var location;
-  // var address = '';
-  // var price;
   var types = ['flat', 'house', 'bungalo'];
   var rooms;
-  // var guests;
   var checkins = ['12:00', '13:00', '14:00'];
   var checkouts = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-  // var description = '';
-  // var photos = [];
 
   function hideBlock(element, className) {
     element.classList.remove(className);
