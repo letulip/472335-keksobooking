@@ -2,7 +2,7 @@
 
 (function () {
   var map = document.querySelector('.map');
-  var mapFaded = '.map--faded';
+  var mapFaded = 'map--faded';
   var numOfAdverts = 8;
   var avatars = [];
   var adverts = [];
@@ -192,8 +192,8 @@
     similarPinElement.appendChild(fragment);
   }
 
-  hideBlock(map, mapFaded);
-  createAvatars();
-  fillFragment(createAdverts());
-  fillAdvert(adverts[0]);
+  // hideBlock(map, mapFaded);
+  // createAvatars();
+  // fillFragment(createAdverts());
+  // fillAdvert(adverts[0]);
 }());
