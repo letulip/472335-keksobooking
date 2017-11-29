@@ -3,6 +3,8 @@
 (function () {
   var map = document.querySelector('.map');
   var mapFaded = 'map--faded';
+  var fieldsetElements = document.querySelectorAll('.form__element');
+  var fieldsetDisabled = 'disabled';
   var numOfAdverts = 8;
   var avatars = [];
   var adverts = [];
@@ -14,8 +16,12 @@
   var checkouts = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-  function hideBlock(element, className) {
+  function showBlock(element, className) {
     element.classList.remove(className);
+  }
+
+  function hideBlock(element, className) {
+    element.classList.add(className);
   }
 
   function Advert(author, offer, locationCoords) {
@@ -192,8 +198,15 @@
     similarPinElement.appendChild(fragment);
   }
 
+  function formFieldsetHide() {
+    for (var i = 0; i < fieldsetElements.length; i++) {
+      hideBlock(fieldsetElements[i], fieldsetDisabled);
+    }
+  }
+
   // hideBlock(map, mapFaded);
   // createAvatars();
   // fillFragment(createAdverts());
   // fillAdvert(adverts[0]);
+  formFieldsetHide();
 }());
