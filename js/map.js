@@ -5,6 +5,8 @@
   var mapFaded = 'map--faded';
   var fieldsetElements = document.querySelectorAll('.form__element');
   var fieldsetDisabled = 'disabled';
+  var noticeForm = document.querySelector('.notice__form');
+  var noticeFormDisabled = 'notice__form--disabled';
   var numOfAdverts = 8;
   var avatars = [];
   var adverts = [];
@@ -15,6 +17,8 @@
   var checkins = ['12:00', '13:00', '14:00'];
   var checkouts = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  var mapPinMainMouseUp = document.querySelector('main');
+  mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
   function showBlock(element, className) {
     element.classList.remove(className);
@@ -204,9 +208,17 @@
     }
   }
 
-  // hideBlock(map, mapFaded);
-  // createAvatars();
-  // fillFragment(createAdverts());
+  function mouseUpInit() {
+    showBlock(map, mapFaded);
+    createAvatars();
+    fillFragment(createAdverts());
+    showBlock(noticeForm, noticeFormDisabled);
+    for (var i = 0; i < fieldsetElements.length; i++) {
+      showBlock(fieldsetElements[i], fieldsetDisabled);
+    }
+    mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
+  }
+
   // fillAdvert(adverts[0]);
   formFieldsetHide();
 }());
