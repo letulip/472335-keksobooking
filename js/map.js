@@ -4,7 +4,8 @@
   var map = document.querySelector('.map');
   var mapFaded = 'map--faded';
   var fieldsetElements = document.querySelectorAll('.form__element');
-  var fieldsetDisabled = 'disabled';
+  var disabled = 'disabled';
+  var hidden = 'hidden';
   var noticeForm = document.querySelector('.notice__form');
   var noticeFormDisabled = 'notice__form--disabled';
   var numOfAdverts = 8;
@@ -204,8 +205,21 @@
 
   function formFieldsetHide() {
     for (var i = 0; i < fieldsetElements.length; i++) {
-      hideBlock(fieldsetElements[i], fieldsetDisabled);
+      hideBlock(fieldsetElements[i], disabled);
     }
+  }
+
+  function formFieldsetShow() {
+    for (var i = 0; i < fieldsetElements.length; i++) {
+      showBlock(fieldsetElements[i], disabled);
+    }
+  }
+
+  function popupsHide() {
+    var popups = document.querySelectorAll('.popup');
+    for (var i = 0; i < popups.length; i++) {
+      hideBlock(popups[i], hidden);
+    };
   }
 
   function mouseUpInit() {
@@ -213,9 +227,8 @@
     createAvatars();
     fillFragment(createAdverts());
     showBlock(noticeForm, noticeFormDisabled);
-    for (var i = 0; i < fieldsetElements.length; i++) {
-      showBlock(fieldsetElements[i], fieldsetDisabled);
-    }
+    formFieldsetShow();
+    popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
   }
 
