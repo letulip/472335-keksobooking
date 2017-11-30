@@ -8,8 +8,6 @@
   var hidden = 'hidden';
   var noticeForm = document.querySelector('.notice__form');
   var noticeFormDisabled = 'notice__form--disabled';
-  var mapPin = document.querySelector('.map__pin');
-  mapPin.addEventListener('click', mapPinClick);
   var numOfAdverts = 8;
   var avatars = [];
   var adverts = [];
@@ -161,7 +159,7 @@
   }
 
   function getCoordinates(locationCoords) {
-    var pinShift = 44;
+    var pinShift = 0;
     return ((locationCoords - pinShift) + 'px');
   }
 
@@ -232,10 +230,23 @@
     formFieldsetShow();
     popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
+    mapPinsListener();
+
+    var mapPinClickables = document.querySelectorAll('.map__pin--clickable');
+    var mapPinActive = 'map__pin--active';
+    for (var i = 0; i < mapPinClickables.length; i++) {
+      mapPinClickables[i].addEventListener('click', function () {
+        hideBlock(mapPinClickables[i], mapPinActive);
+      });
+    }
   }
 
-  function mapPinClick() {
-    mapPin.classList.add('map__pin--active');
+  function mapPinsListener() {
+    var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    var mapPinClickable = 'map__pin--clickable';
+    for (var i = 0; i < mapPins.length; i++) {
+      mapPins[i].addEventListener('click', hideBlock(mapPins[i], mapPinClickable));
+    }
   }
 
   // fillAdvert(adverts[0]);
