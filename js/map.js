@@ -219,7 +219,7 @@
     var popups = document.querySelectorAll('.popup');
     for (var i = 0; i < popups.length; i++) {
       hideBlock(popups[i], hidden);
-    };
+    }
   }
 
   function mouseUpInit() {
@@ -249,6 +249,6 @@
     }
   }
 
-  // fillAdvert(adverts[0]);
+  fillAdvert(adverts[0]);
   formFieldsetHide();
 }());
