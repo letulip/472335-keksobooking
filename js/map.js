@@ -24,11 +24,11 @@
 
   map.onclick = function (evt) {
     var mapPinClickable = document.querySelector('.map__pin:not(.map__pin--main)');
-    // var mapPinClickablePopup = document.querySelector();
+    var mapPinClickablePopup = document.querySelector('.popup + .map__pin:not(.map__pin--main)');
     var mapPinActive = 'map__pin--active';
     if (mapPinClickable.className === document.activeElement.className) {
       addClassName(document.activeElement, mapPinActive);
-      // removeClassName();
+      removeClassName(mapPinClickablePopup, 'hidden');
     }
   }
 
@@ -174,7 +174,7 @@
     return ((locationCoords - pinShift) + 'px');
   }
 
-  function createAdvertButton(advert) {
+  function createAdvert(advert) {
     var similarAdvertTemplate = document.querySelector('template').content;
     var advertButton = similarAdvertTemplate.cloneNode(true);
     advertButton.querySelector('.map__pin img').src = advert.author.avatar;
@@ -196,7 +196,7 @@
     var fragment = document.createDocumentFragment();
     var similarPinElement = document.querySelector('.map__pin');
     for (var i = 0; i < adverts.length; i++) {
-      fragment.appendChild(createAdvertButton(advertsArray[i]));
+      fragment.appendChild(createAdvert(advertsArray[i]));
     }
     similarPinElement.appendChild(fragment);
   }
@@ -216,7 +216,7 @@
   function popupsHide() {
     var popups = document.querySelectorAll('.popup');
     for (var i = 0; i < popups.length; i++) {
-      addClassName(popups[i], hidden);
+      addClassName(popups[i], 'hidden');
     }
   }
 
@@ -230,6 +230,5 @@
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
   }
 
-  // fillAdvert(adverts[0]);
   formFieldsetHide();
 }());
