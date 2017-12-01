@@ -24,9 +24,11 @@
 
   map.onclick = function (evt) {
     var mapPinClickable = document.querySelector('.map__pin:not(.map__pin--main)');
+    // var mapPinClickablePopup = document.querySelector();
     var mapPinActive = 'map__pin--active';
     if (mapPinClickable.className === document.activeElement.className) {
       addClassName(document.activeElement, mapPinActive);
+      // removeClassName();
     }
   }
 
@@ -172,27 +174,21 @@
     return ((locationCoords - pinShift) + 'px');
   }
 
-  function createAdvertElement(advert) {
-    var similarAdvertTemplate = document.querySelector('template').content;
-    var advertElement = similarAdvertTemplate.cloneNode(true);
-    advertElement.querySelector('.popup__avatar').src = advert.author.avatar;
-    advertElement.querySelector('h3').textContent = advert.offer.title;
-    advertElement.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
-    advertElement.querySelector('.popup__price').innerHTML = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
-    advertElement.querySelector('h4').textContent = 'Тип жилья: ' + advert.offer.type;
-    advertElement.querySelector('h4 + p').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
-    advertElement.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
-    advertElement.querySelector('.popup__features').textContent = 'Доп. опции: ' + advert.offer.features;
-    advertElement.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
-    return advertElement;
-  }
-
   function createAdvertButton(advert) {
     var similarAdvertTemplate = document.querySelector('template').content;
     var advertButton = similarAdvertTemplate.cloneNode(true);
     advertButton.querySelector('.map__pin img').src = advert.author.avatar;
     advertButton.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
     advertButton.querySelector('.map__pin').style.top = getCoordinates(advert.location.y);
+    advertButton.querySelector('.popup__avatar').src = advert.author.avatar;
+    advertButton.querySelector('h3').textContent = advert.offer.title;
+    advertButton.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
+    advertButton.querySelector('.popup__price').innerHTML = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
+    advertButton.querySelector('h4').textContent = 'Тип жилья: ' + advert.offer.type;
+    advertButton.querySelector('h4 + p').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
+    advertButton.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
+    advertButton.querySelector('.popup__features').textContent = 'Доп. опции: ' + advert.offer.features;
+    advertButton.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
     return advertButton;
   }
 
@@ -202,13 +198,6 @@
     for (var i = 0; i < adverts.length; i++) {
       fragment.appendChild(createAdvertButton(advertsArray[i]));
     }
-    similarPinElement.appendChild(fragment);
-  }
-
-  function fillAdvert(advert) {
-    var fragment = document.createDocumentFragment();
-    var similarPinElement = document.querySelector('.map__pin');
-    fragment.appendChild(createAdvertElement(advert));
     similarPinElement.appendChild(fragment);
   }
 
