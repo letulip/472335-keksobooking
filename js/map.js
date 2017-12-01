@@ -194,7 +194,7 @@
 
   function fillFragment(advertsArray) {
     var fragment = document.createDocumentFragment();
-    var similarPinElement = document.querySelector('.map__pin');
+    var similarPinElement = document.querySelector('.map__pins');
     for (var i = 0; i < adverts.length; i++) {
       fragment.appendChild(createAdvert(advertsArray[i]));
     }
