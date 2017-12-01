@@ -170,8 +170,7 @@
   }
 
   function getCoordinates(locationCoords) {
-    var pinShift = 0;
-    return ((locationCoords - pinShift) + 'px');
+    return ((locationCoords) + 'px');
   }
 
   function createAdvert(advert) {
