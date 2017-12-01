@@ -19,13 +19,22 @@
   var checkouts = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var mapPinMainMouseUp = document.querySelector('main');
+
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
-  function showBlock(element, className) {
+  map.onclick = function (evt) {
+    var mapPinClickable = document.querySelector('.map__pin:not(.map__pin--main)');
+    var mapPinActive = 'map__pin--active';
+    if (mapPinClickable.className === document.activeElement.className) {
+      addClassName(document.activeElement, mapPinActive);
+    }
+  }
+
+  function removeClassName(element, className) {
     element.classList.remove(className);
   }
 
-  function hideBlock(element, className) {
+  function addClassName(element, className) {
     element.classList.add(className);
   }
 
@@ -205,50 +214,33 @@
 
   function formFieldsetHide() {
     for (var i = 0; i < fieldsetElements.length; i++) {
-      hideBlock(fieldsetElements[i], disabled);
+      addClassName(fieldsetElements[i], disabled);
     }
   }
 
   function formFieldsetShow() {
     for (var i = 0; i < fieldsetElements.length; i++) {
-      showBlock(fieldsetElements[i], disabled);
+      removeClassName(fieldsetElements[i], disabled);
     }
   }
 
   function popupsHide() {
     var popups = document.querySelectorAll('.popup');
     for (var i = 0; i < popups.length; i++) {
-      hideBlock(popups[i], hidden);
+      addClassName(popups[i], hidden);
     }
   }
 
   function mouseUpInit() {
-    showBlock(map, mapFaded);
+    removeClassName(map, mapFaded);
     createAvatars();
     fillFragment(createAdverts());
-    showBlock(noticeForm, noticeFormDisabled);
+    removeClassName(noticeForm, noticeFormDisabled);
     formFieldsetShow();
     popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
-    mapPinsListener();
-
-    var mapPinClickables = document.querySelectorAll('.map__pin--clickable');
-    var mapPinActive = 'map__pin--active';
-    for (var i = 0; i < mapPinClickables.length; i++) {
-      mapPinClickables[i].addEventListener('click', function () {
-        hideBlock(mapPinClickables[i], mapPinActive);
-      });
-    }
   }
 
-  function mapPinsListener() {
-    var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
-    var mapPinClickable = 'map__pin--clickable';
-    for (var i = 0; i < mapPins.length; i++) {
-      mapPins[i].addEventListener('click', hideBlock(mapPins[i], mapPinClickable));
-    }
-  }
-
-  fillAdvert(adverts[0]);
+  // fillAdvert(adverts[0]);
   formFieldsetHide();
 }());
