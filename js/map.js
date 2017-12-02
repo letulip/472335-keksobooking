@@ -24,39 +24,47 @@
 
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
-  map.addEventListener('click', function (evt) {
-    var mapPinTemplate = document.querySelector('.map__pin-template');
-    var mapPinTemplateActive;
-    var mapPinClickable = document.querySelector('.map__pin-template .map__pin:not(.map__pin--main)');
+  map.addEventListener('click', function () {
+    var mapPinTemplate = map.querySelector('.map__pin-template');
+    var mapPinClickable = map.querySelector('.map__pin-template .map__pin:not(.map__pin--main)');
     var mapPinActive = 'map__pin--active';
     if (mapPinTemplate.className === document.activeElement.parentElement.className) {
+      removeTemplateActive();
       document.activeElement.parentElement.classList.add('map__pin-template-active');
       removePreviousActivePin(mapPinPopup);
       addClassName(document.activeElement, mapPinActive);
       mapPinPopup = document.activeElement.parentElement.firstElementChild;
       var string = '.map__pin-template-active article .popup__close';
-      popupCloseIcon = document.querySelector(string);
+      popupCloseIcon = map.querySelector(string);
       removeClassName(mapPinPopup, 'hidden');
       popupCloseIcon.addEventListener('click', popupClose);
     }
-  }
 
-  function popupClose() {
-    removePreviousActivePin(mapPinPopup);
-  }
+    function popupClose() {
+      removeTemplateActive();
+      removePreviousActivePin(mapPinPopup);
+    }
 
-  function removePreviousActivePin(previousPopup) {
-    var pinActive = document.querySelector('.map__pin--active');
-    if (pinActive) {
-      removeClassName(pinActive, 'map__pin--active');
+    function removePreviousActivePin(previousPopup) {
+      var pinActive = document.querySelector('.map__pin--active');
+      if (pinActive) {
+        removeClassName(pinActive, 'map__pin--active');
+      }
+      if (previousPopup) {
+        addClassName(previousPopup, 'hidden');
+        popupCloseIcon.removeEventListener('click', popupClose);
+      }
     }
-    if (previousPopup) {
-      var activePopup = document.querySelector('.map__pin-template-active');
-      addClassName(previousPopup, 'hidden');
-      removeClassName(activePopup, 'map__pin-template-active');
-      popupCloseIcon.removeEventListener('click', popupClose);
+
+    function removeTemplateActive() {
+      var activePopup = map.querySelector('.map__pin-template-active');
+      if (activePopup) {
+        removeClassName(activePopup, 'map__pin-template-active');
+      }
     }
-  }
+  });
+
+
 
   function removeClassName(element, className) {
     element.classList.remove(className);
