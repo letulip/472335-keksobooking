@@ -19,6 +19,7 @@
   var checkouts = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var mapPinMainMouseUp = document.querySelector('main');
+  var mapPinPopup;
 
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
@@ -27,17 +28,20 @@
     var mapPinClickable = document.querySelector('.map__pin-template .map__pin:not(.map__pin--main)');
     var mapPinActive = 'map__pin--active';
     if (mapPinTemplate.className === document.activeElement.parentElement.className) {
-      removePreviousActivePin();
+      removePreviousActivePin(mapPinPopup);
       addClassName(document.activeElement, mapPinActive);
-      var mapPinPopup = document.activeElement.parentElement.firstElementChild;
+      mapPinPopup = document.activeElement.parentElement.firstElementChild;
       removeClassName(mapPinPopup, 'hidden');
     }
-  }
 
-  function removePreviousActivePin() {
-    var pinActive = document.querySelector('.map__pin--active');
-    if (pinActive) {
-      removeClassName(pinActive, 'map__pin--active');
+    function removePreviousActivePin(previousPopup) {
+      var pinActive = document.querySelector('.map__pin--active');
+      if (pinActive) {
+        removeClassName(pinActive, 'map__pin--active');
+      }
+      if (previousPopup) {
+        addClassName(previousPopup, 'hidden');
+      }
     }
   }
 
