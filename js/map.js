@@ -24,7 +24,7 @@
 
   map.onclick = function (evt) {
     var mapPinClickable = document.querySelector('.map__pin:not(.map__pin--main)');
-    var mapPinClickablePopup = document.querySelector('.popup + .map__pin:not(.map__pin--main)');
+    var mapPinClickablePopup = document.querySelector('.popup');
     var mapPinActive = 'map__pin--active';
     if (mapPinClickable.className === document.activeElement.className) {
       addClassName(document.activeElement, mapPinActive);
@@ -173,9 +173,18 @@
     return ((locationCoords) + 'px');
   }
 
+  function createAdvertTemplate(advertContent) {
+    var similarAdvertTemplate = document.querySelector('template');
+    // similarAdvertTemplate.style.display = 'block';
+    var advertTemplate = similarAdvertTemplate.cloneNode(false);
+    advertTemplate.style.display = 'block';
+    advertTemplate.appendChild(advertContent);
+    return advertTemplate;
+  }
+
   function createAdvert(advert) {
-    var similarAdvertTemplate = document.querySelector('template').content;
-    var advertButton = similarAdvertTemplate.cloneNode(true);
+    var similarAdvertTemplateContent = document.querySelector('template').content;
+    var advertButton = similarAdvertTemplateContent.cloneNode(true);
     advertButton.querySelector('.map__pin img').src = advert.author.avatar;
     advertButton.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
     advertButton.querySelector('.map__pin').style.top = getCoordinates(advert.location.y);
@@ -195,7 +204,8 @@
     var fragment = document.createDocumentFragment();
     var similarPinElement = document.querySelector('.map__pins');
     for (var i = 0; i < adverts.length; i++) {
-      fragment.appendChild(createAdvert(advertsArray[i]));
+      // fragment.appendChild(createAdvert(advertsArray[i]));
+      fragment.appendChild(createAdvertTemplate(createAdvert(advertsArray[i])));
     }
     similarPinElement.appendChild(fragment);
   }
