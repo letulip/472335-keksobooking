@@ -23,12 +23,13 @@
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
   map.onclick = function (evt) {
-    var mapPinClickable = document.querySelector('.map__pin:not(.map__pin--main)');
-    var mapPinClickablePopup = document.querySelector('.popup');
+    var mapPinTemplate = document.querySelector('.map__pin-template');
+    var mapPinClickable = document.querySelector('.map__pin-template .map__pin:not(.map__pin--main)');
     var mapPinActive = 'map__pin--active';
-    if (mapPinClickable.className === document.activeElement.className) {
+    if (mapPinTemplate.className === document.activeElement.parentElement.className) {
       addClassName(document.activeElement, mapPinActive);
-      removeClassName(mapPinClickablePopup, 'hidden');
+      var mapPinPopup = document.activeElement.parentElement.firstElementChild;
+      removeClassName(mapPinPopup, 'hidden');
     }
   }
 
@@ -178,6 +179,7 @@
     // similarAdvertTemplate.style.display = 'block';
     var advertTemplate = similarAdvertTemplate.cloneNode(false);
     advertTemplate.style.display = 'block';
+    advertTemplate.classList.add('map__pin-template');
     advertTemplate.appendChild(advertContent);
     return advertTemplate;
   }
