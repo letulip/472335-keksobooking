@@ -27,9 +27,17 @@
     var mapPinClickable = document.querySelector('.map__pin-template .map__pin:not(.map__pin--main)');
     var mapPinActive = 'map__pin--active';
     if (mapPinTemplate.className === document.activeElement.parentElement.className) {
+      removePreviousActivePin();
       addClassName(document.activeElement, mapPinActive);
       var mapPinPopup = document.activeElement.parentElement.firstElementChild;
       removeClassName(mapPinPopup, 'hidden');
+    }
+  }
+
+  function removePreviousActivePin() {
+    var pinActive = document.querySelector('.map__pin--active');
+    if (pinActive) {
+      removeClassName(pinActive, 'map__pin--active');
     }
   }
 
@@ -176,7 +184,6 @@
 
   function createAdvertTemplate(advertContent) {
     var similarAdvertTemplate = document.querySelector('template');
-    // similarAdvertTemplate.style.display = 'block';
     var advertTemplate = similarAdvertTemplate.cloneNode(false);
     advertTemplate.style.display = 'block';
     advertTemplate.classList.add('map__pin-template');
@@ -206,7 +213,6 @@
     var fragment = document.createDocumentFragment();
     var similarPinElement = document.querySelector('.map__pins');
     for (var i = 0; i < adverts.length; i++) {
-      // fragment.appendChild(createAdvert(advertsArray[i]));
       fragment.appendChild(createAdvertTemplate(createAdvert(advertsArray[i])));
     }
     similarPinElement.appendChild(fragment);
