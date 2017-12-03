@@ -28,12 +28,7 @@
 
   map.addEventListener('click', mapEventListener);
   map.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      mapEventListener();
-    }
-  });
-  map.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === ENTER_KEYCODE || evt.keyCode === ESC_KEYCODE) {
       mapEventListener();
     }
   });
