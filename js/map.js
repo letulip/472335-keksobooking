@@ -255,14 +255,17 @@
     });
 
     formRooms.addEventListener('change', function () {
-      if (formRooms.value === '12:00') {
-        formTimeout.value = '12:00';
+      if (formRooms.value === '1') {
+        formCapacity.value = '1';
       }
-      if (formRooms.value === '13:00') {
-        formTimeout.value = '13:00';
+      if (formRooms.value === '2') {
+        formCapacity.value = '2';
       }
-      if (formRooms.value === '14:00') {
-        formTimeout.value = '14:00';
+      if (formRooms.value === '3') {
+        formCapacity.value = '3';
+      }
+      if (formRooms.value === '100') {
+        formCapacity.value = '0';
       }
     });
 
