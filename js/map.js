@@ -215,16 +215,16 @@
 
     formType.addEventListener('change', function () {
       if (formType.value === 'bungalo') {
-        setAttribute(formPrice, 'value', 0);
+        setAttribute(formPrice, 'min', 0);
       }
       if (formType.value === 'flat') {
-        setAttribute(formPrice, 'value', 1000);
+        setAttribute(formPrice, 'min', 1000);
       }
       if (formType.value === 'house') {
-        setAttribute(formPrice, 'value', 5000);
+        setAttribute(formPrice, 'min', 5000);
       }
       if (formType.value === 'palace') {
-        setAttribute(formPrice, 'value', 10000);
+        setAttribute(formPrice, 'min', 10000);
       }
     });
 
