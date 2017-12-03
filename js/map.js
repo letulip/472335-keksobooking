@@ -216,56 +216,35 @@
     });
 
     formType.addEventListener('change', function () {
-      if (formType.value === 'bungalo') {
-        setAttribute(formPrice, 'min', 0);
-      }
-      if (formType.value === 'flat') {
-        setAttribute(formPrice, 'min', 1000);
-      }
-      if (formType.value === 'house') {
-        setAttribute(formPrice, 'min', 5000);
-      }
-      if (formType.value === 'palace') {
-        setAttribute(formPrice, 'min', 10000);
+      switch (formType.value) {
+        case 'bungalo':
+          setAttribute(formPrice, 'min', 0);
+          break;
+        case 'flat':
+          setAttribute(formPrice, 'min', 1000);
+          break;
+        case 'house':
+          setAttribute(formPrice, 'min', 5000);
+          break;
+        case 'palace':
+          setAttribute(formPrice, 'min', 10000);
+          break;
       }
     });
 
     formTimeIn.addEventListener('change', function () {
-      if (formTimeIn.value === '12:00') {
-        formTimeOut.value = '12:00';
-      }
-      if (formTimeIn.value === '13:00') {
-        formTimeOut.value = '13:00';
-      }
-      if (formTimeIn.value === '14:00') {
-        formTimeOut.value = '14:00';
-      }
+      formTimeOut.value = formTimeIn.value;
     });
 
     formTimeOut.addEventListener('change', function () {
-      if (formTimeOut.value === '12:00') {
-        formTimeIn.value = '12:00';
-      }
-      if (formTimeOut.value === '13:00') {
-        formTimeIn.value = '13:00';
-      }
-      if (formTimeOut.value === '14:00') {
-        formTimeIn.value = '14:00';
-      }
+      formTimeIn.value = formTimeOut.value;
     });
 
     formRooms.addEventListener('change', function () {
-      if (formRooms.value === '1') {
-        formCapacity.value = '1';
-      }
-      if (formRooms.value === '2') {
-        formCapacity.value = '2';
-      }
-      if (formRooms.value === '3') {
-        formCapacity.value = '3';
-      }
       if (formRooms.value === '100') {
         formCapacity.value = '0';
+      } else {
+        formCapacity.value = formRooms.value;
       }
     });
 
@@ -281,10 +260,7 @@
       return fieldId.setAttribute(attributeName, attributeValue);
     }
 
-    function timeSync() {
-
-    }
-
+    setAttribute(form, 'action', 'https://js.dump.academy/keksobooking');
     setRequiredField(formAddress);
     setReadOnlyField(formAddress);
     setRequiredField(formTitle);
