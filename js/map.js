@@ -249,12 +249,12 @@
     });
 
     function setRequiredField(fieldId) {
-      fieldId.required = true
+      fieldId.required = true;
       return fieldId;
     }
 
     function setReadOnlyField(fieldId) {
-      fieldId.readOnly = true
+      fieldId.readOnly = true;
       return fieldId;
     }
 
