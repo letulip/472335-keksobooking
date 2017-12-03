@@ -197,6 +197,8 @@
     var formAddress = form.querySelector('#address');
     var formTitle = form.querySelector('#title');
     var formPrice = form.querySelector('#price');
+    var timeIn = form.querySelector('#timein');
+    var timeOut = form.querySelector('#timeout');
 
     formTitle.addEventListener('invalid', function () {
       if (formTitle.validity.tooShort) {
@@ -210,6 +212,18 @@
       }
     });
 
+    timeIn.addEventListener('change', function () {
+      if (timeIn.value === '12:00') {
+        timeout.value = '12:00';
+      }
+      if (timeIn.value === '13:00') {
+        timeout.value = '13:00';
+      }
+      if (timeIn.value === '14:00') {
+        timeout.value = '14:00';
+      }
+    });
+
     function setRequiredField(fieldId) {
       return fieldId.required = true;
     }
@@ -220,6 +234,10 @@
 
     function setAttribute(fieldId, attributeName, attributeValue) {
       return fieldId.setAttribute(attributeName, attributeValue);
+    }
+
+    function timeSync() {
+
     }
 
     setRequiredField(formAddress);
