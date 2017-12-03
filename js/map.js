@@ -228,6 +228,9 @@
     setAttribute(formTitle, 'minlength', 30);
     setAttribute(formTitle, 'maxlength', 100);
     setRequiredField(formPrice);
+    setAttribute(formPrice, 'min', 0);
+    setAttribute(formPrice, 'value', 1000);
+    setAttribute(formPrice, 'max', 1000000);
   }
 
   hideBlock(map, mapFaded);
