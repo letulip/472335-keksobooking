@@ -197,8 +197,9 @@
     var formAddress = form.querySelector('#address');
     var formTitle = form.querySelector('#title');
     var formPrice = form.querySelector('#price');
-    var timeIn = form.querySelector('#timein');
-    var timeOut = form.querySelector('#timeout');
+    var formTimeIn = form.querySelector('#timein');
+    var formTimeOut = form.querySelector('#timeout');
+    var formType = form.querySelector('#type');
 
     formTitle.addEventListener('invalid', function () {
       if (formTitle.validity.tooShort) {
@@ -212,15 +213,30 @@
       }
     });
 
-    timeIn.addEventListener('change', function () {
-      if (timeIn.value === '12:00') {
-        timeout.value = '12:00';
+    formType.addEventListener('change', function () {
+      if (formType.value === 'bungalo') {
+        setAttribute(formPrice, 'value', 0);
       }
-      if (timeIn.value === '13:00') {
-        timeout.value = '13:00';
+      if (formType.value === 'flat') {
+        setAttribute(formPrice, 'value', 1000);
       }
-      if (timeIn.value === '14:00') {
-        timeout.value = '14:00';
+      if (formType.value === 'house') {
+        setAttribute(formPrice, 'value', 5000);
+      }
+      if (formType.value === 'palace') {
+        setAttribute(formPrice, 'value', 10000);
+      }
+    });
+
+    formTimeIn.addEventListener('change', function () {
+      if (formTimeIn.value === '12:00') {
+        formTimeout.value = '12:00';
+      }
+      if (formTimeIn.value === '13:00') {
+        formTimeout.value = '13:00';
+      }
+      if (formTimeIn.value === '14:00') {
+        formTimeout.value = '14:00';
       }
     });
 
