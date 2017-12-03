@@ -200,6 +200,8 @@
     var formTimeIn = form.querySelector('#timein');
     var formTimeOut = form.querySelector('#timeout');
     var formType = form.querySelector('#type');
+    var formRooms = form.querySelector('#room_number');
+    var formCapacity = form.querySelector('#capacity');
 
     formTitle.addEventListener('invalid', function () {
       if (formTitle.validity.tooShort) {
@@ -230,12 +232,36 @@
 
     formTimeIn.addEventListener('change', function () {
       if (formTimeIn.value === '12:00') {
-        formTimeout.value = '12:00';
+        formTimeOut.value = '12:00';
       }
       if (formTimeIn.value === '13:00') {
-        formTimeout.value = '13:00';
+        formTimeOut.value = '13:00';
       }
       if (formTimeIn.value === '14:00') {
+        formTimeOut.value = '14:00';
+      }
+    });
+
+    formTimeOut.addEventListener('change', function () {
+      if (formTimeOut.value === '12:00') {
+        formTimeIn.value = '12:00';
+      }
+      if (formTimeOut.value === '13:00') {
+        formTimeIn.value = '13:00';
+      }
+      if (formTimeOut.value === '14:00') {
+        formTimeIn.value = '14:00';
+      }
+    });
+
+    formRooms.addEventListener('change', function () {
+      if (formRooms.value === '12:00') {
+        formTimeout.value = '12:00';
+      }
+      if (formRooms.value === '13:00') {
+        formTimeout.value = '13:00';
+      }
+      if (formRooms.value === '14:00') {
         formTimeout.value = '14:00';
       }
     });
