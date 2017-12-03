@@ -198,6 +198,18 @@
     var formTitle = form.querySelector('#title');
     var formPrice = form.querySelector('#price');
 
+    formTitle.addEventListener('invalid', function () {
+      if (formTitle.validity.tooShort) {
+        formTitle.setCustomValidity('Заголовок должен состоять минимум из 30-ти символов');
+      } else if (formTitle.validity.tooLong) {
+        formTitle.setCustomValidity('Заголовок не должен превышать 100 символов');
+      } else if (formTitle.validity.valueMissing) {
+        formTitle.setCustomValidity('Обязательное поле');
+      } else {
+        formTitle.setCustomValidity('');
+      }
+    });
+
     function setRequiredField(fieldId) {
       return fieldId.required = true;
     }
@@ -206,9 +218,15 @@
       return fieldId.readOnly = true;
     }
 
+    function setAttribute(fieldId, attributeName, attributeValue) {
+      return fieldId.setAttribute(attributeName, attributeValue);
+    }
+
     setRequiredField(formAddress);
     setReadOnlyField(formAddress);
     setRequiredField(formTitle);
+    setAttribute(formTitle, 'minlength', 30);
+    setAttribute(formTitle, 'maxlength', 100);
     setRequiredField(formPrice);
   }
 
