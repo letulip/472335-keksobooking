@@ -192,8 +192,29 @@
     similarPinElement.appendChild(fragment);
   }
 
+  function formCheck() {
+    var form = document.querySelector('.notice__form');
+    var formAddress = form.querySelector('#address');
+    var formTitle = form.querySelector('#title');
+    var formPrice = form.querySelector('#price');
+
+    function setRequiredField(fieldId) {
+      return fieldId.required = true;
+    }
+
+    function setReadOnlyField(fieldId) {
+      return fieldId.readOnly = true;
+    }
+
+    setRequiredField(formAddress);
+    setReadOnlyField(formAddress);
+    setRequiredField(formTitle);
+    setRequiredField(formPrice);
+  }
+
   hideBlock(map, mapFaded);
   createAvatars();
   fillFragment(createAdverts());
   fillAdvert(adverts[0]);
+  formCheck();
 }());
