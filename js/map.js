@@ -1,8 +1,16 @@
 'use strict';
 
 (function () {
-  var map = document.querySelector('.map');
-  var mapFaded = '.map--faded';
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
+  var map = document.querySelector('.map:not(.popup__close)');
+  var popupCloseIcon;
+  var mapFaded = 'map--faded';
+  var fieldsetElements = document.querySelectorAll('.form__element');
+  var disabled = 'disabled';
+  var hidden = 'hidden';
+  var noticeForm = document.querySelector('.notice__form');
+  var noticeFormDisabled = 'notice__form--disabled';
   var numOfAdverts = 8;
   var avatars = [];
   var adverts = [];
@@ -13,9 +21,68 @@
   var checkins = ['12:00', '13:00', '14:00'];
   var checkouts = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  var mapPinMainMouseUp = document.querySelector('main');
+  var mapPinPopup;
 
-  function hideBlock(element, className) {
+  mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
+
+  map.addEventListener('click', mapEventListener);
+  map.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE || evt.keyCode === ESC_KEYCODE) {
+      mapEventListener();
+    }
+  });
+
+  function mapEventListener() {
+    var mapPinTemplate = map.querySelector('.map__pin-template');
+    var mapPinActive = 'map__pin--active';
+    if (mapPinTemplate.className === document.activeElement.parentElement.className) {
+      removeTemplateActive();
+      document.activeElement.parentElement.classList.add('map__pin-template-active');
+      removePreviousActivePin(mapPinPopup);
+      addClassName(document.activeElement, mapPinActive);
+      mapPinPopup = document.activeElement.parentElement.firstElementChild;
+      var string = '.map__pin-template-active article .popup__close';
+      popupCloseIcon = map.querySelector(string);
+      removeClassName(mapPinPopup, hidden);
+      popupCloseIcon.addEventListener('click', popupClose);
+      document.addEventListener('keydown', function (evt) {
+        if (evt.keyCode === ESC_KEYCODE) {
+          popupClose();
+        }
+      });
+    }
+
+    function popupClose() {
+      removeTemplateActive();
+      removePreviousActivePin(mapPinPopup);
+    }
+
+    function removePreviousActivePin(previousPopup) {
+      var pinActive = document.querySelector('.map__pin--active');
+      if (pinActive) {
+        removeClassName(pinActive, 'map__pin--active');
+      }
+      if (previousPopup) {
+        addClassName(previousPopup, hidden);
+        popupCloseIcon.removeEventListener('click', popupClose);
+      }
+    }
+
+    function removeTemplateActive() {
+      var activePopup = map.querySelector('.map__pin-template-active');
+      if (activePopup) {
+        removeClassName(activePopup, 'map__pin-template-active');
+      }
+    }
+  }
+
+  function removeClassName(element, className) {
     element.classList.remove(className);
+  }
+
+  function addClassName(element, className) {
+    element.classList.add(className);
   }
 
   function Advert(author, offer, locationCoords) {
@@ -148,52 +215,73 @@
   }
 
   function getCoordinates(locationCoords) {
-    var pinShift = 44;
-    return ((locationCoords - pinShift) + 'px');
+    return ((locationCoords) + 'px');
   }
 
-  function createAdvertElement(advert) {
-    var similarAdvertTemplate = document.querySelector('template').content;
-    var advertElement = similarAdvertTemplate.cloneNode(true);
-    advertElement.querySelector('.popup__avatar').src = advert.author.avatar;
-    advertElement.querySelector('h3').textContent = advert.offer.title;
-    advertElement.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
-    advertElement.querySelector('.popup__price').innerHTML = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
-    advertElement.querySelector('h4').textContent = 'Тип жилья: ' + advert.offer.type;
-    advertElement.querySelector('h4 + p').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
-    advertElement.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
-    advertElement.querySelector('.popup__features').textContent = 'Доп. опции: ' + advert.offer.features;
-    advertElement.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
-    return advertElement;
+  function createAdvertTemplate(advertContent) {
+    var similarAdvertTemplate = document.querySelector('template');
+    var advertTemplate = similarAdvertTemplate.cloneNode(false);
+    advertTemplate.style.display = 'block';
+    advertTemplate.classList.add('map__pin-template');
+    advertTemplate.appendChild(advertContent);
+    return advertTemplate;
   }
 
-  function createAdvertButton(advert) {
-    var similarAdvertTemplate = document.querySelector('template').content;
-    var advertButton = similarAdvertTemplate.cloneNode(true);
-    advertButton.querySelector('.map__pin img').src = advert.author.avatar;
-    advertButton.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
-    advertButton.querySelector('.map__pin').style.top = getCoordinates(advert.location.y);
-    return advertButton;
+  function createAdvert(advert) {
+    var similarAdvertTemplateContent = document.querySelector('template').content;
+    var advertContent = similarAdvertTemplateContent.cloneNode(true);
+    advertContent.querySelector('.map__pin img').src = advert.author.avatar;
+    advertContent.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
+    advertContent.querySelector('.map__pin').style.top = getCoordinates(advert.location.y);
+    advertContent.querySelector('.popup__avatar').src = advert.author.avatar;
+    advertContent.querySelector('h3').textContent = advert.offer.title;
+    advertContent.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
+    advertContent.querySelector('.popup__price').innerHTML = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
+    advertContent.querySelector('h4').textContent = 'Тип жилья: ' + advert.offer.type;
+    advertContent.querySelector('h4 + p').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
+    advertContent.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
+    advertContent.querySelector('.popup__features').textContent = 'Доп. опции: ' + advert.offer.features;
+    advertContent.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
+    return advertContent;
   }
 
   function fillFragment(advertsArray) {
     var fragment = document.createDocumentFragment();
-    var similarPinElement = document.querySelector('.map__pin');
+    var similarPinElement = document.querySelector('.map__pins');
     for (var i = 0; i < adverts.length; i++) {
-      fragment.appendChild(createAdvertButton(advertsArray[i]));
+      fragment.appendChild(createAdvertTemplate(createAdvert(advertsArray[i])));
     }
     similarPinElement.appendChild(fragment);
   }
 
-  function fillAdvert(advert) {
-    var fragment = document.createDocumentFragment();
-    var similarPinElement = document.querySelector('.map__pin');
-    fragment.appendChild(createAdvertElement(advert));
-    similarPinElement.appendChild(fragment);
+  function formFieldsetHide() {
+    for (var i = 0; i < fieldsetElements.length; i++) {
+      addClassName(fieldsetElements[i], disabled);
+    }
   }
 
-  hideBlock(map, mapFaded);
-  createAvatars();
-  fillFragment(createAdverts());
-  fillAdvert(adverts[0]);
+  function formFieldsetShow() {
+    for (var i = 0; i < fieldsetElements.length; i++) {
+      removeClassName(fieldsetElements[i], disabled);
+    }
+  }
+
+  function popupsHide() {
+    var popups = document.querySelectorAll('.popup');
+    for (var i = 0; i < popups.length; i++) {
+      addClassName(popups[i], hidden);
+    }
+  }
+
+  function mouseUpInit() {
+    removeClassName(map, mapFaded);
+    createAvatars();
+    fillFragment(createAdverts());
+    removeClassName(noticeForm, noticeFormDisabled);
+    formFieldsetShow();
+    popupsHide();
+    mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
+  }
+
+  formFieldsetHide();
 }());
