@@ -302,6 +302,7 @@
     var capacityMin = '0';
     var minLength = 30;
     var maxLenght = 100;
+    var actionUrl = 'https://js.dump.academy/keksobooking';
 
     formTitle.addEventListener('invalid', function () {
       if (formTitle.validity.tooShort) {
@@ -362,7 +363,7 @@
       return fieldId.setAttribute(attributeName, attributeValue);
     }
 
-    setAttribute(form, 'action', 'https://js.dump.academy/keksobooking');
+    setAttribute(form, 'action', actionUrl);
     setRequiredField(formAddress);
     setReadOnlyField(formAddress);
     setRequiredField(formTitle);
