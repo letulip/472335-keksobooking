@@ -374,6 +374,6 @@
     setAttribute(formPrice, 'max', priceMax);
   }
 
-  formCheck();
   formFieldsetHide();
+  formCheck();
 }());
