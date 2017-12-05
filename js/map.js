@@ -33,15 +33,15 @@
     }
   });
 
-  function mapEventListener() {
+  function mapEventListener(e) {
     var mapPinTemplate = map.querySelector('.map__pin-template');
     var mapPinActive = 'map__pin--active';
-    if (mapPinTemplate.className === document.activeElement.parentElement.className) {
+    if (e.target.parentElement.classList.contains('map__pin')) {
       removeTemplateActive();
-      document.activeElement.parentElement.classList.add('map__pin-template-active');
+      e.target.parentElement.parentElement.classList.add('map__pin-template-active');
       removePreviousActivePin(mapPinPopup);
-      addClassName(document.activeElement, mapPinActive);
-      mapPinPopup = document.activeElement.parentElement.firstElementChild;
+      addClassName(e.target.parentElement, mapPinActive);
+      mapPinPopup = e.target.parentElement.previousElementSibling;
       var string = '.map__pin-template-active article .popup__close';
       popupCloseIcon = map.querySelector(string);
       removeClassName(mapPinPopup, hidden);
