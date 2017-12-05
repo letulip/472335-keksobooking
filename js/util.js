@@ -4,8 +4,25 @@ window.util = (function () {
   var disabled = 'disabled';
   var fieldsetElements = document.querySelectorAll('.form__element');
   var hidden = 'hidden';
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
 
   return {
+    isEscEvent: function (evt, action) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        action();
+      }
+    },
+    isEnterEvent: function (evt, action) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        action();
+      }
+    },
+    isEnterOrEscEvent: function (evt, action) {
+      if (evt.keyCode === ENTER_KEYCODE || evt.keyCode === ESC_KEYCODE) {
+        action();
+      }
+    },
     removeClassName: function (element, className) {
       element.classList.remove(className);
     },

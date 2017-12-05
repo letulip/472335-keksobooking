@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var ESC_KEYCODE = 27;
-  var ENTER_KEYCODE = 13;
   var map = document.querySelector('.map:not(.popup__close)');
   var popupCloseIcon;
   var mapFaded = 'map--faded';
@@ -15,9 +13,7 @@
 
   map.addEventListener('click', mapEventListener);
   map.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE || evt.keyCode === ESC_KEYCODE) {
-      mapEventListener();
-    }
+    window.util.isEnterOrEscEvent(evt, mapEventListener);
   });
 
   function mapEventListener(e) {
@@ -33,9 +29,7 @@
       window.util.removeClassName(mapPinPopup, window.util.getHiddenAttribute());
       popupCloseIcon.addEventListener('click', popupClose);
       document.addEventListener('keydown', function (evt) {
-        if (evt.keyCode === ESC_KEYCODE) {
-          popupClose();
-        }
+        window.util.isEscEvent(evt, popupClose);
       });
     }
 
