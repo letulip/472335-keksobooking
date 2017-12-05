@@ -4,8 +4,8 @@
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
   var map = document.querySelector('.map:not(.popup__close)');
-  var popupCloseIcon;
   var mapFaded = 'map--faded';
+  var popupCloseIcon;
   var fieldsetElements = document.querySelectorAll('.form__element');
   var disabled = 'disabled';
   var hidden = 'hidden';
@@ -29,19 +29,19 @@
   map.addEventListener('click', mapEventListener);
   map.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE || evt.keyCode === ESC_KEYCODE) {
-      mapEventListener();
+      mapEventListener(evt);
     }
   });
 
-  function mapEventListener() {
+  function mapEventListener(e) {
     var mapPinTemplate = map.querySelector('.map__pin-template');
     var mapPinActive = 'map__pin--active';
-    if (mapPinTemplate.className === document.activeElement.parentElement.className) {
+    if (e.target.parentElement.classList.contains('map__pin')) {
       removeTemplateActive();
-      document.activeElement.parentElement.classList.add('map__pin-template-active');
+      e.target.parentElement.parentElement.classList.add('map__pin-template-active');
       removePreviousActivePin(mapPinPopup);
-      addClassName(document.activeElement, mapPinActive);
-      mapPinPopup = document.activeElement.parentElement.firstElementChild;
+      addClassName(e.target.parentElement, mapPinActive);
+      mapPinPopup = e.target.parentElement.previousElementSibling;
       var string = '.map__pin-template-active article .popup__close';
       popupCloseIcon = map.querySelector(string);
       removeClassName(mapPinPopup, hidden);
