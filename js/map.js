@@ -6,21 +6,11 @@
   var map = document.querySelector('.map:not(.popup__close)');
   var popupCloseIcon;
   var mapFaded = 'map--faded';
-  var fieldsetElements = document.querySelectorAll('.form__element');
-  var disabled = 'disabled';
-  var hidden = 'hidden';
   var noticeForm = document.querySelector('.notice__form');
   var noticeFormDisabled = 'notice__form--disabled';
   var numOfAdverts = 8;
   var avatars = [];
   var adverts = [];
-  var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
-  var location;
-  var types = ['flat', 'house', 'bungalo'];
-  var rooms;
-  var checkins = ['12:00', '13:00', '14:00'];
-  var checkouts = ['12:00', '13:00', '14:00'];
-  var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var mapPinMainMouseUp = document.querySelector('main');
   var mapPinPopup;
 
@@ -43,7 +33,7 @@
       mapPinPopup = e.target.parentElement.previousElementSibling;
       var string = '.map__pin-template-active article .popup__close';
       popupCloseIcon = map.querySelector(string);
-      window.util.removeClassName(mapPinPopup, hidden);
+      window.util.removeClassName(mapPinPopup, window.util.getHiddenAttribute());
       popupCloseIcon.addEventListener('click', popupClose);
       document.addEventListener('keydown', function (evt) {
         if (evt.keyCode === ESC_KEYCODE) {
@@ -63,7 +53,7 @@
         window.util.removeClassName(pinActive, 'map__pin--active');
       }
       if (previousPopup) {
-        window.util.addClassName(previousPopup, hidden);
+        window.util.addClassName(previousPopup, window.util.getHiddenAttribute());
         popupCloseIcon.removeEventListener('click', popupClose);
       }
     }
@@ -86,44 +76,9 @@
     this.avatar = avatar;
   }
 
-  function Offer(offerParams) {
-    this.title = offerParams.title;
-    this.address = offerParams.address;
-    this.price = offerParams.price;
-    this.type = offerParams.type;
-    this.rooms = offerParams.rooms;
-    this.guests = offerParams.guests;
-    this.checkin = offerParams.checkin;
-    this.checkout = offerParams.checkout;
-    this.features = offerParams.features;
-    this.description = offerParams.description;
-    this.photos = offerParams.photos;
-  }
-
-  function Location(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  function getRandomTitle() {
-    return titles[getRandomInt(0, titles.length)];
-  }
-
-  function getRandomFeatures() {
-    var currentOfferFeatures = [];
-    for (var i = 0; i < getRandomInt(1, features.length); i++) {
-      currentOfferFeatures.push(features[getRandomInt(0, features.length)]);
-    }
-    return currentOfferFeatures;
-  }
-
   function createAdverts() {
     for (var i = 0; i < numOfAdverts; i++) {
-      adverts.push(new Advert(getAuthor(i), createOffer(), location));
+      adverts.push(new Advert(getAuthor(i), window.offer.createOffer(), window.offer.getOfferLocation()));
     }
     return adverts;
   }
@@ -136,73 +91,6 @@
     for (var i = 1; i <= numOfAdverts; i++) {
       avatars.push('img/avatars/user0' + i + '.png');
     }
-  }
-
-  function createOffer() {
-    var offer = {
-      title: getRandomTitle(),
-      address: getAddress(getLocation()),
-      price: getPrice(),
-      type: getType(),
-      rooms: getNumberOfRooms(),
-      guests: getNumberOfGuests(),
-      checkin: getCheckIn(),
-      checkout: getCheckOut(),
-      features: getRandomFeatures(),
-      description: '',
-      photos: []
-    };
-    return new Offer(offer);
-  }
-
-  function getLocation() {
-    var minAreaX = 300;
-    var maxAreaX = 900;
-    var minAreaY = 100;
-    var maxAreaY = 500;
-    location = new Location(getRandomInt(minAreaX, maxAreaX), getRandomInt(minAreaY, maxAreaY));
-    return location;
-  }
-
-  function getAddress(locationCoords) {
-    return locationCoords.x + ', ' + locationCoords.y;
-  }
-
-  function getPrice() {
-    var minPrice = 1000;
-    var maxPrice = 1000000;
-    return getRandomInt(minPrice, maxPrice);
-  }
-
-  function getType() {
-    var type = types[getRandomInt(0, types.length)];
-    if (type === 'flat') {
-      return 'Квартира';
-    } else if (type === 'house') {
-      return 'Дом';
-    } else {
-      return 'Бунгало';
-    }
-  }
-
-  function getNumberOfRooms() {
-    var minRooms = 1;
-    var maxRooms = 5;
-    rooms = getRandomInt(minRooms, maxRooms);
-    return rooms;
-  }
-
-  function getNumberOfGuests() {
-    var guestByRoom = 2;
-    return rooms * guestByRoom;
-  }
-
-  function getCheckIn() {
-    return checkins[getRandomInt(0, checkins.length)];
-  }
-
-  function getCheckOut() {
-    return checkouts[getRandomInt(0, checkouts.length)];
   }
 
   function getCoordinates(locationCoords) {
@@ -245,35 +133,16 @@
     similarPinElement.appendChild(fragment);
   }
 
-  function formFieldsetHide() {
-    for (var i = 0; i < fieldsetElements.length; i++) {
-      window.util.addClassName(fieldsetElements[i], disabled);
-    }
-  }
-
-  function formFieldsetShow() {
-    for (var i = 0; i < fieldsetElements.length; i++) {
-      window.util.removeClassName(fieldsetElements[i], disabled);
-    }
-  }
-
-  function popupsHide() {
-    var popups = document.querySelectorAll('.popup');
-    for (var i = 0; i < popups.length; i++) {
-      window.util.addClassName(popups[i], hidden);
-    }
-  }
-
   function mouseUpInit() {
     window.util.removeClassName(map, mapFaded);
     createAvatars();
     fillFragment(createAdverts());
     window.util.removeClassName(noticeForm, noticeFormDisabled);
-    formFieldsetShow();
-    popupsHide();
+    window.util.formFieldsetShow();
+    window.util.popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
   }
 
-  formFieldsetHide();
+  window.util.formFieldsetHide();
   window.formValidation.formCheck();
 }());
