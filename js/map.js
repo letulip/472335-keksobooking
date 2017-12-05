@@ -35,15 +35,15 @@
 
   function mapEventListener(e) {
     var mapPinActive = 'map__pin--active';
-    if (e.target.parentElement.classList.contains('map__pin')) {
+    if (e.target.closest('.map__pin')) {
       removeTemplateActive();
       e.target.parentElement.parentElement.classList.add('map__pin-template-active');
       removePreviousActivePin(mapPinPopup);
-      addClassName(e.target.parentElement, mapPinActive);
+      window.util.addClassName(e.target.parentElement, mapPinActive);
       mapPinPopup = e.target.parentElement.previousElementSibling;
       var string = '.map__pin-template-active article .popup__close';
       popupCloseIcon = map.querySelector(string);
-      removeClassName(mapPinPopup, hidden);
+      window.util.removeClassName(mapPinPopup, hidden);
       popupCloseIcon.addEventListener('click', popupClose);
       document.addEventListener('keydown', function (evt) {
         if (evt.keyCode === ESC_KEYCODE) {
@@ -60,10 +60,10 @@
     function removePreviousActivePin(previousPopup) {
       var pinActive = document.querySelector('.map__pin--active');
       if (pinActive) {
-        removeClassName(pinActive, 'map__pin--active');
+        window.util.removeClassName(pinActive, 'map__pin--active');
       }
       if (previousPopup) {
-        addClassName(previousPopup, hidden);
+        window.util.addClassName(previousPopup, hidden);
         popupCloseIcon.removeEventListener('click', popupClose);
       }
     }
@@ -71,17 +71,9 @@
     function removeTemplateActive() {
       var activePopup = map.querySelector('.map__pin-template-active');
       if (activePopup) {
-        removeClassName(activePopup, 'map__pin-template-active');
+        window.util.removeClassName(activePopup, 'map__pin-template-active');
       }
     }
-  }
-
-  function removeClassName(element, className) {
-    element.classList.remove(className);
-  }
-
-  function addClassName(element, className) {
-    element.classList.add(className);
   }
 
   function Advert(author, offer, locationCoords) {
@@ -255,28 +247,28 @@
 
   function formFieldsetHide() {
     for (var i = 0; i < fieldsetElements.length; i++) {
-      addClassName(fieldsetElements[i], disabled);
+      window.util.addClassName(fieldsetElements[i], disabled);
     }
   }
 
   function formFieldsetShow() {
     for (var i = 0; i < fieldsetElements.length; i++) {
-      removeClassName(fieldsetElements[i], disabled);
+      window.util.removeClassName(fieldsetElements[i], disabled);
     }
   }
 
   function popupsHide() {
     var popups = document.querySelectorAll('.popup');
     for (var i = 0; i < popups.length; i++) {
-      addClassName(popups[i], hidden);
+      window.util.addClassName(popups[i], hidden);
     }
   }
 
   function mouseUpInit() {
-    removeClassName(map, mapFaded);
+    window.util.removeClassName(map, mapFaded);
     createAvatars();
     fillFragment(createAdverts());
-    removeClassName(noticeForm, noticeFormDisabled);
+    window.util.removeClassName(noticeForm, noticeFormDisabled);
     formFieldsetShow();
     popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
