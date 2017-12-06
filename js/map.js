@@ -22,8 +22,8 @@
       removeTemplateActive();
       e.target.parentElement.parentElement.classList.add('map__pin-template-active');
       removePreviousActivePin(mapPinPopup);
-      window.util.addClassName(e.target.parentElement, mapPinActive);
-      mapPinPopup = e.target.parentElement.previousElementSibling;
+      window.util.addClassName(document.activeElement, mapPinActive);
+      mapPinPopup = document.activeElement.parentElement.firstElementChild;
       var string = '.map__pin-template-active article .popup__close';
       popupCloseIcon = map.querySelector(string);
       window.util.removeClassName(mapPinPopup, window.util.getHiddenAttribute());
