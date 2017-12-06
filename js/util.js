@@ -10,17 +10,17 @@ window.util = (function () {
   return {
     isEscEvent: function (evt, action) {
       if (evt.keyCode === ESC_KEYCODE) {
-        action();
+        action(evt);
       }
     },
     isEnterEvent: function (evt, action) {
       if (evt.keyCode === ENTER_KEYCODE) {
-        action();
+        action(evt);
       }
     },
     isEnterOrEscEvent: function (evt, action) {
       if (evt.keyCode === ENTER_KEYCODE || evt.keyCode === ESC_KEYCODE) {
-        action();
+        action(evt);
       }
     },
     removeClassName: function (element, className) {
