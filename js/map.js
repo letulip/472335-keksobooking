@@ -9,9 +9,45 @@
   var mapPinMainMouseUp = document.querySelector('main');
   var mapPinPopup;
   var mapPinMain = document.querySelector('.map__pin--main');
+  var mapPinMainImg = document.querySelector('.map__pin--main img');
 
-  mapPinMain.draggable = true;
-  mapPinMain.addEventListener('dragstart', mapPinDragStart, false);
+  mapPinMainImg.draggable = true;
+
+  mapPinMainImg.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+
+    var startCoords = {
+      x: evt.clientX,
+      y: evt.clientY
+    };
+
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+
+      var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
+      };
+
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
+
+      mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+      mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+    };
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
+
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  });
 
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
@@ -22,7 +58,7 @@
 
   function mapEventListener(e) {
     var mapPinActive = 'map__pin--active';
-    if (e.target.closest('.map__pin')) {
+    if (e.target.closest('.map__pin:not(.map__pin--main)')) {
       removeTemplateActive();
       e.target.parentElement.parentElement.classList.add('map__pin-template-active');
       removePreviousActivePin(mapPinPopup);
@@ -69,10 +105,6 @@
     window.util.formFieldsetShow();
     window.util.popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
-  }
-
-  function mapPinDragStart(e) {
-    e.dataTransfer.effectAllowed = 'move';
   }
 
   window.util.formFieldsetHide();
