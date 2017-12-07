@@ -8,6 +8,10 @@
   var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMainMouseUp = document.querySelector('main');
   var mapPinPopup;
+  var mapPinMain = document.querySelector('.map__pin--main');
+
+  mapPinMain.draggable = true;
+  mapPinMain.addEventListener('dragstart', mapPinDragStart, false);
 
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
@@ -65,6 +69,10 @@
     window.util.formFieldsetShow();
     window.util.popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
+  }
+
+  function mapPinDragStart(e) {
+    e.dataTransfer.effectAllowed = 'move';
   }
 
   window.util.formFieldsetHide();
