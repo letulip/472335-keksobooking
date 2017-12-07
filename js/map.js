@@ -10,6 +10,7 @@
   var mapPinPopup;
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPinMainImg = document.querySelector('.map__pin--main img');
+  var formAddress = document.querySelector('#address');
 
   mapPinMainImg.draggable = true;
 
@@ -36,6 +37,7 @@
 
       mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
       mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+      setAddress();
     };
 
     var onMouseUp = function (upEvt) {
@@ -94,6 +96,15 @@
       if (activePopup) {
         window.util.removeClassName(activePopup, 'map__pin-template-active');
       }
+    }
+  }
+
+  function setAddress() {
+    var coords = mapPinMain.getBoundingClientRect();
+    var verticalShift = 22;
+    var horisontalShift = 31;
+    if (coords.top >= 100 && coords.bottom <= 500) {
+      formAddress.value = 'x: ' + (coords.bottom + verticalShift) + ', y: ' + (coords.left + horisontalShift);
     }
   }
 
