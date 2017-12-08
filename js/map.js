@@ -25,6 +25,10 @@
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
+      var mapArea = map.querySelector('.map__pins');
+      var mapAreaCoords = mapArea.getBoundingClientRect();
+      var mapPinMainCoords = mapPinMain.getBoundingClientRect();
+
       var shift = {
         x: startCoords.x - moveEvt.clientX,
         y: startCoords.y - moveEvt.clientY
@@ -35,8 +39,27 @@
         y: moveEvt.clientY
       };
 
-      mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-      mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+      if (mapPinMainCoords.top >= mapAreaCoords.top) {
+        mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+      } else {
+        mapPinMain.style.top = (mapAreaCoords.top + 50) + 'px';
+      }
+      if (mapPinMainCoords.bottom <= mapAreaCoords.bottom) {
+        mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+      } else {
+        mapPinMain.style.top = (mapAreaCoords.bottom - 50) + 'px';
+      }
+      if (mapPinMainCoords.left > mapAreaCoords.left) {
+        mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+      } else {
+        mapPinMain.style.left = (mapAreaCoords.left + 50) + 'px';
+      }
+      if (mapPinMainCoords.right < mapAreaCoords.right) {
+        mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+      } else {
+        mapPinMain.style.left = (mapAreaCoords.right - 150) + 'px';
+      }
+
       setAddress();
     };
 
