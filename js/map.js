@@ -38,11 +38,25 @@
         y: moveEvt.clientY
       };
 
-      if (mainPinCoords.top > pinsOverlayCoords.top && mainPinCoords.bottom < pinsOverlayCoords.bottom) {
+      if (mainPinCoords.top > pinsOverlayCoords.top) {
         mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+      } else {
+        mapPinMain.style.top = pinsOverlayCoords.top + Math.round(mapPinMain.offsetHeigth / 2) + 'px';
       }
-      if (mainPinCoords.left > pinsOverlayCoords.left && mainPinCoords.right < pinsOverlayCoords.right) {
+      if (mainPinCoords.left > pinsOverlayCoords.left) {
         mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+      } else {
+        mapPinMain.style.left = pinsOverlayCoords.left + Math.round(mapPinMain.offsetWidth / 2) + 'px';
+      }
+      if (mainPinCoords.bottom < pinsOverlayCoords.bottom) {
+        mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+      } else {
+        mapPinMain.style.top = pinsOverlayCoords.bottom + Math.round(mapPinMain.offsetHeigth / 2) + 'px';
+      }
+      if (mainPinCoords.right < pinsOverlayCoords.right) {
+        mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+      } else {
+        mapPinMain.style.left = pinsOverlayCoords.right + Math.round(mapPinMain.offsetWidth / 2) + 'px';
       }
 
       setAddress();
