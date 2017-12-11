@@ -11,7 +11,6 @@
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPinMainImg = document.querySelector('.map__pin--main img');
   var formAddress = document.querySelector('#address');
-  var pinsOverlay = document.querySelector('.map__pinsoverlay');
 
   mapPinMainImg.draggable = true;
 
