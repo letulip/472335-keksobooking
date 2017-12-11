@@ -28,6 +28,7 @@
       var mapArea = map.querySelector('.map__pins');
       var mapAreaCoords = mapArea.getBoundingClientRect();
       var mapPinMainCoords = mapPinMain.getBoundingClientRect();
+      var pinShift = 40;
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -39,32 +40,47 @@
         y: moveEvt.clientY
       };
 
-      if (mapPinMainCoords.top > mapAreaCoords.top) {
-        mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-      } else {
-        mapPinMain.style.top = (mapAreaCoords.top + 40) + 'px';
-      }
-      if (mapPinMainCoords.bottom >= mapAreaCoords.bottom) {
-        mapPinMain.style.top = (mapAreaCoords.bottom - 50) + 'px';
-      }
-      if (mapPinMainCoords.left > mapAreaCoords.left) {
-        mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
-      } else {
-        mapPinMain.style.left = '40px';
-      }
-      if (mapPinMainCoords.right >= mapAreaCoords.right) {
-        mapPinMain.style.left = (mapAreaCoords.width - 50) + 'px';
+      function setTopCoords() {
+        if (mapPinMainCoords.top > mapAreaCoords.top) {
+          mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+        } else {
+          mapPinMain.style.top = (mapAreaCoords.top + pinShift) + 'px';
+        }
       }
 
+      function setBottomCoords() {
+        if (mapPinMainCoords.bottom >= mapAreaCoords.bottom) {
+          mapPinMain.style.top = (mapAreaCoords.bottom - pinShift) + 'px';
+        }
+      }
+
+      function setLeftCoords() {
+        if (mapPinMainCoords.left > mapAreaCoords.left) {
+          mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+        } else {
+          mapPinMain.style.left = pinShift + 'px';
+        }
+      }
+
+      function setRightCoords() {
+        if (mapPinMainCoords.right >= mapAreaCoords.right) {
+          mapPinMain.style.left = (mapAreaCoords.width - pinShift) + 'px';
+        }
+      }
+
+      setTopCoords();
+      setBottomCoords();
+      setLeftCoords();
+      setRightCoords();
       setAddress();
     };
 
-    var onMouseUp = function (upEvt) {
+    function onMouseUp(upEvt) {
       upEvt.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-    };
+    }
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
