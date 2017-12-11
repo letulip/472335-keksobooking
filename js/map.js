@@ -11,6 +11,7 @@
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPinMainImg = document.querySelector('.map__pin--main img');
   var formAddress = document.querySelector('#address');
+  var pinsOverlay = document.querySelector('.map__pinsoverlay');
 
   mapPinMainImg.draggable = true;
 
@@ -122,7 +123,9 @@
     var coords = mapPinMain.getBoundingClientRect();
     var verticalShift = 22;
     var horisontalShift = 31;
-    if (coords.top >= 100 && coords.bottom <= 500) {
+    var minCoords = 100;
+    var maxCoords = 500;
+    if (coords.top >= minCoords && coords.bottom <= maxCoords) {
       formAddress.value = 'x: ' + (coords.bottom + verticalShift) + ', y: ' + (coords.left + horisontalShift);
     }
   }
