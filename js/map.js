@@ -2,12 +2,12 @@
 
 (function () {
   var map = document.querySelector('.map:not(.popup__close)');
-  var popupCloseIcon;
+  // var popupCloseIcon;
   var mapFaded = 'map--faded';
   var noticeForm = document.querySelector('.notice__form');
   var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMainMouseUp = document.querySelector('main');
-  var mapPinPopup;
+  // var mapPinPopup;
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPinMainImg = document.querySelector('.map__pin--main img');
   var formAddress = document.querySelector('#address');
@@ -88,51 +88,51 @@
 
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
-  map.addEventListener('click', mapEventListener);
+  map.addEventListener('click', window.showCard);
   map.addEventListener('keydown', function (evt) {
-    window.util.isEnterOrEscEvent(evt, mapEventListener);
+    window.util.isEnterOrEscEvent(evt, window.showCard);
   });
 
-  function mapEventListener(e) {
-    var mapPinActive = 'map__pin--active';
-    if (e.target.closest('.map__pin:not(.map__pin--main)')) {
-      removeTemplateActive();
-      e.target.parentElement.parentElement.classList.add('map__pin-template-active');
-      removePreviousActivePin(mapPinPopup);
-      window.util.addClassName(document.activeElement, mapPinActive);
-      mapPinPopup = document.activeElement.parentElement.firstElementChild;
-      var string = '.map__pin-template-active article .popup__close';
-      popupCloseIcon = map.querySelector(string);
-      window.util.removeClassName(mapPinPopup, window.util.getHiddenAttribute());
-      popupCloseIcon.addEventListener('click', popupClose);
-      document.addEventListener('keydown', function (evt) {
-        window.util.isEscEvent(evt, popupClose);
-      });
-    }
-
-    function popupClose() {
-      removeTemplateActive();
-      removePreviousActivePin(mapPinPopup);
-    }
-
-    function removePreviousActivePin(previousPopup) {
-      var pinActive = document.querySelector('.map__pin--active');
-      if (pinActive) {
-        window.util.removeClassName(pinActive, 'map__pin--active');
-      }
-      if (previousPopup) {
-        window.util.addClassName(previousPopup, window.util.getHiddenAttribute());
-        popupCloseIcon.removeEventListener('click', popupClose);
-      }
-    }
-
-    function removeTemplateActive() {
-      var activePopup = map.querySelector('.map__pin-template-active');
-      if (activePopup) {
-        window.util.removeClassName(activePopup, 'map__pin-template-active');
-      }
-    }
-  }
+  // function mapEventListener(e) {
+  //   var mapPinActive = 'map__pin--active';
+  //   if (e.target.closest('.map__pin:not(.map__pin--main)')) {
+  //     removeTemplateActive();
+  //     e.target.parentElement.parentElement.classList.add('map__pin-template-active');
+  //     removePreviousActivePin(mapPinPopup);
+  //     window.util.addClassName(document.activeElement, mapPinActive);
+  //     mapPinPopup = document.activeElement.parentElement.firstElementChild;
+  //     var string = '.map__pin-template-active article .popup__close';
+  //     popupCloseIcon = map.querySelector(string);
+  //     window.util.removeClassName(mapPinPopup, window.util.getHiddenAttribute());
+  //     popupCloseIcon.addEventListener('click', popupClose);
+  //     document.addEventListener('keydown', function (evt) {
+  //       window.util.isEscEvent(evt, popupClose);
+  //     });
+  //   }
+  //
+  //   function popupClose() {
+  //     removeTemplateActive();
+  //     removePreviousActivePin(mapPinPopup);
+  //   }
+  //
+  //   function removePreviousActivePin(previousPopup) {
+  //     var pinActive = document.querySelector('.map__pin--active');
+  //     if (pinActive) {
+  //       window.util.removeClassName(pinActive, 'map__pin--active');
+  //     }
+  //     if (previousPopup) {
+  //       window.util.addClassName(previousPopup, window.util.getHiddenAttribute());
+  //       popupCloseIcon.removeEventListener('click', popupClose);
+  //     }
+  //   }
+  //
+  //   function removeTemplateActive() {
+  //     var activePopup = map.querySelector('.map__pin-template-active');
+  //     if (activePopup) {
+  //       window.util.removeClassName(activePopup, 'map__pin-template-active');
+  //     }
+  //   }
+  // }
 
   function setAddress() {
     var coords = mapPinMain.getBoundingClientRect();
