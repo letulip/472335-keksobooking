@@ -12,10 +12,12 @@ window.formValidation = (function () {
       var formType = form.querySelector('#type');
       var formRooms = form.querySelector('#room_number');
       var formCapacity = form.querySelector('#capacity');
+      var timeIns = ['12:00', '13:00', '14:00'];
+      var timeOuts = ['12:00', '13:00', '14:00'];
+      var types = ['flat', 'bungalo', 'house', 'palace'];
+      var pricesMin = [1000, 0, 5000, 10000];
       var priceBungalo = 0;
       var priceFlat = 1000;
-      var priceHouse = 5000;
-      var pricePalace = 10000;
       var priceMax = 1000000;
       var roomsMax = '100';
       var capacityMin = '0';
@@ -36,28 +38,15 @@ window.formValidation = (function () {
       });
 
       formType.addEventListener('change', function () {
-        switch (formType.value) {
-          case 'bungalo':
-            setAttribute(formPrice, 'min', priceBungalo);
-            break;
-          case 'flat':
-            setAttribute(formPrice, 'min', priceFlat);
-            break;
-          case 'house':
-            setAttribute(formPrice, 'min', priceHouse);
-            break;
-          case 'palace':
-            setAttribute(formPrice, 'min', pricePalace);
-            break;
-        }
+        window.synchronizeFields(formType, formPrice, types, pricesMin, setMinAttribute);
       });
 
       formTimeIn.addEventListener('change', function () {
-        formTimeOut.value = formTimeIn.value;
+        window.synchronizeFields(formTimeIn, formTimeOut, timeIns, timeOuts, setValue);
       });
 
       formTimeOut.addEventListener('change', function () {
-        formTimeIn.value = formTimeOut.value;
+        window.synchronizeFields(formTimeOut, formTimeIn, timeOuts, timeIns, setValue);
       });
 
       formRooms.addEventListener('change', function () {
@@ -80,6 +69,14 @@ window.formValidation = (function () {
 
       function setAttribute(fieldId, attributeName, attributeValue) {
         return fieldId.setAttribute(attributeName, attributeValue);
+      }
+
+      function setMinAttribute(fieldId, attributeValue) {
+        fieldId.min = attributeValue;
+      }
+
+      function setValue(field, value) {
+        field.value = value;
       }
 
       setAttribute(form, 'action', actionUrl);
