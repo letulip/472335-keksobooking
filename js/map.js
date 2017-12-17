@@ -138,7 +138,7 @@
 
     noticeForm.addEventListener('submit', function (evt) {
       window.backend.save(new FormData(noticeForm), function () {
-        console.log('Нужен код обновления полей формы');
+        window.restoreForm();
       }, errorHandler);
       evt.preventDefault();
     });
