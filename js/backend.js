@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var SERVER_URL = 'https://1510.dump.academy/code-and-magick';
+  var SERVER_URL = 'https://1510.dump.academy/keksobooking';
   var STATUS_OK = 200;
 
   function setup(onLoad, onError) {
