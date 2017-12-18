@@ -9,6 +9,7 @@
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPinMainImg = document.querySelector('.map__pin--main img');
   var formAddress = document.querySelector('#address');
+  var loadPath = 'https://1510.dump.academy/keksobooking';
 
   mapPinMainImg.draggable = true;
 
@@ -107,11 +108,40 @@
   function mouseUpInit() {
     window.util.removeClassName(map, mapFaded);
     window.avatarCreation.createAvatars();
-    window.fillAdvertTemplate.fillFragment(window.advertCreation.createAdverts());
+    saveLoad();
     window.util.removeClassName(noticeForm, noticeFormDisabled);
     window.util.formFieldsetShow();
     window.util.popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
+  }
+
+  function saveLoad() {
+
+    function successHandler(advertsArray) {
+      window.fillAdvertTemplate.fillFragment(advertsArray);
+      window.util.popupsHide();
+    }
+
+    function errorHandler(errorMessage) {
+      var node = document.createElement('div');
+      node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+      node.style.position = 'absolute';
+      node.style.left = 0;
+      node.style.right = 0;
+      node.style.fontSize = '30px';
+
+      node.textContent = errorMessage;
+      document.body.insertAdjacentElement('afterbegin', node);
+    }
+
+    window.backend.load(loadPath, successHandler, errorHandler);
+
+    noticeForm.addEventListener('submit', function (evt) {
+      window.backend.save(new FormData(noticeForm), function () {
+        window.restoreForm();
+      }, errorHandler);
+      evt.preventDefault();
+    });
   }
 
   window.util.formFieldsetHide();
