@@ -33,8 +33,10 @@ window.fillAdvertTemplate = (function () {
     var inner = element.querySelector('.popup__pictures li');
     element.querySelector('.popup__pictures').removeChild(inner);
     for (var i = 0; i < photosArray.length; i++) {
+      var imgWidth = 50;
+      var imgHeight = 70;
       var li = document.createElement('li');
-      var img = new Image(50, 70);
+      var img = new Image(imgWidth, imgHeight);
       element.querySelector('.popup__pictures').appendChild(li).appendChild(img).src = photosArray[i];
     }
   }
