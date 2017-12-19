@@ -50,6 +50,9 @@ window.util = (function () {
     },
     getHiddenAttribute: function () {
       return hidden;
+    },
+    debounce: function (func) {
+      setTimeout(func, 500);
     }
   };
 })();
