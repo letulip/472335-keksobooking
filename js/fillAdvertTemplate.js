@@ -49,7 +49,7 @@ window.fillAdvertTemplate = (function () {
     fillFragment: function (advertsArray) {
       var fragment = document.createDocumentFragment();
       var similarPinElement = document.querySelector('.map__pins');
-      for (var i = 0; i < window.advertCreation.getNumberOfAdverts(); i++) {
+      for (var i = 0; i < window.util.getNumberOfAdverts(); i++) {
         fragment.appendChild(createAdvertTemplate(createAdvert(advertsArray[i])));
       }
       similarPinElement.appendChild(fragment);

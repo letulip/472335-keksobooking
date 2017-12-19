@@ -107,7 +107,6 @@
 
   function mouseUpInit() {
     window.util.removeClassName(map, mapFaded);
-    window.avatarCreation.createAvatars();
     saveLoad();
     window.util.removeClassName(noticeForm, noticeFormDisabled);
     window.util.formFieldsetShow();
