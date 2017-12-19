@@ -7,6 +7,8 @@ window.util = (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
   var numOfAdverts = 5;
+  var DEBOUNCE_INTERVAL = 500;
+  var lastTimeout;
 
   return {
     isEscEvent: function (evt, action) {
@@ -53,7 +55,10 @@ window.util = (function () {
       return hidden;
     },
     debounce: function (func) {
-      setTimeout(func, 500);
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(func, DEBOUNCE_INTERVAL);
     },
     getNumberOfAdverts: function () {
       return numOfAdverts;
