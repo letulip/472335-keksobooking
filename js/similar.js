@@ -7,7 +7,7 @@ window.similar = function () {
   var filtersType;
   var adverts = [];
 
-  filters.onTypeChange = function (type) {
+  window.advert.onTypeChange = function (type) {
     filtersType = type;
     window.util.debounce(updateAdverts);
   };
@@ -15,17 +15,18 @@ window.similar = function () {
   function updateAdverts() {
     window.fillAdvertTemplate.fillFragment(adverts.sort(function (left, right) {
       var rankDiff = getRank(right) - getRank(left);
-      if (rankDiff === 0) {
-        rankDiff = pricesComparator(left.name, right.name);
-      }
+      // if (rankDiff === 0) {
+      //   rankDiff = pricesComparator(left.name, right.name);
+      // }
       return rankDiff;
     }));
+    window.util.popupsHide();
   }
 
   function getRank(advert) {
     var rank = 0;
 
-    if (advert.type === filtersType) {
+    if (advert.offer.type === filtersType) {
       rank += 5;
       console.log(rank);
     }

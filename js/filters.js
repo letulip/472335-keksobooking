@@ -16,7 +16,8 @@
   };
 
   type.addEventListener('change', function () {
-    console.log('type changed');
+    var newType = type.value;
+    advert.onTypeChange(newType);
   });
   price.addEventListener('change', function () {
     console.log('price changed');
@@ -30,4 +31,7 @@
   features.addEventListener('change', function () {
     console.log('features changed');
   });
+
+  window.advert = advert;
+  return advert;
 })();

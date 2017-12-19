@@ -36,20 +36,20 @@ window.util = (function () {
       return Math.floor(Math.random() * (max - min)) + min;
     },
     formFieldsetHide: function () {
-      for (var i = 0; i < fieldsetElements.length; i++) {
-        window.util.addClassName(fieldsetElements[i], disabled);
-      }
+      fieldsetElements.forEach(function (item) {
+        window.util.addClassName(item, disabled);
+      });
     },
     formFieldsetShow: function () {
-      for (var i = 0; i < fieldsetElements.length; i++) {
-        window.util.removeClassName(fieldsetElements[i], disabled);
-      }
+      fieldsetElements.forEach(function (item) {
+        window.util.removeClassName(item, disabled);
+      });
     },
     popupsHide: function () {
       var popups = document.querySelectorAll('.popup');
-      for (var i = 0; i < popups.length; i++) {
-        window.util.addClassName(popups[i], hidden);
-      }
+      popups.forEach(function (item) {
+        window.util.addClassName(item, hidden);
+      });
     },
     getHiddenAttribute: function () {
       return hidden;

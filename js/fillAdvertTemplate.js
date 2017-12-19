@@ -47,6 +47,10 @@ window.fillAdvertTemplate = (function () {
 
   return {
     fillFragment: function (advertsArray) {
+      var existingAdverts = document.querySelectorAll('.map__pin-template');
+      existingAdverts.forEach(function (item) {
+        item.remove();
+      });
       var fragment = document.createDocumentFragment();
       var similarPinElement = document.querySelector('.map__pins');
       for (var i = 0; i < window.util.getNumberOfAdverts(); i++) {
