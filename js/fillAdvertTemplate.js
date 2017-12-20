@@ -53,7 +53,11 @@ window.fillAdvertTemplate = (function () {
       });
       var fragment = document.createDocumentFragment();
       var similarPinElement = document.querySelector('.map__pins');
-      for (var i = 0; i < window.util.getNumberOfAdverts(); i++) {
+      var arrayLength = advertsArray.length;
+      if (arrayLength > 5) {
+        arrayLength = 5;
+      }
+      for (var i = 0; i < arrayLength; i++) {
         fragment.appendChild(createAdvertTemplate(createAdvert(advertsArray[i])));
       }
       similarPinElement.appendChild(fragment);
