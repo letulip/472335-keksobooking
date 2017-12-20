@@ -44,7 +44,6 @@ window.similar = function () {
       }
       return rankDiff;
     }));
-    console.log(adverts);
     window.util.popupsHide();
   }
 
@@ -68,7 +67,6 @@ window.similar = function () {
         rank += 1;
       }
     });
-    console.log(rank);
     return rank;
   }
 

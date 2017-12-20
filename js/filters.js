@@ -35,17 +35,19 @@
   features.addEventListener('change', function () {
     var elements = features.querySelectorAll('input[type=checkbox]');
 
-    elements.forEach(function (element) {
-      if (element.checked && !newFeatures.includes(element.value)) {
-        newFeatures.push(element.value);
-      }
-      if (!element.checked && newFeatures.includes(element.value)) {
-        newFeatures.splice(newFeatures.indexOf(element.value), 1);
-      }
-    });
+    elements.forEach(checkingFeatures);
 
     advert.onFeaturesChange(newFeatures);
   });
+
+  function checkingFeatures(element) {
+    if (element.checked && !newFeatures.includes(element.value)) {
+      newFeatures.push(element.value);
+    }
+    if (!element.checked && newFeatures.includes(element.value)) {
+      newFeatures.splice(newFeatures.indexOf(element.value), 1);
+    }
+  }
 
   window.advert = advert;
   return advert;
