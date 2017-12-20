@@ -8,7 +8,7 @@ window.similar = function () {
   var filtersPrice;
   var filtersRooms;
   var filtersGuests;
-  var filtersFeatures;
+  var filtersFeatures = [];
   var adverts = [];
 
   window.advert.onTypeChange = function (type) {
@@ -63,9 +63,12 @@ window.similar = function () {
     if (advert.offer.guests >= filtersGuests) {
       rank += 2;
     }
-    if (advert.offer.features.includes(filtersFeatures)) {
-      rank += 1;
-    }
+    filtersFeatures.forEach(function (feature) {
+      if (advert.offer.features.includes(feature)) {
+        rank += 1;
+      }
+    });
+    console.log(rank);
     return rank;
   }
 
