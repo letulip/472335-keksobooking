@@ -52,8 +52,20 @@ window.similar = function () {
     });
     var filtered = adverts.filter(isType);
     filtered = filtered.filter(isPrice);
+    filtered = filtered.filter(isRooms);
     window.fillAdvertTemplate.fillFragment(filtered);
     window.util.popupsHide();
+  }
+
+  function isRooms(value) {
+    var filterType = mapFilters.querySelector('#housing-rooms');
+    if (filterType.value === filtersDefault) {
+      return true;
+    }
+    if (filterType.value === value.offer.rooms.toString()) {
+      return true;
+    }
+    return false;
   }
 
   function isType(value) {
