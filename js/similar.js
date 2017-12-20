@@ -1,7 +1,6 @@
 'use strict';
 
 window.similar = function () {
-  // var filters = document.querySelector('.map__filters');
   var loadPath = 'https://1510.dump.academy/keksobooking';
   var noticeForm = document.querySelector('.notice__form');
   var mapFilters = document.querySelector('.map__filters');
@@ -51,12 +50,13 @@ window.similar = function () {
       }
       return rankDiff;
     });
-    var filtered = adverts.filter(isDefault);
+    var filtered = adverts.filter(isType);
+    filtered = filtered.filter(isPrice);
     window.fillAdvertTemplate.fillFragment(filtered);
     window.util.popupsHide();
   }
 
-  function isDefault(value) {
+  function isType(value) {
     var filterType = mapFilters.querySelector('#housing-type');
     if (filterType.value === filtersDefault) {
       return true;
@@ -65,6 +65,28 @@ window.similar = function () {
       return true;
     }
     return false;
+  }
+
+  function isPrice(value) {
+    var filterPrice = mapFilters.querySelector('#housing-price');
+    if (filterPrice.value === filtersDefault) {
+      return true;
+    }
+    if (filterPrice.value === priceValue(value.offer.price)) {
+      return true;
+    }
+    return false;
+  }
+
+  function priceValue(price) {
+    if (price <= lowPriceValue) {
+      return lowPrice;
+    }
+    if (price >= highPriceValue) {
+      return highPrice;
+    } else {
+      return middlePrice;
+    }
   }
 
   function getRank(advert) {
