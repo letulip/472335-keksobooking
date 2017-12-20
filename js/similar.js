@@ -79,13 +79,16 @@ window.similar = function () {
   }
 
   function priceValue(price) {
-    if (price <= lowPriceValue) {
+    if (price <= lowPriceValue && filtersPrice === lowPrice) {
       return lowPrice;
     }
-    if (price >= highPriceValue) {
+    if (price >= lowPriceValue && price <= highPriceValue && filtersPrice === middlePrice) {
+      return middlePrice;
+    }
+    if (price >= highPriceValue && filtersPrice === highPrice) {
       return highPrice;
     } else {
-      return middlePrice;
+      return filtersDefault;
     }
   }
 
