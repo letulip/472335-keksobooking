@@ -6,6 +6,11 @@ window.similar = function () {
   var noticeForm = document.querySelector('.notice__form');
   var filtersType;
   var filtersPrice;
+  var lowPrice = 'low';
+  var lowPriceValue = 10000;
+  var middlePrice = 'middle';
+  var highPrice = 'high';
+  var highPriceValue = 50000;
   var filtersRooms;
   var filtersGuests;
   var filtersFeatures = [];
@@ -71,14 +76,14 @@ window.similar = function () {
   }
 
   function priceRange(price) {
-    if (filtersPrice === 'low') {
-      return price <= 10000;
+    if (filtersPrice === lowPrice) {
+      return price <= lowPriceValue;
     }
-    if (filtersPrice === 'middle') {
-      return price > 10000 && price <= 50000;
+    if (filtersPrice === middlePrice) {
+      return price > lowPriceValue && price <= highPriceValue;
     }
-    if (filtersPrice === 'high') {
-      return price >= 50000;
+    if (filtersPrice === highPrice) {
+      return price >= highPriceValue;
     }
     return false;
   }
