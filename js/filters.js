@@ -7,6 +7,7 @@
   var rooms = filters.querySelector('#housing-rooms');
   var guests = filters.querySelector('#housing-guests');
   var features = filters.querySelector('#housing-features');
+  var newFeatures = [];
   var advert = {
     onTypeChange: function () {},
     onPriceChange: function () {},
@@ -20,16 +21,30 @@
     advert.onTypeChange(newType);
   });
   price.addEventListener('change', function () {
-    console.log('price changed');
+    var newPrice = price.value;
+    advert.onPriceChange(newPrice);
   });
   rooms.addEventListener('change', function () {
-    console.log('rooms changed');
+    var newRooms = rooms.value;
+    advert.onRoomsChange(newRooms);
   });
   guests.addEventListener('change', function () {
-    console.log('guests changed');
+    var newGuests = guests.value;
+    advert.onGuestsChange(newGuests);
   });
   features.addEventListener('change', function () {
-    console.log('features changed');
+    var elements = features.querySelectorAll('input[type=checkbox]');
+
+    elements.forEach(function (element) {
+      if (element.checked && !newFeatures.includes(element.value)) {
+        newFeatures.push(element.value);
+      }
+      if (!element.checked && newFeatures.includes(element.value)) {
+        newFeatures.splice(newFeatures.indexOf(element.value), 1);
+      }
+    });
+
+    advert.onFeaturesChange(newFeatures);
   });
 
   window.advert = advert;
