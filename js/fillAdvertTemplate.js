@@ -37,29 +37,7 @@ window.fillAdvertTemplate = (function () {
     });
     features.forEach(function (feature) {
       var li = document.createElement('li');
-
-      switch (feature) {
-        case 'wifi':
-          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--wifi');
-          break;
-        case 'dishwasher':
-          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--dishwasher');
-          break;
-        case 'parking':
-          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--parking');
-          break;
-        case 'washer':
-          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--washer');
-          break;
-        case 'elevator':
-          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--elevator');
-          break;
-        case 'conditioner':
-          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--conditioner');
-          break;
-        default:
-          return;
-      }
+      element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--' + feature);
     });
   }
 
