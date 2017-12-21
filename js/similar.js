@@ -17,6 +17,7 @@ window.similar = function () {
   var filtersFeatures = [];
   var adverts = [];
 
+
   window.advert.onTypeChange = function (type) {
     filtersType = type;
     window.util.debounce(updateAdverts);
@@ -65,69 +66,51 @@ window.similar = function () {
   }
 
   function isWifi(obj) {
-    var filterWifi = mapFilters.querySelector('#filter-wifi');
-    if (!filterWifi.checked) {
+    var filterType = mapFilters.querySelector('#filter-wifi');
+    if (!filterType.checked) {
       return true;
     }
-    if (filterWifi.checked && obj.offer.features.includes(filterWifi.value)) {
-      return true;
-    }
-    return false;
+    return filterType.checked && obj.offer.features.includes(filterType.value);
   }
 
   function isDishwasher(obj) {
-    var filterDishwasher = mapFilters.querySelector('#filter-dishwasher');
-    if (!filterDishwasher.checked) {
+    var filterType = mapFilters.querySelector('#filter-dishwasher');
+    if (!filterType.checked) {
       return true;
     }
-    if (filterDishwasher.checked && obj.offer.features.includes(filterDishwasher.value)) {
-      return true;
-    }
-    return false;
+    return filterType.checked && obj.offer.features.includes(filterType.value);
   }
 
   function isParking(obj) {
-    var filterParking = mapFilters.querySelector('#filter-parking');
-    if (!filterParking.checked) {
+    var filterType = mapFilters.querySelector('#filter-parking');
+    if (!filterType.checked) {
       return true;
     }
-    if (filterParking.checked && obj.offer.features.includes(filterParking.value)) {
-      return true;
-    }
-    return false;
+    return filterType.checked && obj.offer.features.includes(filterType.value);
   }
 
   function isWasher(obj) {
-    var filterWasher = mapFilters.querySelector('#filter-washer');
-    if (!filterWasher.checked) {
+    var filterType = mapFilters.querySelector('#filter-washer');
+    if (!filterType.checked) {
       return true;
     }
-    if (filterWasher.checked && obj.offer.features.includes(filterWasher.value)) {
-      return true;
-    }
-    return false;
+    return filterType.checked && obj.offer.features.includes(filterType.value);
   }
 
   function isElevator(obj) {
-    var filterElevator = mapFilters.querySelector('#filter-elevator');
-    if (!filterElevator.checked) {
+    var filterType = mapFilters.querySelector('#filter-elevator');
+    if (!filterType.checked) {
       return true;
     }
-    if (filterElevator.checked && obj.offer.features.includes(filterElevator.value)) {
-      return true;
-    }
-    return false;
+    return filterType.checked && obj.offer.features.includes(filterType.value);
   }
 
   function isConditioner(obj) {
-    var filterConditioner = mapFilters.querySelector('#filter-conditioner');
-    if (!filterConditioner.checked) {
+    var filterType = mapFilters.querySelector('#filter-conditioner');
+    if (!filterType.checked) {
       return true;
     }
-    if (filterConditioner.checked && obj.offer.features.includes(filterConditioner.value)) {
-      return true;
-    }
-    return false;
+    return filterType.checked && obj.offer.features.includes(filterType.value);
   }
 
   function isGuests(value) {
@@ -135,10 +118,7 @@ window.similar = function () {
     if (filterType.value === filtersDefault) {
       return true;
     }
-    if (filterType.value === value.offer.guests.toString()) {
-      return true;
-    }
-    return false;
+    return filterType.value === value.offer.guests.toString();
   }
 
   function isRooms(value) {
@@ -146,10 +126,7 @@ window.similar = function () {
     if (filterType.value === filtersDefault) {
       return true;
     }
-    if (filterType.value === value.offer.rooms.toString()) {
-      return true;
-    }
-    return false;
+    return filterType.value === value.offer.rooms.toString();
   }
 
   function isType(value) {
@@ -157,10 +134,7 @@ window.similar = function () {
     if (filterType.value === filtersDefault) {
       return true;
     }
-    if (filterType.value === value.offer.type) {
-      return true;
-    }
-    return false;
+    return filterType.value === value.offer.type;
   }
 
   function isPrice(value) {
@@ -168,10 +142,7 @@ window.similar = function () {
     if (filterPrice.value === filtersDefault) {
       return true;
     }
-    if (filterPrice.value === priceValue(value.offer.price)) {
-      return true;
-    }
-    return false;
+    return filterPrice.value === priceValue(value.offer.price);
   }
 
   function priceValue(price) {
