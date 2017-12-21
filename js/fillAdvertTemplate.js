@@ -20,13 +20,57 @@ window.fillAdvertTemplate = (function () {
     advertContent.querySelector('h3').textContent = advert.offer.title;
     advertContent.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
     advertContent.querySelector('.popup__price').innerHTML = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
-    advertContent.querySelector('h4').textContent = 'Тип жилья: ' + advert.offer.type;
+    advertContent.querySelector('h4').textContent = 'Тип жилья: ' + getType(advert.offer.type);
     advertContent.querySelector('h4 + p').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
     advertContent.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
-    advertContent.querySelector('.popup__features').textContent = 'Доп. опции: ' + advert.offer.features;
+    getFeatures(advertContent, advert.offer.features);
     advertContent.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
     picturesAdding(advertContent, advert.offer.photos);
     return advertContent;
+  }
+
+  function getFeatures(element, features) {
+    var popupFeatures = element.querySelector('.popup__features');
+    var popupFeaturesChildren = popupFeatures.querySelectorAll('li');
+    popupFeaturesChildren.forEach(function (child) {
+      child.remove();
+    });
+    features.forEach(function (feature) {
+      var li = document.createElement('li');
+
+      switch (feature) {
+        case 'wi-fi':
+          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--wifi');
+          break;
+        case 'dishwasher':
+          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--dishwasher');
+          break;
+        case 'parking':
+          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--parking');
+          break;
+        case 'washer':
+          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--washer');
+          break;
+        case 'elevator':
+          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--elevator');
+          break;
+        case 'conditioner':
+          element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--conditioner');
+          break;
+        default:
+          return;
+      }
+    });
+  }
+
+  function getType(type) {
+    if (type === 'flat') {
+      return 'Квартира';
+    } else if (type === 'house') {
+      return 'Дом';
+    } else {
+      return 'Бунгало';
+    }
   }
 
   function picturesAdding(element, photosArray) {

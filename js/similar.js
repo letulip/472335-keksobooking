@@ -53,8 +53,20 @@ window.similar = function () {
     var filtered = adverts.filter(isType);
     filtered = filtered.filter(isPrice);
     filtered = filtered.filter(isRooms);
+    filtered = filtered.filter(isGuests);
     window.fillAdvertTemplate.fillFragment(filtered);
     window.util.popupsHide();
+  }
+
+  function isGuests(value) {
+    var filterType = mapFilters.querySelector('#housing-guests');
+    if (filterType.value === filtersDefault) {
+      return true;
+    }
+    if (filterType.value === value.offer.guests.toString()) {
+      return true;
+    }
+    return false;
   }
 
   function isRooms(value) {
