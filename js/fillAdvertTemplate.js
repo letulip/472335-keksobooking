@@ -39,7 +39,7 @@ window.fillAdvertTemplate = (function () {
       var li = document.createElement('li');
 
       switch (feature) {
-        case 'wi-fi':
+        case 'wifi':
           element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--wifi');
           break;
         case 'dishwasher':

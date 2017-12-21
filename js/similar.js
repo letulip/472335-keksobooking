@@ -54,8 +54,80 @@ window.similar = function () {
     filtered = filtered.filter(isPrice);
     filtered = filtered.filter(isRooms);
     filtered = filtered.filter(isGuests);
+    filtered = filtered.filter(isWifi);
+    filtered = filtered.filter(isDishwasher);
+    filtered = filtered.filter(isParking);
+    filtered = filtered.filter(isWasher);
+    filtered = filtered.filter(isElevator);
+    filtered = filtered.filter(isConditioner);
     window.fillAdvertTemplate.fillFragment(filtered);
     window.util.popupsHide();
+  }
+
+  function isWifi(obj) {
+    var filterWifi = mapFilters.querySelector('#filter-wifi');
+    if (!filterWifi.checked) {
+      return true;
+    }
+    if (filterWifi.checked && obj.offer.features.includes(filterWifi.value)) {
+      return true;
+    }
+    return false;
+  }
+
+  function isDishwasher(obj) {
+    var filterDishwasher = mapFilters.querySelector('#filter-dishwasher');
+    if (!filterDishwasher.checked) {
+      return true;
+    }
+    if (filterDishwasher.checked && obj.offer.features.includes(filterDishwasher.value)) {
+      return true;
+    }
+    return false;
+  }
+
+  function isParking(obj) {
+    var filterParking = mapFilters.querySelector('#filter-parking');
+    if (!filterParking.checked) {
+      return true;
+    }
+    if (filterParking.checked && obj.offer.features.includes(filterParking.value)) {
+      return true;
+    }
+    return false;
+  }
+
+  function isWasher(obj) {
+    var filterWasher = mapFilters.querySelector('#filter-washer');
+    if (!filterWasher.checked) {
+      return true;
+    }
+    if (filterWasher.checked && obj.offer.features.includes(filterWasher.value)) {
+      return true;
+    }
+    return false;
+  }
+
+  function isElevator(obj) {
+    var filterElevator = mapFilters.querySelector('#filter-elevator');
+    if (!filterElevator.checked) {
+      return true;
+    }
+    if (filterElevator.checked && obj.offer.features.includes(filterElevator.value)) {
+      return true;
+    }
+    return false;
+  }
+
+  function isConditioner(obj) {
+    var filterConditioner = mapFilters.querySelector('#filter-conditioner');
+    if (!filterConditioner.checked) {
+      return true;
+    }
+    if (filterConditioner.checked && obj.offer.features.includes(filterConditioner.value)) {
+      return true;
+    }
+    return false;
   }
 
   function isGuests(value) {
