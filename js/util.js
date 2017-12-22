@@ -6,6 +6,9 @@ window.util = (function () {
   var hidden = 'hidden';
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
+  var numOfAdverts = 5;
+  var DEBOUNCE_INTERVAL = 500;
+  var lastTimeout;
 
   return {
     isEscEvent: function (evt, action) {
@@ -33,23 +36,32 @@ window.util = (function () {
       return Math.floor(Math.random() * (max - min)) + min;
     },
     formFieldsetHide: function () {
-      for (var i = 0; i < fieldsetElements.length; i++) {
-        window.util.addClassName(fieldsetElements[i], disabled);
-      }
+      fieldsetElements.forEach(function (item) {
+        window.util.addClassName(item, disabled);
+      });
     },
     formFieldsetShow: function () {
-      for (var i = 0; i < fieldsetElements.length; i++) {
-        window.util.removeClassName(fieldsetElements[i], disabled);
-      }
+      fieldsetElements.forEach(function (item) {
+        window.util.removeClassName(item, disabled);
+      });
     },
     popupsHide: function () {
       var popups = document.querySelectorAll('.popup');
-      for (var i = 0; i < popups.length; i++) {
-        window.util.addClassName(popups[i], hidden);
-      }
+      popups.forEach(function (item) {
+        window.util.addClassName(item, hidden);
+      });
     },
     getHiddenAttribute: function () {
       return hidden;
+    },
+    debounce: function (func) {
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(func, DEBOUNCE_INTERVAL);
+    },
+    getNumberOfAdverts: function () {
+      return numOfAdverts;
     }
   };
 })();

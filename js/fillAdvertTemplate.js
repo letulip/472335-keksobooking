@@ -20,13 +20,35 @@ window.fillAdvertTemplate = (function () {
     advertContent.querySelector('h3').textContent = advert.offer.title;
     advertContent.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
     advertContent.querySelector('.popup__price').innerHTML = 'Цена за ночь: ' + advert.offer.price + '&#x20bd;/ночь';
-    advertContent.querySelector('h4').textContent = 'Тип жилья: ' + advert.offer.type;
+    advertContent.querySelector('h4').textContent = 'Тип жилья: ' + getType(advert.offer.type);
     advertContent.querySelector('h4 + p').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
     advertContent.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
-    advertContent.querySelector('.popup__features').textContent = 'Доп. опции: ' + advert.offer.features;
+    getFeatures(advertContent, advert.offer.features);
     advertContent.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
     picturesAdding(advertContent, advert.offer.photos);
     return advertContent;
+  }
+
+  function getFeatures(element, features) {
+    var popupFeatures = element.querySelector('.popup__features');
+    var popupFeaturesChildren = popupFeatures.querySelectorAll('li');
+    popupFeaturesChildren.forEach(function (child) {
+      child.remove();
+    });
+    features.forEach(function (feature) {
+      var li = document.createElement('li');
+      element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--' + feature);
+    });
+  }
+
+  function getType(type) {
+    if (type === 'flat') {
+      return 'Квартира';
+    } else if (type === 'house') {
+      return 'Дом';
+    } else {
+      return 'Бунгало';
+    }
   }
 
   function picturesAdding(element, photosArray) {
@@ -47,9 +69,17 @@ window.fillAdvertTemplate = (function () {
 
   return {
     fillFragment: function (advertsArray) {
+      var existingAdverts = document.querySelectorAll('.map__pin-template');
+      existingAdverts.forEach(function (item) {
+        item.remove();
+      });
       var fragment = document.createDocumentFragment();
       var similarPinElement = document.querySelector('.map__pins');
-      for (var i = 0; i < window.advertCreation.getNumberOfAdverts(); i++) {
+      var arrayLength = advertsArray.length;
+      if (arrayLength > 5) {
+        arrayLength = 5;
+      }
+      for (var i = 0; i < arrayLength; i++) {
         fragment.appendChild(createAdvertTemplate(createAdvert(advertsArray[i])));
       }
       similarPinElement.appendChild(fragment);
