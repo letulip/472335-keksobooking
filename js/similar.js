@@ -44,23 +44,6 @@ window.similar = function () {
   };
 
   function updateAdverts() {
-    // adverts.sort(function (left, right) {
-    //   var rankDiff = getRank(right) - getRank(left);
-    //   if (rankDiff === 0) {
-    //     rankDiff = featuresComparator(left.offer.features, right.offer.features);
-    //   }
-    //   return rankDiff;
-    // });
-    // var filtered = adverts.filter(isType);
-    // filtered = filtered.filter(isPrice);
-    // filtered = filtered.filter(isRooms);
-    // filtered = filtered.filter(isGuests);
-    // filtered = filtered.filter(isWifi);
-    // filtered = filtered.filter(isDishwasher);
-    // filtered = filtered.filter(isParking);
-    // filtered = filtered.filter(isWasher);
-    // filtered = filtered.filter(isElevator);
-    // filtered = filtered.filter(isConditioner);
     sortAdverts();
     var filtered = filterAdverts(adverts);
     window.fillAdvertTemplate.fillFragment(filtered);
