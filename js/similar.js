@@ -44,6 +44,23 @@ window.similar = function () {
   };
 
   function updateAdverts() {
+    // adverts.sort(function (left, right) {
+    //   var rankDiff = getRank(right) - getRank(left);
+    //   if (rankDiff === 0) {
+    //     rankDiff = featuresComparator(left.offer.features, right.offer.features);
+    //   }
+    //   return rankDiff;
+    // });
+    // var filtered = adverts.filter(isType);
+    // filtered = filtered.filter(isPrice);
+    // filtered = filtered.filter(isRooms);
+    // filtered = filtered.filter(isGuests);
+    // filtered = filtered.filter(isWifi);
+    // filtered = filtered.filter(isDishwasher);
+    // filtered = filtered.filter(isParking);
+    // filtered = filtered.filter(isWasher);
+    // filtered = filtered.filter(isElevator);
+    // filtered = filtered.filter(isConditioner);
     sortAdverts();
     var filtered = filterAdverts(adverts);
     window.fillAdvertTemplate.fillFragment(filtered);
@@ -60,89 +77,82 @@ window.similar = function () {
     });
   }
 
-  function filterAdverts() {
-    adverts.filter(isType).filter(isPrice).filter(isRooms).filter(isGuests).filter(isWifi).filter(isDishwasher).filter(isParking).filter(isWasher).filter(isElevator).filter(isConditioner);
-    return adverts;
+  function filterAdverts(advs) {
+    advs = adverts.filter(isType);
+    advs = advs.filter(isPrice);
+    advs = advs.filter(isRooms);
+    advs = advs.filter(isGuests);
+    advs = advs.filter(isWifi);
+    advs = advs.filter(isDishwasher);
+    advs = advs.filter(isParking);
+    advs = advs.filter(isWasher);
+    advs = advs.filter(isElevator);
+    advs = advs.filter(isConditioner);
+    return advs;
+  }
+
+  function isCheckedIncludes(filterType, obj) {
+    if (!filterType.checked) {
+      return true;
+    }
+    return filterType.checked && obj.offer.features.includes(filterType.value);
   }
 
   function isWifi(obj) {
     var filterType = mapFilters.querySelector('#filter-wifi');
-    if (!filterType.checked) {
-      return true;
-    }
-    return filterType.checked && obj.offer.features.includes(filterType.value);
+    return isCheckedIncludes(filterType, obj);
   }
 
   function isDishwasher(obj) {
     var filterType = mapFilters.querySelector('#filter-dishwasher');
-    if (!filterType.checked) {
-      return true;
-    }
-    return filterType.checked && obj.offer.features.includes(filterType.value);
+    return isCheckedIncludes(filterType, obj);
   }
 
   function isParking(obj) {
     var filterType = mapFilters.querySelector('#filter-parking');
-    if (!filterType.checked) {
-      return true;
-    }
-    return filterType.checked && obj.offer.features.includes(filterType.value);
+    return isCheckedIncludes(filterType, obj);
   }
 
   function isWasher(obj) {
     var filterType = mapFilters.querySelector('#filter-washer');
-    if (!filterType.checked) {
-      return true;
-    }
-    return filterType.checked && obj.offer.features.includes(filterType.value);
+    return isCheckedIncludes(filterType, obj);
   }
 
   function isElevator(obj) {
     var filterType = mapFilters.querySelector('#filter-elevator');
-    if (!filterType.checked) {
-      return true;
-    }
-    return filterType.checked && obj.offer.features.includes(filterType.value);
+    return isCheckedIncludes(filterType, obj);
   }
 
   function isConditioner(obj) {
     var filterType = mapFilters.querySelector('#filter-conditioner');
-    if (!filterType.checked) {
+    return isCheckedIncludes(filterType, obj);
+  }
+
+  function isChecked(filterType, value) {
+    if (filterType.value === filtersDefault) {
       return true;
     }
-    return filterType.checked && obj.offer.features.includes(filterType.value);
+    return filterType.value === value;
   }
 
   function isGuests(value) {
     var filterType = mapFilters.querySelector('#housing-guests');
-    if (filterType.value === filtersDefault) {
-      return true;
-    }
-    return filterType.value === value.offer.guests.toString();
+    return isChecked(filterType, value.offer.guests.toString());
   }
 
   function isRooms(value) {
     var filterType = mapFilters.querySelector('#housing-rooms');
-    if (filterType.value === filtersDefault) {
-      return true;
-    }
-    return filterType.value === value.offer.rooms.toString();
+    return isChecked(filterType, value.offer.rooms.toString());
   }
 
   function isType(value) {
     var filterType = mapFilters.querySelector('#housing-type');
-    if (filterType.value === filtersDefault) {
-      return true;
-    }
-    return filterType.value === value.offer.type;
+    return isChecked(filterType, value.offer.type);
   }
 
   function isPrice(value) {
-    var filterPrice = mapFilters.querySelector('#housing-price');
-    if (filterPrice.value === filtersDefault) {
-      return true;
-    }
-    return filterPrice.value === priceValue(value.offer.price);
+    var filterType = mapFilters.querySelector('#housing-price');
+    return isChecked(filterType, priceValue(value.offer.price));
   }
 
   function priceValue(price) {
