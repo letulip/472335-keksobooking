@@ -3,8 +3,8 @@
 window.fillAdvertTemplate = (function () {
   function createAdvertTemplate(advertContent) {
     var similarAdvertTemplate = document.querySelector('template');
-    var advertTemplate = similarAdvertTemplate.cloneNode(false);
-    advertTemplate.style.display = 'block';
+    var advertTemplate = document.createElement('div');
+    advertTemplate.appendChild(similarAdvertTemplate.cloneNode(false).content);
     advertTemplate.classList.add('map__pin-template');
     advertTemplate.appendChild(advertContent);
     return advertTemplate;

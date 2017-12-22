@@ -7,7 +7,7 @@
   var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMainMouseUp = document.querySelector('main');
   var mapPinMain = document.querySelector('.map__pin--main');
-  var mapPinMainImg = document.querySelector('.map__pin--main img');
+  var mapPinMainImg = document.querySelector('.map__pin--main');
   var formAddress = document.querySelector('#address');
 
   mapPinMainImg.draggable = true;
