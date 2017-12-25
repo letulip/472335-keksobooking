@@ -1,15 +1,6 @@
 'use strict';
 
 window.fillAdvertTemplate = (function () {
-  function createAdvertTemplate(advertContent) {
-    var similarAdvertTemplate = document.querySelector('template');
-    var advertTemplate = document.createElement('div');
-    advertTemplate.appendChild(similarAdvertTemplate.cloneNode(false).content);
-    advertTemplate.classList.add('map__pin-template');
-    advertTemplate.appendChild(advertContent);
-    return advertTemplate;
-  }
-
   function createAdvert(advert) {
     var similarAdvertTemplateContent = document.querySelector('template').content;
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
@@ -69,8 +60,12 @@ window.fillAdvertTemplate = (function () {
 
   return {
     fillFragment: function (advertsArray) {
-      var existingAdverts = document.querySelectorAll('.map__pin-template');
-      existingAdverts.forEach(function (item) {
+      var existingCards = document.querySelectorAll('.map__card');
+      existingCards.forEach(function (item) {
+        item.remove();
+      });
+      var existingPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+      existingPins.forEach(function (item) {
         item.remove();
       });
       var fragment = document.createDocumentFragment();
@@ -80,7 +75,7 @@ window.fillAdvertTemplate = (function () {
         arrayLength = 5;
       }
       for (var i = 0; i < arrayLength; i++) {
-        fragment.appendChild(createAdvertTemplate(createAdvert(advertsArray[i])));
+        fragment.appendChild(createAdvert(advertsArray[i]));
       }
       similarPinElement.appendChild(fragment);
     }
