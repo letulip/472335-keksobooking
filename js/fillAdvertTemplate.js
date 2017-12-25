@@ -49,7 +49,9 @@ window.fillAdvertTemplate = (function () {
       var imgWidth = 50;
       var imgHeight = 70;
       var li = document.createElement('li');
-      var img = new Image(imgWidth, imgHeight);
+      var img = new Image();
+      img.style.width = imgWidth + 'px';
+      img.style.height = imgHeight + 'px';
       element.querySelector('.popup__pictures').appendChild(li).appendChild(img).src = photosArray[i];
     }
   }
