@@ -7,12 +7,12 @@
   var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMainMouseUp = document.querySelector('main');
   var mapPinMain = document.querySelector('.map__pin--main');
-  var mapPinMainImg = document.querySelector('.map__pin--main');
+  var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
   var formAddress = document.querySelector('#address');
 
-  mapPinMainImg.draggable = true;
+  mapPinMain.draggable = true;
 
-  mapPinMainImg.addEventListener('mousedown', function (evt) {
+  mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -86,8 +86,13 @@
 
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
-  map.addEventListener('click', function (evt) {
-    window.card.showCard(evt);
+  // map.addEventListener('click', function (evt) {
+  //   window.card.showCard(evt);
+  // });
+  mapPins.forEach(function (pin) {
+    pin.addEventListener('click', function (evt) {
+      window.card.showCard(evt);
+    });
   });
   map.addEventListener('keydown', function (evt) {
     window.util.isEnterOrEscEvent(evt, window.card.showCard.bind(evt));
