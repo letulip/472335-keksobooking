@@ -26,10 +26,14 @@ window.fillAdvertTemplate = (function () {
     popupFeaturesChildren.forEach(function (child) {
       child.remove();
     });
+    var fragment = document.createDocumentFragment();
+
     features.forEach(function (feature) {
       var li = document.createElement('li');
-      element.querySelector('.popup__features').appendChild(li).classList.add('feature', 'feature--' + feature);
+      fragment.appendChild(li).classList.add('feature', 'feature--' + feature);
     });
+
+    element.querySelector('.popup__features').appendChild(fragment);
   }
 
   function getType(type) {
