@@ -57,7 +57,7 @@ window.fillAdvertTemplate = (function () {
   }
 
   function getCoordinates(locationCoords) {
-    return ((locationCoords) + 'px');
+    return locationCoords + 'px';
   }
 
   return {
@@ -72,9 +72,10 @@ window.fillAdvertTemplate = (function () {
       });
       var fragment = document.createDocumentFragment();
       var similarPinElement = document.querySelector('.map__pins');
+      var advertsCount = 5;
       var arrayLength = advertsArray.length;
-      if (arrayLength > 5) {
-        arrayLength = 5;
+      if (arrayLength > advertsCount) {
+        arrayLength = advertsCount;
       }
       for (var i = 0; i < arrayLength; i++) {
         fragment.appendChild(createAdvert(advertsArray[i]));
