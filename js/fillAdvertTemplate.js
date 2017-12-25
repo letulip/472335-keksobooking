@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.fillAdvertTemplate = (function () {
+  window.fillAdvertTemplate = function () {
     function createAdvert(advert) {
       var similarAdvertTemplateContent = document.querySelector('template').content;
       var advertContent = similarAdvertTemplateContent.cloneNode(true);
@@ -88,5 +88,5 @@
         similarPinElement.appendChild(fragment);
       }
     };
-  })();
+  };
 })();

@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.card = (function () {
+  window.card = function () {
     var popupCloseIcon;
     var mapPinPopup;
 
@@ -36,5 +36,5 @@
         }
       }
     };
-  })();
+  };
 })();

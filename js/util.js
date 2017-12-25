@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.util = (function () {
+  window.util = function () {
     var disabled = 'disabled';
     var fieldsetElements = document.querySelectorAll('.form__element');
     var hidden = 'hidden';
@@ -65,5 +65,5 @@
         return numOfAdverts;
       }
     };
-  })();
+  };
 })();

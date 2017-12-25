@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.formValidation = (function () {
+  window.formValidation = function () {
     return {
       formCheck: function () {
         var form = document.querySelector('.notice__form');
@@ -90,5 +90,5 @@
         setAttribute(formPrice, 'max', priceMax);
       }
     };
-  })();
+  };
 })();
