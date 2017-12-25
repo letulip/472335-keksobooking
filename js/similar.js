@@ -17,7 +17,6 @@ window.similar = function () {
   var filtersFeatures = [];
   var adverts = [];
 
-
   window.advert.onTypeChange = function (type) {
     filtersType = type;
     window.util.debounce(updateAdverts);
@@ -48,6 +47,13 @@ window.similar = function () {
     var filtered = filterAdverts(adverts);
     window.fillAdvertTemplate.fillFragment(filtered);
     window.util.popupsHide();
+    var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+
+    mapPins.forEach(function (pin) {
+      pin.addEventListener('click', function (evt) {
+        window.card.showCard(evt);
+      });
+    });
   }
 
   function sortAdverts() {

@@ -7,12 +7,11 @@
   var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMainMouseUp = document.querySelector('main');
   var mapPinMain = document.querySelector('.map__pin--main');
-  var mapPinMainImg = document.querySelector('.map__pin--main img');
   var formAddress = document.querySelector('#address');
 
-  mapPinMainImg.draggable = true;
+  mapPinMain.draggable = true;
 
-  mapPinMainImg.addEventListener('mousedown', function (evt) {
+  mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -20,7 +19,7 @@
       y: evt.clientY
     };
 
-    var onMouseMove = function (moveEvt) {
+    function onMouseMove(moveEvt) {
       moveEvt.preventDefault();
 
       var mapArea = map.querySelector('.map__pins');
@@ -71,7 +70,8 @@
       setLeftCoords();
       setRightCoords();
       setAddress();
-    };
+      window.similar();
+    }
 
     function onMouseUp(upEvt) {
       upEvt.preventDefault();
@@ -86,9 +86,6 @@
 
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
-  map.addEventListener('click', function (evt) {
-    window.card.showCard(evt);
-  });
   map.addEventListener('keydown', function (evt) {
     window.util.isEnterOrEscEvent(evt, window.card.showCard.bind(evt));
   });
@@ -106,7 +103,6 @@
 
   function mouseUpInit() {
     window.util.removeClassName(map, mapFaded);
-    window.similar();
     window.util.removeClassName(noticeForm, noticeFormDisabled);
     window.util.formFieldsetShow();
     window.util.popupsHide();

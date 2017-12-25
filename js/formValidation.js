@@ -50,11 +50,9 @@ window.formValidation = (function () {
       });
 
       formRooms.addEventListener('change', function () {
-        if (formRooms.value === roomsMax) {
-          formCapacity.value = capacityMin;
-        } else {
-          formCapacity.value = formRooms.value;
-        }
+        formCapacity.value = formRooms.value === roomsMax
+          ? capacityMin
+          : formRooms.value;
       });
 
       function setRequiredField(fieldId) {
