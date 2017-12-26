@@ -11,6 +11,10 @@
 
   mapPinMain.draggable = true;
 
+  document.addEventListener('keydown', function (evt) {
+    window.util.isEscEvent(evt, window.card.popupClose);
+  });
+
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
@@ -22,10 +26,10 @@
     function onMouseMove(moveEvt) {
       moveEvt.preventDefault();
 
+      var PIN_SHIFT = 40;
       var mapArea = map.querySelector('.map__pins');
       var mapAreaCoords = mapArea.getBoundingClientRect();
       var mapPinMainCoords = mapPinMain.getBoundingClientRect();
-      var pinShift = 40;
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -41,13 +45,13 @@
         if (mapPinMainCoords.top > mapAreaCoords.top) {
           mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
         } else {
-          mapPinMain.style.top = (mapAreaCoords.top + pinShift) + 'px';
+          mapPinMain.style.top = (mapAreaCoords.top + PIN_SHIFT) + 'px';
         }
       }
 
       function setBottomCoords() {
         if (mapPinMainCoords.bottom >= mapAreaCoords.bottom) {
-          mapPinMain.style.top = (mapAreaCoords.bottom - pinShift) + 'px';
+          mapPinMain.style.top = (mapAreaCoords.bottom - PIN_SHIFT) + 'px';
         }
       }
 
@@ -55,13 +59,13 @@
         if (mapPinMainCoords.left > mapAreaCoords.left) {
           mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
         } else {
-          mapPinMain.style.left = pinShift + 'px';
+          mapPinMain.style.left = PIN_SHIFT + 'px';
         }
       }
 
       function setRightCoords() {
         if (mapPinMainCoords.right >= mapAreaCoords.right) {
-          mapPinMain.style.left = (mapAreaCoords.width - pinShift) + 'px';
+          mapPinMain.style.left = (mapAreaCoords.width - PIN_SHIFT) + 'px';
         }
       }
 
@@ -87,7 +91,7 @@
   mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
 
   map.addEventListener('keydown', function (evt) {
-    window.util.isEnterOrEscEvent(evt, window.card.showCard.bind(evt));
+    window.util.isEnterOrEscEvent(evt, window.card.showPopup.bind(evt));
   });
 
   function setAddress() {
@@ -105,7 +109,6 @@
     window.util.removeClassName(map, mapFaded);
     window.util.removeClassName(noticeForm, noticeFormDisabled);
     window.util.formFieldsetShow();
-    window.util.popupsHide();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
   }
 

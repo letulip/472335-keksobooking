@@ -50,5 +50,4 @@
   }
 
   window.advert = advert;
-  return advert;
 })();
