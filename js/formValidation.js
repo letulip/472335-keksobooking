@@ -1,7 +1,7 @@
 'use strict';
 
-window.formValidation = (function () {
-  return {
+(function () {
+  window.formValidation = {
     formCheck: function () {
       var form = document.querySelector('.notice__form');
       var formAddress = form.querySelector('#address');

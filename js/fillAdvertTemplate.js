@@ -1,6 +1,6 @@
 'use strict';
 
-window.fillAdvertTemplate = (function () {
+(function () {
   function createAdvert(advert) {
     var similarAdvertTemplateContent = document.querySelector('template').content;
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
@@ -64,7 +64,7 @@ window.fillAdvertTemplate = (function () {
     return locationCoords + 'px';
   }
 
-  return {
+  window.fillAdvertTemplate = {
     fillFragment: function (advertsArray) {
       var existingCards = document.querySelectorAll('.map__card');
       existingCards.forEach(function (item) {
