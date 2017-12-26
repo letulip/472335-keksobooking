@@ -1,10 +1,10 @@
 'use strict';
 
-window.card = (function () {
+(function () {
   var popupCloseIcon;
   var mapPinPopup;
 
-  return {
+  window.card = {
     showCard: function (e) {
       var mapPinActive = 'map__pin--active';
       if (e.target.closest('.map__pin:not(.map__pin--main)')) {

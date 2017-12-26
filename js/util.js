@@ -1,6 +1,6 @@
 'use strict';
 
-window.util = (function () {
+(function () {
   var disabled = 'disabled';
   var fieldsetElements = document.querySelectorAll('.form__element');
   var hidden = 'hidden';
@@ -10,7 +10,7 @@ window.util = (function () {
   var DEBOUNCE_INTERVAL = 500;
   var lastTimeout;
 
-  return {
+  window.util = {
     isEscEvent: function (evt, action) {
       if (evt.keyCode === ESC_KEYCODE) {
         action(evt);
