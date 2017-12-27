@@ -5,7 +5,6 @@
   var mapFaded = 'map--faded';
   var noticeForm = document.querySelector('.notice__form');
   var noticeFormDisabled = 'notice__form--disabled';
-  var mapPinMainMouseUp = document.querySelector('main');
   var mapPinMain = document.querySelector('.map__pin--main');
   var formAddress = document.querySelector('#address');
 
