@@ -69,7 +69,16 @@
 
     function filterAdverts() {
       return adverts.filter(function (item) {
-        return isType(item) && isPrice(item) && isRooms(item) && isGuests(item) && isWifi(item) && isDishwasher(item) && isParking(item) && isWasher(item) && isElevator(item) && isConditioner(item);
+        return isType(item)
+          && isPrice(item)
+          && isRooms(item)
+          && isGuests(item)
+          && isWifi(item)
+          && isDishwasher(item)
+          && isParking(item)
+          && isWasher(item)
+          && isElevator(item)
+          && isConditioner(item);
       });
     }
 
