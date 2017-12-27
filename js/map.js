@@ -88,7 +88,8 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
+  mapPinMain.addEventListener('mouseup', mouseUpInit);
+
 
   map.addEventListener('keydown', function (evt) {
     window.util.isEnterOrEscEvent(evt, window.card.showPopup.bind(evt));
@@ -101,13 +102,14 @@
     var minCoords = 100;
     var maxCoords = 500;
     if (coords.top >= minCoords && coords.bottom <= maxCoords) {
-      formAddress.value = 'x: ' + (coords.left + horisontalShift) + ', y: ' + (coords.bottom + verticalShift);
+      formAddress.value = 'x: ' + Math.round(coords.left + horisontalShift) + ', y: ' + Math.round(coords.bottom + verticalShift);
     }
   }
 
   function mouseUpInit() {
     window.util.removeClassName(map, mapFaded);
     window.util.removeClassName(noticeForm, noticeFormDisabled);
+    setAddress();
     window.util.formFieldsetShow();
     mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
   }

@@ -77,7 +77,7 @@
       }
 
       setAttribute(form, 'action', actionUrl);
-      setRequiredField(formAddress);
+      // setRequiredField(formAddress);
       setReadOnlyField(formAddress);
       setRequiredField(formTitle);
       setAttribute(formTitle, 'minlength', minLength);
