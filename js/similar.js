@@ -80,6 +80,9 @@
       advs = advs.filter(isElevator);
       advs = advs.filter(isConditioner);
       return advs;
+      // adverts.filter(function () {
+      //   return isType(advs) && isPrice(advs) && isRooms(advs) && isGuests(advs) && isWifi(advs) && isDishwasher(advs) && isParking(advs) && isWasher(advs) && isElevator(advs) && isConditioner(advs);
+      // });
     }
 
     function isCheckedIncludes(filterType, obj) {

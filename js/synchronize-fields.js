@@ -5,6 +5,7 @@
     values1.forEach(function (item, i) {
       if (field1.value === values1[i]) {
         action(field2, values2[i]);
+        return;
       }
     });
   };

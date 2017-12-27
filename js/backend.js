@@ -13,7 +13,7 @@
       if (xhr.status === STATUS_OK) {
         onLoad(xhr.response);
       } else {
-        onError(xhr.response);
+        onError('Произошла ошибка соединения');
       }
     });
     xhr.addEventListener('error', function () {

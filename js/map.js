@@ -101,7 +101,7 @@
     var minCoords = 100;
     var maxCoords = 500;
     if (coords.top >= minCoords && coords.bottom <= maxCoords) {
-      formAddress.value = 'x: ' + (coords.bottom + verticalShift) + ', y: ' + (coords.left + horisontalShift);
+      formAddress.value = 'x: ' + (coords.left + horisontalShift) + ', y: ' + (coords.bottom + verticalShift);
     }
   }
 

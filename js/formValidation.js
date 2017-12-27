@@ -16,7 +16,6 @@
       var timeOuts = ['12:00', '13:00', '14:00'];
       var types = ['flat', 'bungalo', 'house', 'palace'];
       var pricesMin = [1000, 0, 5000, 10000];
-      var priceBungalo = 0;
       var priceFlat = 1000;
       var priceMax = 1000000;
       var roomsMax = '100';
@@ -84,7 +83,7 @@
       setAttribute(formTitle, 'minlength', minLength);
       setAttribute(formTitle, 'maxlength', maxLenght);
       setRequiredField(formPrice);
-      setAttribute(formPrice, 'min', priceBungalo);
+      setAttribute(formPrice, 'min', priceFlat);
       setAttribute(formPrice, 'value', priceFlat);
       setAttribute(formPrice, 'max', priceMax);
     }

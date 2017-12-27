@@ -51,6 +51,10 @@
         window.util.addClassName(item, HIDDEN);
       });
     },
+    popupHide: function () {
+      var popup = document.querySelector('.popup');
+      popup.classList.add(HIDDEN);
+    },
     getHiddenAttribute: function () {
       return HIDDEN;
     },
