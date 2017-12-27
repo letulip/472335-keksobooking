@@ -45,14 +45,7 @@
         window.util.removeClassName(item, DISABLED);
       });
     },
-    popupsHide: function () {
-      var popups = document.querySelectorAll('.popup');
-      popups.forEach(function (item) {
-        window.util.addClassName(item, HIDDEN);
-      });
-    },
-    popupHide: function () {
-      var popup = document.querySelector('.popup');
+    popupHide: function (popup) {
       popup.classList.add(HIDDEN);
     },
     getHiddenAttribute: function () {

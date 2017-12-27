@@ -46,9 +46,8 @@
 
     function updateAdverts() {
       sortAdverts();
-      var filtered = filterAdverts(adverts);
+      var filtered = filterAdverts();
       window.fillAdvertTemplate.fillFragment(filtered);
-      window.util.popupsHide();
       var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
 
       mapPins.forEach(function (pin) {
@@ -68,21 +67,20 @@
       });
     }
 
-    function filterAdverts(advs) {
-      advs = adverts.filter(isType);
-      advs = advs.filter(isPrice);
-      advs = advs.filter(isRooms);
-      advs = advs.filter(isGuests);
-      advs = advs.filter(isWifi);
-      advs = advs.filter(isDishwasher);
-      advs = advs.filter(isParking);
-      advs = advs.filter(isWasher);
-      advs = advs.filter(isElevator);
-      advs = advs.filter(isConditioner);
-      return advs;
-      // adverts.filter(function () {
-      //   return isType(advs) && isPrice(advs) && isRooms(advs) && isGuests(advs) && isWifi(advs) && isDishwasher(advs) && isParking(advs) && isWasher(advs) && isElevator(advs) && isConditioner(advs);
-      // });
+    function filterAdverts() {
+      // advs = adverts.filter(isType);
+      // advs = advs.filter(isPrice);
+      // advs = advs.filter(isRooms);
+      // advs = advs.filter(isGuests);
+      // advs = advs.filter(isWifi);
+      // advs = advs.filter(isDishwasher);
+      // advs = advs.filter(isParking);
+      // advs = advs.filter(isWasher);
+      // advs = advs.filter(isElevator);
+      // advs = advs.filter(isConditioner);
+      // advs = adverts.filter(isType).filter(isPrice).filter(isRooms).filter(isGuests).filter(isWifi).filter(isDishwasher).filter(isParking).filter(isWasher).filter(isElevator).filter(isConditioner);
+      return adverts.filter(isType).filter(isPrice).filter(isRooms).filter(isGuests).filter(isWifi).filter(isDishwasher).filter(isParking).filter(isWasher).filter(isElevator).filter(isConditioner);
+      // return adverts.filter(isType && isPrice && isRooms && isGuests && isWifi && isDishwasher && isParking && isWasher && isElevator && isConditioner);
     }
 
     function isCheckedIncludes(filterType, obj) {
@@ -211,7 +209,6 @@
     function successHandler(advertsArray) {
       adverts = advertsArray;
       updateAdverts(adverts);
-      window.util.popupsHide();
     }
 
     function errorHandler(errorMessage) {
