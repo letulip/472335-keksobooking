@@ -74,7 +74,6 @@
       setLeftCoords();
       setRightCoords();
       setAddress();
-      window.similar();
     }
 
     function onMouseUp(upEvt) {
@@ -107,11 +106,12 @@
   }
 
   function mouseUpInit() {
+    window.similar();
     window.util.removeClassName(map, mapFaded);
     window.util.removeClassName(noticeForm, noticeFormDisabled);
     setAddress();
     window.util.formFieldsetShow();
-    mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
+    mapPinMain.removeEventListener('mouseup', mouseUpInit);
   }
 
   window.util.formFieldsetHide();

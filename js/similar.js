@@ -198,7 +198,7 @@
 
     function successHandler(advertsArray) {
       adverts = advertsArray;
-      updateAdverts(adverts);
+      updateAdverts();
     }
 
     function errorHandler(errorMessage) {
