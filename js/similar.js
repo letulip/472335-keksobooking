@@ -68,19 +68,9 @@
     }
 
     function filterAdverts() {
-      // advs = adverts.filter(isType);
-      // advs = advs.filter(isPrice);
-      // advs = advs.filter(isRooms);
-      // advs = advs.filter(isGuests);
-      // advs = advs.filter(isWifi);
-      // advs = advs.filter(isDishwasher);
-      // advs = advs.filter(isParking);
-      // advs = advs.filter(isWasher);
-      // advs = advs.filter(isElevator);
-      // advs = advs.filter(isConditioner);
-      // advs = adverts.filter(isType).filter(isPrice).filter(isRooms).filter(isGuests).filter(isWifi).filter(isDishwasher).filter(isParking).filter(isWasher).filter(isElevator).filter(isConditioner);
-      return adverts.filter(isType).filter(isPrice).filter(isRooms).filter(isGuests).filter(isWifi).filter(isDishwasher).filter(isParking).filter(isWasher).filter(isElevator).filter(isConditioner);
-      // return adverts.filter(isType && isPrice && isRooms && isGuests && isWifi && isDishwasher && isParking && isWasher && isElevator && isConditioner);
+      return adverts.filter(function (item) {
+        return isType(item) && isPrice(item) && isRooms(item) && isGuests(item) && isWifi(item) && isDishwasher(item) && isParking(item) && isWasher(item) && isElevator(item) && isConditioner(item);
+      });
     }
 
     function isCheckedIncludes(filterType, obj) {
