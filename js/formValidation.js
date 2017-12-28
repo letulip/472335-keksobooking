@@ -57,12 +57,10 @@
 
       function setRequiredField(fieldId) {
         fieldId.required = true;
-        return fieldId;
       }
 
       function setReadOnlyField(fieldId) {
         fieldId.readOnly = true;
-        return fieldId;
       }
 
       function setAttribute(fieldId, attributeName, attributeValue) {
