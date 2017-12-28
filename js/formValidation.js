@@ -64,7 +64,7 @@
       }
 
       function setAttribute(fieldId, attributeName, attributeValue) {
-        return fieldId.setAttribute(attributeName, attributeValue);
+        fieldId.setAttribute(attributeName, attributeValue);
       }
 
       function setMinAttribute(fieldId, attributeValue) {
