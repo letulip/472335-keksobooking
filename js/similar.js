@@ -2,11 +2,9 @@
 
 (function () {
   window.similar = function () {
-    var RANK_VALUE = 5;
     var loadPath = 'https://1510.dump.academy/keksobooking';
     var noticeForm = document.querySelector('.notice__form');
     var mapFilters = document.querySelector('.map__filters');
-    var filtersType;
     var filtersDefault = 'any';
     var filtersPrice;
     var lowPrice = 'low';
@@ -14,38 +12,29 @@
     var middlePrice = 'middle';
     var highPrice = 'high';
     var highPriceValue = 50000;
-    var filtersRooms;
-    var filtersGuests;
-    var filtersFeatures = [];
     var adverts = [];
 
-    window.advert.onTypeChange = function (type) {
-      filtersType = type;
+    window.advert.onTypeChange = function () {
       window.util.debounce(updateAdverts);
     };
 
-    window.advert.onPriceChange = function (price) {
-      filtersPrice = price;
+    window.advert.onPriceChange = function () {
       window.util.debounce(updateAdverts);
     };
 
-    window.advert.onRoomsChange = function (rooms) {
-      filtersRooms = parseInt(rooms, 10);
+    window.advert.onRoomsChange = function () {
       window.util.debounce(updateAdverts);
     };
 
-    window.advert.onGuestsChange = function (guests) {
-      filtersGuests = parseInt(guests, 10);
+    window.advert.onGuestsChange = function () {
       window.util.debounce(updateAdverts);
     };
 
-    window.advert.onFeaturesChange = function (features) {
-      filtersFeatures = features;
+    window.advert.onFeaturesChange = function () {
       window.util.debounce(updateAdverts);
     };
 
     function updateAdverts() {
-      sortAdverts();
       window.fillAdvertTemplate.fillFragment(filterAdverts());
       var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
 
@@ -53,16 +42,6 @@
         pin.addEventListener('click', function (evt) {
           window.card.showPopup(evt);
         });
-      });
-    }
-
-    function sortAdverts() {
-      adverts.sort(function (left, right) {
-        var rankDiff = getRank(right) - getRank(left);
-        if (rankDiff === 0) {
-          rankDiff = featuresComparator(left.offer.features, right.offer.features);
-        }
-        return rankDiff;
       });
     }
 
@@ -150,52 +129,6 @@
         return highPrice;
       }
       return filtersDefault;
-    }
-
-    function getRank(advert) {
-      var rank = 0;
-
-      if (advert.offer.type === filtersType) {
-        rank += RANK_VALUE;
-      }
-      if (priceRange(advert.offer.price)) {
-        rank += RANK_VALUE;
-      }
-      if (advert.offer.rooms === filtersRooms) {
-        rank += RANK_VALUE;
-      }
-      if (advert.offer.guests >= filtersGuests) {
-        rank += RANK_VALUE;
-      }
-      filtersFeatures.forEach(function (feature) {
-        if (advert.offer.features.includes(feature)) {
-          rank += RANK_VALUE;
-        }
-      });
-      return rank;
-    }
-
-    function priceRange(price) {
-      if (filtersPrice === lowPrice) {
-        return price <= lowPriceValue;
-      }
-      if (filtersPrice === middlePrice) {
-        return price > lowPriceValue && price <= highPriceValue;
-      }
-      if (filtersPrice === highPrice) {
-        return price >= highPriceValue;
-      }
-      return false;
-    }
-
-    function featuresComparator(left, right) {
-      if (left > right) {
-        return 1;
-      } else if (left < right) {
-        return -1;
-      } else {
-        return 0;
-      }
     }
 
     function successHandler(advertsArray) {
