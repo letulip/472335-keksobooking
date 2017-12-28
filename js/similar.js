@@ -46,8 +46,7 @@
 
     function updateAdverts() {
       sortAdverts();
-      var filtered = filterAdverts();
-      window.fillAdvertTemplate.fillFragment(filtered);
+      window.fillAdvertTemplate.fillFragment(filterAdverts());
       var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
 
       mapPins.forEach(function (pin) {
