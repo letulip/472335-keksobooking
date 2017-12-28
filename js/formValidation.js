@@ -53,6 +53,8 @@
         formCapacity.value = formRooms.value === roomsMax
           ? capacityMin
           : formRooms.value;
+        deleteValuesDisabled(formCapacity);
+        setValuesDisabled(formRooms.value);
       });
 
       function setRequiredField(fieldId) {
@@ -67,6 +69,10 @@
         fieldId.setAttribute(attributeName, attributeValue);
       }
 
+      function removeAttribute(fieldId, attributeName, attributeValue) {
+        fieldId.removeAttribute(attributeName, attributeValue);
+      }
+
       function setMinAttribute(fieldId, attributeValue) {
         fieldId.min = attributeValue;
       }
@@ -75,13 +81,30 @@
         field.value = value;
       }
 
-      function setValuesDisabled(fieldId1, fieldId2, value) {
-        switch (value) {
-          case fieldId.value:
-            setAttribute();
+      function deleteValuesDisabled(fieldId) {
+        for (var i = 0; i < fieldId.options.length; i++) {
+          removeAttribute(fieldId.options[i], 'disabled');
+        }
+      }
+
+      function setValuesDisabled(value1) {
+        switch (value1) {
+          case formCapacity.options[0].value:
+            setAttribute(formCapacity.options[3], 'disabled');
+            break;
+          case formCapacity.options[1].value:
+            setAttribute(formCapacity.options[0], 'disabled');
+            setAttribute(formCapacity.options[3], 'disabled');
+            break;
+          case formCapacity.options[2].value:
+            setAttribute(formCapacity.options[0], 'disabled');
+            setAttribute(formCapacity.options[1], 'disabled');
+            setAttribute(formCapacity.options[3], 'disabled');
             break;
           default:
-
+            setAttribute(formCapacity.options[0], 'disabled');
+            setAttribute(formCapacity.options[1], 'disabled');
+            setAttribute(formCapacity.options[2], 'disabled');
         }
       }
 
@@ -95,7 +118,7 @@
       setAttribute(formPrice, 'value', priceFlat);
       setAttribute(formPrice, 'max', priceMax);
       setValue(formCapacity, capacityDefault);
-      // setValuesDisabled(formCapacity, ['1']);
+      setValuesDisabled('1');
     }
   };
 })();
