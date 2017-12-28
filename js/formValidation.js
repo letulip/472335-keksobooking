@@ -20,6 +20,7 @@
       var priceMax = 1000000;
       var roomsMax = '100';
       var capacityMin = '0';
+      var capacityDefault = '1';
       var minLength = 30;
       var maxLenght = 100;
       var actionUrl = 'https://js.dump.academy/keksobooking';
@@ -85,6 +86,7 @@
       setAttribute(formPrice, 'min', priceFlat);
       setAttribute(formPrice, 'value', priceFlat);
       setAttribute(formPrice, 'max', priceMax);
+      setValue(formCapacity, capacityDefault);
     }
   };
 })();
