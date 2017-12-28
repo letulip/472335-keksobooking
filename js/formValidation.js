@@ -75,6 +75,16 @@
         field.value = value;
       }
 
+      function setValuesDisabled(fieldId1, fieldId2, value) {
+        switch (value) {
+          case fieldId.value:
+            setAttribute();
+            break;
+          default:
+
+        }
+      }
+
       setAttribute(form, 'action', actionUrl);
       setReadOnlyField(formAddress);
       setRequiredField(formTitle);
@@ -85,6 +95,7 @@
       setAttribute(formPrice, 'value', priceFlat);
       setAttribute(formPrice, 'max', priceMax);
       setValue(formCapacity, capacityDefault);
+      // setValuesDisabled(formCapacity, ['1']);
     }
   };
 })();
