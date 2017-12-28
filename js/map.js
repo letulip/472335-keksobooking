@@ -7,6 +7,8 @@
   var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMain = document.querySelector('.map__pin--main');
   var formAddress = document.querySelector('#address');
+  var minCoords = 100;
+  var maxCoords = 500;
 
   mapPinMain.draggable = true;
 
@@ -26,6 +28,7 @@
       moveEvt.preventDefault();
 
       var PIN_SHIFT = 40;
+      var PIN_SHIFT_TOP = 140;
       var mapArea = map.querySelector('.map__pins');
       var mapAreaCoords = mapArea.getBoundingClientRect();
       var mapPinMainCoords = mapPinMain.getBoundingClientRect();
@@ -41,10 +44,10 @@
       };
 
       function setTopCoords() {
-        if (mapPinMainCoords.top > mapAreaCoords.top) {
+        if (mapPinMainCoords.top > mapAreaCoords.top + minCoords) {
           mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
         } else {
-          mapPinMain.style.top = (mapAreaCoords.top + PIN_SHIFT) + 'px';
+          mapPinMain.style.top = (mapAreaCoords.top + PIN_SHIFT_TOP) + 'px';
         }
       }
 
@@ -97,8 +100,6 @@
     var coords = mapPinMain.getBoundingClientRect();
     var verticalShift = 22;
     var horisontalShift = 31;
-    var minCoords = 100;
-    var maxCoords = 500;
     if (coords.top >= minCoords && coords.bottom <= maxCoords) {
       formAddress.value = 'x: ' + Math.round(coords.left + horisontalShift) + ', y: ' + Math.round(coords.bottom + verticalShift);
     }
