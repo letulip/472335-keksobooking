@@ -82,10 +82,7 @@
     }
 
     function isCheckedIncludes(filterType, obj) {
-      if (!filterType.checked) {
-        return true;
-      }
-      return filterType.checked && obj.offer.features.includes(filterType.value);
+      return !filterType.checked || filterType.checked && obj.offer.features.includes(filterType.value);
     }
 
     function isWifi(obj) {
@@ -119,10 +116,7 @@
     }
 
     function isChecked(filterType, value) {
-      if (filterType.value === filtersDefault) {
-        return true;
-      }
-      return filterType.value === value;
+      return filterType.value === filtersDefault || filterType.value === value;
     }
 
     function isGuests(value) {
