@@ -45,7 +45,11 @@
 
       function setTopCoords() {
         if (mapPinMainCoords.top > mapAreaCoords.top + minCoords) {
-          mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+          if (mapPinMainCoords.top <= 0) {
+            mapPinMain.style.top = (0 - mapAreaCoords.top + PIN_SHIFT) + 'px';
+          } else {
+            mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+          }
         } else {
           mapPinMain.style.top = (mapAreaCoords.top + PIN_SHIFT_TOP) + 'px';
         }
