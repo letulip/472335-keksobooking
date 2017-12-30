@@ -1,14 +1,14 @@
 'use strict';
 
 (function () {
-  var disabled = 'disabled';
-  var fieldsetElements = document.querySelectorAll('.form__element');
-  var hidden = 'hidden';
+  var DISABLED = 'disabled';
+  var HIDDEN = 'hidden';
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
-  var numOfAdverts = 5;
+  var NUM_OF_ADVERTS = 5;
   var DEBOUNCE_INTERVAL = 500;
   var lastTimeout;
+  var fieldsetElements = document.querySelectorAll('.form__element');
 
   window.util = {
     isEscEvent: function (evt, action) {
@@ -37,22 +37,19 @@
     },
     formFieldsetHide: function () {
       fieldsetElements.forEach(function (item) {
-        window.util.addClassName(item, disabled);
+        window.util.addClassName(item, DISABLED);
       });
     },
     formFieldsetShow: function () {
       fieldsetElements.forEach(function (item) {
-        window.util.removeClassName(item, disabled);
+        window.util.removeClassName(item, DISABLED);
       });
     },
-    popupsHide: function () {
-      var popups = document.querySelectorAll('.popup');
-      popups.forEach(function (item) {
-        window.util.addClassName(item, hidden);
-      });
+    popupHide: function (popup) {
+      popup.classList.add(HIDDEN);
     },
     getHiddenAttribute: function () {
-      return hidden;
+      return HIDDEN;
     },
     debounce: function (func) {
       if (lastTimeout) {
@@ -61,7 +58,7 @@
       lastTimeout = window.setTimeout(func, DEBOUNCE_INTERVAL);
     },
     getNumberOfAdverts: function () {
-      return numOfAdverts;
+      return NUM_OF_ADVERTS;
     }
   };
 })();

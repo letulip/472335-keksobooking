@@ -16,11 +16,11 @@
       var timeOuts = ['12:00', '13:00', '14:00'];
       var types = ['flat', 'bungalo', 'house', 'palace'];
       var pricesMin = [1000, 0, 5000, 10000];
-      var priceBungalo = 0;
       var priceFlat = 1000;
       var priceMax = 1000000;
       var roomsMax = '100';
       var capacityMin = '0';
+      var capacityDefault = '1';
       var minLength = 30;
       var maxLenght = 100;
       var actionUrl = 'https://js.dump.academy/keksobooking';
@@ -53,20 +53,24 @@
         formCapacity.value = formRooms.value === roomsMax
           ? capacityMin
           : formRooms.value;
+        deleteValuesDisabled(formCapacity);
+        setValuesDisabled(formRooms.value);
       });
 
       function setRequiredField(fieldId) {
         fieldId.required = true;
-        return fieldId;
       }
 
       function setReadOnlyField(fieldId) {
         fieldId.readOnly = true;
-        return fieldId;
       }
 
       function setAttribute(fieldId, attributeName, attributeValue) {
-        return fieldId.setAttribute(attributeName, attributeValue);
+        fieldId.setAttribute(attributeName, attributeValue);
+      }
+
+      function removeAttribute(fieldId, attributeName, attributeValue) {
+        fieldId.removeAttribute(attributeName, attributeValue);
       }
 
       function setMinAttribute(fieldId, attributeValue) {
@@ -77,16 +81,44 @@
         field.value = value;
       }
 
+      function deleteValuesDisabled(fieldId) {
+        for (var i = 0; i < fieldId.options.length; i++) {
+          removeAttribute(fieldId.options[i], 'disabled');
+        }
+      }
+
+      function setValuesDisabled(value1) {
+        switch (value1) {
+          case formCapacity.options[0].value:
+            setAttribute(formCapacity.options[3], 'disabled');
+            break;
+          case formCapacity.options[1].value:
+            setAttribute(formCapacity.options[0], 'disabled');
+            setAttribute(formCapacity.options[3], 'disabled');
+            break;
+          case formCapacity.options[2].value:
+            setAttribute(formCapacity.options[0], 'disabled');
+            setAttribute(formCapacity.options[1], 'disabled');
+            setAttribute(formCapacity.options[3], 'disabled');
+            break;
+          default:
+            setAttribute(formCapacity.options[0], 'disabled');
+            setAttribute(formCapacity.options[1], 'disabled');
+            setAttribute(formCapacity.options[2], 'disabled');
+        }
+      }
+
       setAttribute(form, 'action', actionUrl);
-      setRequiredField(formAddress);
       setReadOnlyField(formAddress);
       setRequiredField(formTitle);
       setAttribute(formTitle, 'minlength', minLength);
       setAttribute(formTitle, 'maxlength', maxLenght);
       setRequiredField(formPrice);
-      setAttribute(formPrice, 'min', priceBungalo);
+      setAttribute(formPrice, 'min', priceFlat);
       setAttribute(formPrice, 'value', priceFlat);
       setAttribute(formPrice, 'max', priceMax);
+      setValue(formCapacity, capacityDefault);
+      setValuesDisabled('1');
     }
   };
 })();

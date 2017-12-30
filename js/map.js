@@ -5,11 +5,16 @@
   var mapFaded = 'map--faded';
   var noticeForm = document.querySelector('.notice__form');
   var noticeFormDisabled = 'notice__form--disabled';
-  var mapPinMainMouseUp = document.querySelector('main');
   var mapPinMain = document.querySelector('.map__pin--main');
   var formAddress = document.querySelector('#address');
+  var minCoords = 100;
+  var maxCoords = 500;
 
   mapPinMain.draggable = true;
+
+  document.addEventListener('keydown', function (evt) {
+    window.util.isEscEvent(evt, window.card.popupClose);
+  });
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -22,10 +27,11 @@
     function onMouseMove(moveEvt) {
       moveEvt.preventDefault();
 
+      var PIN_SHIFT = 40;
+      var PIN_SHIFT_TOP = 140;
       var mapArea = map.querySelector('.map__pins');
       var mapAreaCoords = mapArea.getBoundingClientRect();
       var mapPinMainCoords = mapPinMain.getBoundingClientRect();
-      var pinShift = 40;
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -38,16 +44,20 @@
       };
 
       function setTopCoords() {
-        if (mapPinMainCoords.top > mapAreaCoords.top) {
-          mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+        if (mapPinMainCoords.top > mapAreaCoords.top + minCoords) {
+          if (mapPinMainCoords.top <= 0) {
+            mapPinMain.style.top = (0 - mapAreaCoords.top + PIN_SHIFT) + 'px';
+          } else {
+            mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
+          }
         } else {
-          mapPinMain.style.top = (mapAreaCoords.top + pinShift) + 'px';
+          mapPinMain.style.top = (mapAreaCoords.top + PIN_SHIFT_TOP) + 'px';
         }
       }
 
       function setBottomCoords() {
         if (mapPinMainCoords.bottom >= mapAreaCoords.bottom) {
-          mapPinMain.style.top = (mapAreaCoords.bottom - pinShift) + 'px';
+          mapPinMain.style.top = (mapAreaCoords.bottom - PIN_SHIFT) + 'px';
         }
       }
 
@@ -55,13 +65,13 @@
         if (mapPinMainCoords.left > mapAreaCoords.left) {
           mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
         } else {
-          mapPinMain.style.left = pinShift + 'px';
+          mapPinMain.style.left = PIN_SHIFT + 'px';
         }
       }
 
       function setRightCoords() {
         if (mapPinMainCoords.right >= mapAreaCoords.right) {
-          mapPinMain.style.left = (mapAreaCoords.width - pinShift) + 'px';
+          mapPinMain.style.left = (mapAreaCoords.width - PIN_SHIFT) + 'px';
         }
       }
 
@@ -70,7 +80,6 @@
       setLeftCoords();
       setRightCoords();
       setAddress();
-      window.similar();
     }
 
     function onMouseUp(upEvt) {
@@ -84,29 +93,29 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  mapPinMainMouseUp.addEventListener('mouseup', mouseUpInit);
+  mapPinMain.addEventListener('mouseup', mouseUpInit);
+
 
   map.addEventListener('keydown', function (evt) {
-    window.util.isEnterOrEscEvent(evt, window.card.showCard.bind(evt));
+    window.util.isEnterOrEscEvent(evt, window.card.showPopup.bind(evt));
   });
 
   function setAddress() {
     var coords = mapPinMain.getBoundingClientRect();
     var verticalShift = 22;
     var horisontalShift = 31;
-    var minCoords = 100;
-    var maxCoords = 500;
     if (coords.top >= minCoords && coords.bottom <= maxCoords) {
-      formAddress.value = 'x: ' + (coords.bottom + verticalShift) + ', y: ' + (coords.left + horisontalShift);
+      formAddress.value = 'x: ' + Math.round(coords.left + horisontalShift) + ', y: ' + Math.round(coords.bottom + verticalShift);
     }
   }
 
   function mouseUpInit() {
+    window.similar();
     window.util.removeClassName(map, mapFaded);
     window.util.removeClassName(noticeForm, noticeFormDisabled);
+    setAddress();
     window.util.formFieldsetShow();
-    window.util.popupsHide();
-    mapPinMainMouseUp.removeEventListener('mouseup', mouseUpInit);
+    mapPinMain.removeEventListener('mouseup', mouseUpInit);
   }
 
   window.util.formFieldsetHide();

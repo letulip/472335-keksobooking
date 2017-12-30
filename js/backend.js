@@ -13,7 +13,7 @@
       if (xhr.status === STATUS_OK) {
         onLoad(xhr.response);
       } else {
-        onError(xhr.response);
+        onError('Произошла ошибка соединения');
       }
     });
     xhr.addEventListener('error', function () {
@@ -23,7 +23,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = TIMEOUT; // 10s
+    xhr.timeout = TIMEOUT;
 
     return xhr;
   }

@@ -5,7 +5,6 @@
     var loadPath = 'https://1510.dump.academy/keksobooking';
     var noticeForm = document.querySelector('.notice__form');
     var mapFilters = document.querySelector('.map__filters');
-    var filtersType;
     var filtersDefault = 'any';
     var filtersPrice;
     var lowPrice = 'low';
@@ -13,79 +12,56 @@
     var middlePrice = 'middle';
     var highPrice = 'high';
     var highPriceValue = 50000;
-    var filtersRooms;
-    var filtersGuests;
-    var filtersFeatures = [];
     var adverts = [];
 
-    window.advert.onTypeChange = function (type) {
-      filtersType = type;
+    window.advert.onTypeChange = function () {
       window.util.debounce(updateAdverts);
     };
 
-    window.advert.onPriceChange = function (price) {
-      filtersPrice = price;
+    window.advert.onPriceChange = function () {
       window.util.debounce(updateAdverts);
     };
 
-    window.advert.onRoomsChange = function (rooms) {
-      filtersRooms = parseInt(rooms, 10);
+    window.advert.onRoomsChange = function () {
       window.util.debounce(updateAdverts);
     };
 
-    window.advert.onGuestsChange = function (guests) {
-      filtersGuests = parseInt(guests, 10);
+    window.advert.onGuestsChange = function () {
       window.util.debounce(updateAdverts);
     };
 
-    window.advert.onFeaturesChange = function (features) {
-      filtersFeatures = features;
+    window.advert.onFeaturesChange = function () {
       window.util.debounce(updateAdverts);
     };
 
     function updateAdverts() {
-      sortAdverts();
-      var filtered = filterAdverts(adverts);
-      window.fillAdvertTemplate.fillFragment(filtered);
-      window.util.popupsHide();
+      window.fillAdvertTemplate.fillFragment(filterAdverts());
       var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
 
       mapPins.forEach(function (pin) {
         pin.addEventListener('click', function (evt) {
-          window.card.showCard(evt);
+          window.card.showPopup(evt);
         });
       });
     }
 
-    function sortAdverts() {
-      adverts.sort(function (left, right) {
-        var rankDiff = getRank(right) - getRank(left);
-        if (rankDiff === 0) {
-          rankDiff = featuresComparator(left.offer.features, right.offer.features);
-        }
-        return rankDiff;
+    function filterAdverts() {
+      return adverts.filter(function (item) {
+        return isType(item)
+          && isPrice(item)
+          && isRooms(item)
+          && isGuests(item)
+          && isWifi(item)
+          && isDishwasher(item)
+          && isParking(item)
+          && isWasher(item)
+          && isElevator(item)
+          && isConditioner(item);
       });
     }
 
-    function filterAdverts(advs) {
-      advs = adverts.filter(isType);
-      advs = advs.filter(isPrice);
-      advs = advs.filter(isRooms);
-      advs = advs.filter(isGuests);
-      advs = advs.filter(isWifi);
-      advs = advs.filter(isDishwasher);
-      advs = advs.filter(isParking);
-      advs = advs.filter(isWasher);
-      advs = advs.filter(isElevator);
-      advs = advs.filter(isConditioner);
-      return advs;
-    }
-
     function isCheckedIncludes(filterType, obj) {
-      if (!filterType.checked) {
-        return true;
-      }
-      return filterType.checked && obj.offer.features.includes(filterType.value);
+      return !filterType.checked || filterType.checked && obj.offer.features.includes(filterType.value);
     }
 
     function isWifi(obj) {
@@ -119,10 +95,7 @@
     }
 
     function isChecked(filterType, value) {
-      if (filterType.value === filtersDefault) {
-        return true;
-      }
-      return filterType.value === value;
+      return filterType.value === filtersDefault || filterType.value === value;
     }
 
     function isGuests(value) {
@@ -154,61 +127,13 @@
       }
       if (price >= highPriceValue && filtersPrice === highPrice) {
         return highPrice;
-      } else {
-        return filtersDefault;
       }
-    }
-
-    function getRank(advert) {
-      var rank = 0;
-
-      if (advert.offer.type === filtersType) {
-        rank += 5;
-      }
-      if (priceRange(advert.offer.price)) {
-        rank += 4;
-      }
-      if (advert.offer.rooms === filtersRooms) {
-        rank += 3;
-      }
-      if (advert.offer.guests >= filtersGuests) {
-        rank += 2;
-      }
-      filtersFeatures.forEach(function (feature) {
-        if (advert.offer.features.includes(feature)) {
-          rank += 1;
-        }
-      });
-      return rank;
-    }
-
-    function priceRange(price) {
-      if (filtersPrice === lowPrice) {
-        return price <= lowPriceValue;
-      }
-      if (filtersPrice === middlePrice) {
-        return price > lowPriceValue && price <= highPriceValue;
-      }
-      if (filtersPrice === highPrice) {
-        return price >= highPriceValue;
-      }
-      return false;
-    }
-
-    function featuresComparator(left, right) {
-      if (left > right) {
-        return 1;
-      } else if (left < right) {
-        return -1;
-      } else {
-        return 0;
-      }
+      return filtersDefault;
     }
 
     function successHandler(advertsArray) {
       adverts = advertsArray;
-      updateAdverts(adverts);
-      window.util.popupsHide();
+      updateAdverts();
     }
 
     function errorHandler(errorMessage) {

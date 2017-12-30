@@ -13,7 +13,7 @@
   var imagesChooser = document.querySelector('#images');
   var preview = document.querySelector('.notice__preview img');
 
-  avatarChooser.addEventListener('change', upload);
+  avatarChooser.addEventListener('change', uploadAvatar);
   imagesChooser.addEventListener('change', uploadPhoto);
 
   function setStylesElements() {
@@ -30,10 +30,8 @@
     imagesChooser.style.width = '100%';
   }
 
-  function upload() {
-    var file = avatarChooser.files[0];
+  function upload(file, callback, param1, param2) {
     var fileName = file.name.toLowerCase();
-
     var matches = FILE_TYPES.some(function (it) {
       return fileName.endsWith(it);
     });
@@ -42,11 +40,17 @@
       var reader = new FileReader();
 
       reader.addEventListener('load', function () {
-        avatarRender(reader);
+        callback(reader, param1, param2);
       });
 
       reader.readAsDataURL(file);
     }
+  }
+
+  function uploadAvatar() {
+    var file = avatarChooser.files[0];
+
+    upload(file, avatarRender);
   }
 
   function avatarRender(reader) {
@@ -63,23 +67,10 @@
 
   function uploadPhoto() {
     var file = imagesChooser.files[0];
-    var fileName = file.name.toLowerCase();
     var imgWidth = 50;
     var imgHeight = 70;
 
-    var matches = FILE_TYPES.some(function (it) {
-      return fileName.endsWith(it);
-    });
-
-    if (matches) {
-      var reader = new FileReader();
-
-      reader.addEventListener('load', function () {
-        advertPhotoRender(reader, imgHeight, imgWidth);
-      });
-
-      reader.readAsDataURL(file);
-    }
+    upload(file, advertPhotoRender, imgHeight, imgWidth);
   }
 
   setStylesElements();

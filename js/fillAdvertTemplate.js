@@ -10,6 +10,7 @@
     advertContent.querySelector('.popup__avatar').src = advert.author.avatar;
     advertContent.querySelector('h3').textContent = advert.offer.title;
     advertContent.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
+    window.util.popupHide(advertContent.querySelector('.popup'));
     advertContent.querySelector('.popup__price').textContent = 'Цена за ночь: ' + advert.offer.price + '₽/ночь';
     advertContent.querySelector('h4').textContent = 'Тип жилья: ' + getType(advert.offer.type);
     advertContent.querySelector('h4 + p').textContent = 'Количество комнат: ' + advert.offer.rooms + ' для ' + advert.offer.guests + ' гостей';
