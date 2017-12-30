@@ -2,13 +2,13 @@
 
 (function () {
   var DISABLED = 'disabled';
-  var fieldsetElements = document.querySelectorAll('.form__element');
   var HIDDEN = 'hidden';
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
   var NUM_OF_ADVERTS = 5;
   var DEBOUNCE_INTERVAL = 500;
   var lastTimeout;
+  var fieldsetElements = document.querySelectorAll('.form__element');
 
   window.util = {
     isEscEvent: function (evt, action) {

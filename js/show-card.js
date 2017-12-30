@@ -23,9 +23,9 @@
     },
 
     removePreviousActivePin: function (previousPopup) {
-      var pinActive = document.querySelector('.map__pin--active');
-      if (pinActive) {
-        window.util.removeClassName(pinActive, 'map__pin--active');
+      var activePin = document.querySelector('.' + MAP_PIN_ACTIVE);
+      if (activePin) {
+        window.util.removeClassName(activePin, MAP_PIN_ACTIVE);
       }
       if (previousPopup) {
         window.util.addClassName(previousPopup, window.util.getHiddenAttribute());
