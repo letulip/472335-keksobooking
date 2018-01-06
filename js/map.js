@@ -25,10 +25,11 @@
     };
 
     function onMouseMove(moveEvt) {
-      moveEvt.preventDefault();
-
       var PIN_SHIFT = 40;
       var PIN_SHIFT_TOP = 140;
+
+      moveEvt.preventDefault();
+
       var mapArea = map.querySelector('.map__pins');
       var mapAreaCoords = mapArea.getBoundingClientRect();
       var mapPinMainCoords = mapPinMain.getBoundingClientRect();
