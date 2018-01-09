@@ -50,15 +50,15 @@
   function picturesAdding(element, photosArray) {
     var inner = element.querySelector('.popup__pictures li');
     element.querySelector('.popup__pictures').removeChild(inner);
-    for (var i = 0; i < photosArray.length; i++) {
+    photosArray.forEach(function (item) {
       var imgWidth = 50;
       var imgHeight = 70;
       var li = document.createElement('li');
       var img = new Image();
       img.style.width = imgWidth + 'px';
       img.style.height = imgHeight + 'px';
-      element.querySelector('.popup__pictures').appendChild(li).appendChild(img).src = photosArray[i];
-    }
+      element.querySelector('.popup__pictures').appendChild(li).appendChild(img).src = item;
+    });
   }
 
   function getCoordinates(locationCoords) {
