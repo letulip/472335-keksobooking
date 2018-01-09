@@ -9,9 +9,9 @@
   var minCoords = 100;
   var pinLeftDefault = 600;
   var pinTopDefault = 376;
+
   mapPinMain.style.top = pinTopDefault + 'px';
   mapPinMain.style.left = pinLeftDefault + 'px';
-
   mapPinMain.draggable = true;
 
   mapPinMain.addEventListener('mousedown', function (evt) {

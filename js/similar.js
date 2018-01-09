@@ -151,6 +151,7 @@
     window.backend.load(loadPath, successHandler, errorHandler);
 
     noticeForm.addEventListener('submit', function (evt) {
+      window.formValidation.formCheck();
       window.backend.save(new FormData(noticeForm), function () {
         window.restoreForm();
       }, errorHandler);

@@ -20,10 +20,15 @@
       var priceMax = 1000000;
       var roomsMax = '100';
       var capacityMin = '0';
-      var capacityDefault = '1';
+      var valueDefault = '1';
       var minLength = 30;
       var maxLenght = 100;
       var actionUrl = 'https://js.dump.academy/keksobooking';
+
+      var inputs = form.querySelectorAll('input');
+      inputs.forEach(function (item) {
+        item.setCustomValidity('');
+      });
 
       formTitle.addEventListener('invalid', function () {
         if (formTitle.validity.tooShort) {
@@ -87,8 +92,8 @@
         }
       }
 
-      function setValuesDisabled(value1) {
-        switch (value1) {
+      function setValuesDisabled(defaultValue) {
+        switch (defaultValue) {
           case formCapacity.options[0].value:
             setAttribute(formCapacity.options[3], 'disabled');
             break;
@@ -117,8 +122,8 @@
       setAttribute(formPrice, 'min', priceFlat);
       setAttribute(formPrice, 'value', priceFlat);
       setAttribute(formPrice, 'max', priceMax);
-      setValue(formCapacity, capacityDefault);
-      setValuesDisabled('1');
+      setValue(formCapacity, valueDefault);
+      setValuesDisabled(valueDefault);
     }
   };
 })();
