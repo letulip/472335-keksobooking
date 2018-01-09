@@ -14,10 +14,6 @@
 
   mapPinMain.draggable = true;
 
-  document.addEventListener('keydown', function (evt) {
-    window.util.isEscEvent(evt, window.card.popupClose);
-  });
-
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 

@@ -14,12 +14,18 @@
         popupCloseIcon = mapPinPopup.querySelector('.popup__close');
         window.util.removeClassName(mapPinPopup, window.util.getHiddenAttribute());
         popupCloseIcon.addEventListener('click', window.card.popupClose);
+        document.addEventListener('keydown', window.card.escListener);
       }
     },
 
     popupClose: function () {
       window.card.removePreviousActivePin(mapPinPopup);
       popupCloseIcon.removeEventListener('click', window.card.popupClose);
+      document.removeEventListener('keydown', window.card.escListener);
+    },
+
+    escListener: function (e) {
+      window.util.isEscEvent(e, window.card.popupClose);
     },
 
     removePreviousActivePin: function (previousPopup) {
