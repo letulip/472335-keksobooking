@@ -10,8 +10,7 @@
     var defaultPrice = '1000';
     var title = form.querySelector('#title');
     title.value = '';
-    var address = form.querySelector('#address');
-    address.value = '';
+    window.setAddress();
     var type = form.querySelector('#type');
     type.value = defaultType;
     var price = form.querySelector('#price');
@@ -26,5 +25,7 @@
     roomCapacity.value = defaultGuests;
     var description = form.querySelector('#description');
     description.value = '';
+
+    window.formValidation.formCheck();
   };
 })();
