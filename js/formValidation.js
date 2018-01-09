@@ -25,11 +25,6 @@
       var maxLenght = 100;
       var actionUrl = 'https://js.dump.academy/keksobooking';
 
-      var inputs = form.querySelectorAll('input');
-      inputs.forEach(function (item) {
-        item.setCustomValidity('');
-      });
-
       formTitle.addEventListener('invalid', function () {
         if (formTitle.validity.tooShort) {
           formTitle.setCustomValidity('Заголовок должен состоять минимум из 30-ти символов');
