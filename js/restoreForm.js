@@ -6,7 +6,7 @@
     var defaultType = 'flat';
     var defaultTime = '12:00';
     var deafaultRooms = '1';
-    var defaultGuests = '3';
+    var defaultGuests = '1';
     var defaultPrice = '1000';
     var title = form.querySelector('#title');
     title.value = '';

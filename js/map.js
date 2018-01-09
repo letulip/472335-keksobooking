@@ -8,7 +8,7 @@
   var mapPinMain = document.querySelector('.map__pin--main');
   var formAddress = document.querySelector('#address');
   var minCoords = 100;
-  var maxCoords = 500;
+  var maxCoords = 446;
 
   mapPinMain.draggable = true;
 
@@ -103,10 +103,10 @@
 
   function setAddress() {
     var coords = mapPinMain.getBoundingClientRect();
-    var verticalShift = 22;
-    var horisontalShift = 31;
+    var verticalShift = 87;
+    var horisontalShift = 32;
     if (coords.top >= minCoords && coords.bottom <= maxCoords) {
-      formAddress.value = 'x: ' + Math.round(coords.left + horisontalShift) + ', y: ' + Math.round(coords.bottom + verticalShift);
+      formAddress.value = 'x: ' + (parseInt(mapPinMain.style.left, 10) + horisontalShift) + ', y: ' + (parseInt(mapPinMain.style.top, 10) + verticalShift);
     }
   }
 
