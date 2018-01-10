@@ -1,8 +1,9 @@
 'use strict';
 
 (function () {
-  var VERTICAL_SHIFT = 87;
-  var HORIZONTAL_SHIFT = 32;
+  // var HORIZONTAL_SHIFT = 32;
+  var VERTICAL_SHIFT = 54;
+  var HORIZONTAL_SHIFT = 0;
   var mapPinMain = document.querySelector('.map__pin--main');
   var formAddress = document.querySelector('#address');
 

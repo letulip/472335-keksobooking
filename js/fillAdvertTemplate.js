@@ -4,6 +4,7 @@
   var IMG_WIDTH = 50;
   var IMG_HEIGHT = 70;
   var ADVERT_COUNT = 5;
+  var VERTICAL_SHIFT = 41;
   var similarAdvertTemplateContent = document.querySelector('template').content;
   var similarPinElement = document.querySelector('.map__pins');
   var AdvertType = {
@@ -16,7 +17,7 @@
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
     advertContent.querySelector('.map__pin img').src = advert.author.avatar;
     advertContent.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
-    advertContent.querySelector('.map__pin').style.top = getCoordinates(advert.location.y);
+    advertContent.querySelector('.map__pin').style.top = getCoordinates(advert.location.y - VERTICAL_SHIFT);
     advertContent.querySelector('.popup__avatar').src = advert.author.avatar;
     advertContent.querySelector('h3').textContent = advert.offer.title;
     advertContent.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;

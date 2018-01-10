@@ -3,8 +3,8 @@
 (function () {
   var PIN_SHIFT = 40;
   var PIN_SHIFT_TOP = 50;
-  var MIN_COORD = 10;
-  var MAX_COORD = 265;
+  var MIN_COORD = 15;
+  var MAX_COORD = 215;
   var PIN_LEFT_DEFAULT = 600;
   var PIN_TOP_DEFAULT = 376;
   var MAP_FADED = 'map--faded';
