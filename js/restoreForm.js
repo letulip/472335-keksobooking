@@ -27,6 +27,6 @@
     roomCapacity.value = DEFAULT_GUEST;
     description.value = '';
 
-    window.formValidation.formCheck();
+    window.form.check();
   };
 })();

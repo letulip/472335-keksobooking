@@ -44,11 +44,9 @@
 
       function setTopCoords() {
         if (mapPinMainCoords.top > mapAreaCoords.top + MIN_COORD) {
-          if (mapPinMainCoords.top <= 0) {
-            mapPinMain.style.top = (0 - mapAreaCoords.top + PIN_SHIFT) + 'px';
-          } else {
-            mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-          }
+          mapPinMain.style.top = (mapPinMainCoords.top <= 0)
+            ? (0 - mapAreaCoords.top + PIN_SHIFT) + 'px'
+            : (mapPinMain.offsetTop - shift.y) + 'px';
         } else {
           mapPinMain.style.top = (mapAreaCoords.top + PIN_SHIFT_TOP) + 'px';
         }
@@ -56,20 +54,16 @@
 
       function setBottomCoords() {
         if (mapPinMainCoords.bottom >= mapAreaCoords.bottom - MAX_COORD) {
-          if (mapAreaCoords.top < 0) {
-            mapPinMain.style.top = (0 - mapAreaCoords.top + mapAreaCoords.bottom - MAX_COORD - PIN_SHIFT) + 'px';
-          } else {
-            mapPinMain.style.top = (mapAreaCoords.bottom - MAX_COORD - PIN_SHIFT) + 'px';
-          }
+          mapPinMain.style.top = (mapAreaCoords.top < 0)
+            ? (0 - mapAreaCoords.top + mapAreaCoords.bottom - MAX_COORD - PIN_SHIFT) + 'px'
+            : (mapAreaCoords.bottom - MAX_COORD - PIN_SHIFT) + 'px';
         }
       }
 
       function setLeftCoords() {
-        if (mapPinMainCoords.left > mapAreaCoords.left) {
-          mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
-        } else {
-          mapPinMain.style.left = PIN_SHIFT + 'px';
-        }
+        mapPinMain.style.left = (mapPinMainCoords.left > mapAreaCoords.left)
+          ? (mapPinMain.offsetLeft - shift.x) + 'px'
+          : PIN_SHIFT + 'px';
       }
 
       function setRightCoords() {
@@ -113,5 +107,5 @@
   }
 
   window.util.formFieldsetHide();
-  window.formValidation.formCheck();
+  window.form.check();
 }());

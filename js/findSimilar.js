@@ -7,30 +7,27 @@
   var MIDDLE_PRICE = 'middle';
   var HIGH_PRICE = 'high';
   var HIGH_PRICE_VALUE = 50000;
-  var LOAD_PATH = 'https://1510.dump.academy/keksobooking';
+  var URL_PATH = 'https://1510.dump.academy/keksobooking';
   var filterPrice;
   var noticeForm = document.querySelector('.notice__form');
   var mapFilter = document.querySelector('.map__filters');
+  var guest = mapFilter.querySelector('#housing-guests');
+  var room = mapFilter.querySelector('#housing-rooms');
+  var type = mapFilter.querySelector('#housing-type');
+  var price = mapFilter.querySelector('#housing-price');
   var adverts = [];
+  var advert = {
+    onFilterChange: function () {}
+  };
+
+  mapFilter.addEventListener('change', function () {
+    advert.onFilterChange();
+  });
+
+  window.advert = advert;
 
   window.findSimilar = function () {
-    window.advert.onTypeChange = function () {
-      window.util.debounce(updateAdverts);
-    };
-
-    window.advert.onPriceChange = function () {
-      window.util.debounce(updateAdverts);
-    };
-
-    window.advert.onRoomsChange = function () {
-      window.util.debounce(updateAdverts);
-    };
-
-    window.advert.onGuestsChange = function () {
-      window.util.debounce(updateAdverts);
-    };
-
-    window.advert.onFeaturesChange = function () {
+    window.advert.onFilterChange = function () {
       window.util.debounce(updateAdverts);
     };
 
@@ -99,33 +96,29 @@
     }
 
     function isGuests(value) {
-      var filterType = mapFilter.querySelector('#housing-guests');
-      return isChecked(filterType, value.offer.guests.toString());
+      return isChecked(guest, value.offer.guests.toString());
     }
 
     function isRooms(value) {
-      var filterType = mapFilter.querySelector('#housing-rooms');
-      return isChecked(filterType, value.offer.rooms.toString());
+      return isChecked(room, value.offer.rooms.toString());
     }
 
     function isType(value) {
-      var filterType = mapFilter.querySelector('#housing-type');
-      return isChecked(filterType, value.offer.type);
+      return isChecked(type, value.offer.type);
     }
 
     function isPrice(value) {
-      var filterType = mapFilter.querySelector('#housing-price');
-      return isChecked(filterType, priceValue(value.offer.price));
+      return isChecked(price, priceValue(value.offer.price));
     }
 
-    function priceValue(price) {
-      if (price <= LOW_PRICE_VALUE && filterPrice === LOW_PRICE) {
+    function priceValue(value) {
+      if (value <= LOW_PRICE_VALUE && filterPrice === LOW_PRICE) {
         return LOW_PRICE;
       }
-      if (price >= LOW_PRICE_VALUE && price <= HIGH_PRICE_VALUE && filterPrice === MIDDLE_PRICE) {
+      if (value >= LOW_PRICE_VALUE && value <= HIGH_PRICE_VALUE && filterPrice === MIDDLE_PRICE) {
         return MIDDLE_PRICE;
       }
-      if (price >= HIGH_PRICE_VALUE && filterPrice === HIGH_PRICE) {
+      if (value >= HIGH_PRICE_VALUE && filterPrice === HIGH_PRICE) {
         return HIGH_PRICE;
       }
       return FILTER_DEFAULT;
@@ -146,12 +139,15 @@
 
       node.textContent = errorMessage;
       document.body.insertAdjacentElement('afterbegin', node);
+      node.addEventListener('click', function () {
+        document.body.removeChild(node);
+      });
     }
 
-    window.backend.load(LOAD_PATH, successHandler, errorHandler);
+    window.backend.load(URL_PATH, successHandler, errorHandler);
 
     noticeForm.addEventListener('submit', function (evt) {
-      window.formValidation.formCheck();
+      window.form.check();
       window.backend.save(new FormData(noticeForm), function () {
         window.restoreForm();
       }, errorHandler);

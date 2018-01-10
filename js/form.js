@@ -23,8 +23,8 @@
   var formRooms = form.querySelector('#room_number');
   var formCapacity = form.querySelector('#capacity');
 
-  window.formValidation = {
-    formCheck: function () {
+  window.form = {
+    check: function () {
       formTitle.addEventListener('invalid', function () {
         if (formTitle.validity.tooShort) {
           formTitle.setCustomValidity('Заголовок должен состоять минимум из 30-ти символов');
