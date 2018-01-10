@@ -2,6 +2,8 @@
 
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var IMG_WIDTH = 50;
+  var IMG_HEIGHT = 70;
   var avatarUploader = document.querySelector('.notice__photo .upload');
   var avatarChooser = document.querySelector('#avatar');
   var photoContainer = document.querySelector('.form__photo-container');
@@ -67,10 +69,8 @@
 
   function uploadPhoto() {
     var file = imagesChooser.files[0];
-    var imgWidth = 50;
-    var imgHeight = 70;
 
-    upload(file, advertPhotoRender, imgHeight, imgWidth);
+    upload(file, advertPhotoRender, IMG_HEIGHT, IMG_WIDTH);
   }
 
   setStylesElements();

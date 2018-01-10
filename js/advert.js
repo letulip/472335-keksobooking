@@ -35,12 +35,12 @@
   feature.addEventListener('change', function () {
     var elements = feature.querySelectorAll('input[type=checkbox]');
 
-    elements.forEach(checkingFeatures);
+    elements.forEach(checkFeatures);
 
     advert.onFeaturesChange(newFeatures);
   });
 
-  function checkingFeatures(element) {
+  function checkFeatures(element) {
     if (element.checked && !newFeatures.includes(element.value)) {
       newFeatures.push(element.value);
     }

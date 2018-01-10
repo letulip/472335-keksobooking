@@ -1,17 +1,17 @@
 'use strict';
 
 (function () {
-  window.similar = function () {
-    var loadPath = 'https://1510.dump.academy/keksobooking';
+  window.findSimilar = function () {
+    var FILTER_DEFAULT = 'any';
+    var LOW_PRICE = 'low';
+    var LOW_PRICE_VALUE = 10000;
+    var MIDDLE_PRICE = 'middle';
+    var HIGH_PRICE = 'high';
+    var HIGH_PRICE_VALUE = 50000;
+    var LOAD_PATH = 'https://1510.dump.academy/keksobooking';
+    var filterPrice;
     var noticeForm = document.querySelector('.notice__form');
     var mapFilters = document.querySelector('.map__filters');
-    var filtersDefault = 'any';
-    var filtersPrice;
-    var lowPrice = 'low';
-    var lowPriceValue = 10000;
-    var middlePrice = 'middle';
-    var highPrice = 'high';
-    var highPriceValue = 50000;
     var adverts = [];
 
     window.advert.onTypeChange = function () {
@@ -95,7 +95,7 @@
     }
 
     function isChecked(filterType, value) {
-      return filterType.value === filtersDefault || filterType.value === value;
+      return filterType.value === FILTER_DEFAULT || filterType.value === value;
     }
 
     function isGuests(value) {
@@ -119,16 +119,16 @@
     }
 
     function priceValue(price) {
-      if (price <= lowPriceValue && filtersPrice === lowPrice) {
-        return lowPrice;
+      if (price <= LOW_PRICE_VALUE && filterPrice === LOW_PRICE) {
+        return LOW_PRICE;
       }
-      if (price >= lowPriceValue && price <= highPriceValue && filtersPrice === middlePrice) {
-        return middlePrice;
+      if (price >= LOW_PRICE_VALUE && price <= HIGH_PRICE_VALUE && filterPrice === MIDDLE_PRICE) {
+        return MIDDLE_PRICE;
       }
-      if (price >= highPriceValue && filtersPrice === highPrice) {
-        return highPrice;
+      if (price >= HIGH_PRICE_VALUE && filterPrice === HIGH_PRICE) {
+        return HIGH_PRICE;
       }
-      return filtersDefault;
+      return FILTER_DEFAULT;
     }
 
     function successHandler(advertsArray) {
@@ -148,7 +148,7 @@
       document.body.insertAdjacentElement('afterbegin', node);
     }
 
-    window.backend.load(loadPath, successHandler, errorHandler);
+    window.backend.load(LOAD_PATH, successHandler, errorHandler);
 
     noticeForm.addEventListener('submit', function (evt) {
       window.formValidation.formCheck();

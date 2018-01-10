@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var IMG_WIDTH = 50;
+  var IMG_HEIGHT = 70;
+  var ADVERT_COUNT = 5;
+
   function createAdvert(advert) {
     var similarAdvertTemplateContent = document.querySelector('template').content;
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
@@ -17,7 +21,7 @@
     advertContent.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
     getFeatures(advertContent, advert.offer.features);
     advertContent.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
-    picturesAdding(advertContent, advert.offer.photos);
+    addPictures(advertContent, advert.offer.photos);
     return advertContent;
   }
 
@@ -47,16 +51,14 @@
     }
   }
 
-  function picturesAdding(element, photosArray) {
+  function addPictures(element, photosArray) {
     var inner = element.querySelector('.popup__pictures li');
     element.querySelector('.popup__pictures').removeChild(inner);
     photosArray.forEach(function (item) {
-      var imgWidth = 50;
-      var imgHeight = 70;
       var li = document.createElement('li');
       var img = new Image();
-      img.style.width = imgWidth + 'px';
-      img.style.height = imgHeight + 'px';
+      img.style.width = IMG_WIDTH + 'px';
+      img.style.height = IMG_HEIGHT + 'px';
       element.querySelector('.popup__pictures').appendChild(li).appendChild(img).src = item;
     });
   }
@@ -77,8 +79,7 @@
       });
       var fragment = document.createDocumentFragment();
       var similarPinElement = document.querySelector('.map__pins');
-      var advertsCount = 5;
-      advertsArray.slice(0, advertsCount).forEach(function (item) {
+      advertsArray.slice(0, ADVERT_COUNT).forEach(function (item) {
         fragment.appendChild(createAdvert(item));
       });
       similarPinElement.appendChild(fragment);

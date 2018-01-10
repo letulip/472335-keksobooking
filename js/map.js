@@ -3,18 +3,18 @@
 (function () {
   var PIN_SHIFT = 40;
   var PIN_SHIFT_TOP = 50;
+  var MIN_COORD = 10;
+  var MAX_COORD = 265;
+  var PIN_LEFT_DEFAULT = 600;
+  var PIN_TOP_DEFAULT = 376;
+  var MAP_FADED = 'map--faded';
+  var NOTICE_FORM_DISABLED = 'notice__form--disabled';
   var map = document.querySelector('.map:not(.popup__close)');
-  var mapFaded = 'map--faded';
   var noticeForm = document.querySelector('.notice__form');
-  var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMain = document.querySelector('.map__pin--main');
-  var minCoord = 10;
-  var maxCoord = 265;
-  var pinLeftDefault = 600;
-  var pinTopDefault = 376;
 
-  mapPinMain.style.top = pinTopDefault + 'px';
-  mapPinMain.style.left = pinLeftDefault + 'px';
+  mapPinMain.style.top = PIN_TOP_DEFAULT + 'px';
+  mapPinMain.style.left = PIN_LEFT_DEFAULT + 'px';
   mapPinMain.draggable = true;
 
   mapPinMain.addEventListener('mousedown', function (evt) {
@@ -43,7 +43,7 @@
       };
 
       function setTopCoords() {
-        if (mapPinMainCoords.top > mapAreaCoords.top + minCoord) {
+        if (mapPinMainCoords.top > mapAreaCoords.top + MIN_COORD) {
           if (mapPinMainCoords.top <= 0) {
             mapPinMain.style.top = (0 - mapAreaCoords.top + PIN_SHIFT) + 'px';
           } else {
@@ -55,11 +55,11 @@
       }
 
       function setBottomCoords() {
-        if (mapPinMainCoords.bottom >= mapAreaCoords.bottom - maxCoord) {
+        if (mapPinMainCoords.bottom >= mapAreaCoords.bottom - MAX_COORD) {
           if (mapAreaCoords.top < 0) {
-            mapPinMain.style.top = (0 - mapAreaCoords.top + mapAreaCoords.bottom - maxCoord - PIN_SHIFT) + 'px';
+            mapPinMain.style.top = (0 - mapAreaCoords.top + mapAreaCoords.bottom - MAX_COORD - PIN_SHIFT) + 'px';
           } else {
-            mapPinMain.style.top = (mapAreaCoords.bottom - maxCoord - PIN_SHIFT) + 'px';
+            mapPinMain.style.top = (mapAreaCoords.bottom - MAX_COORD - PIN_SHIFT) + 'px';
           }
         }
       }
@@ -105,8 +105,8 @@
 
   function mouseUpInit() {
     window.similar();
-    window.util.removeClassName(map, mapFaded);
-    window.util.removeClassName(noticeForm, noticeFormDisabled);
+    window.util.removeClassName(map, MAP_FADED);
+    window.util.removeClassName(noticeForm, NOTICE_FORM_DISABLED);
     window.setAddress();
     window.util.formFieldsetShow();
     mapPinMain.removeEventListener('mouseup', mouseUpInit);

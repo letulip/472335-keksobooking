@@ -3,6 +3,18 @@
 (function () {
   window.formValidation = {
     formCheck: function () {
+      var TIME_INS = ['12:00', '13:00', '14:00'];
+      var TIME_OUTS = ['12:00', '13:00', '14:00'];
+      var TYPES = ['flat', 'bungalo', 'house', 'palace'];
+      var PRICES_MIN = [1000, 0, 5000, 10000];
+      var PRICE_FLAT = 1000;
+      var PRICE_MAX = 1000000;
+      var ROOM_MAX = '100';
+      var CAPACITY_MIN = '0';
+      var VALUE_DEFAULT = '1';
+      var MIN_LENGTH = 30;
+      var MAX_LENGTH = 100;
+      var ACTION_URL = 'https://js.dump.academy/keksobooking';
       var form = document.querySelector('.notice__form');
       var formAddress = form.querySelector('#address');
       var formTitle = form.querySelector('#title');
@@ -12,18 +24,6 @@
       var formType = form.querySelector('#type');
       var formRooms = form.querySelector('#room_number');
       var formCapacity = form.querySelector('#capacity');
-      var timeIns = ['12:00', '13:00', '14:00'];
-      var timeOuts = ['12:00', '13:00', '14:00'];
-      var types = ['flat', 'bungalo', 'house', 'palace'];
-      var pricesMin = [1000, 0, 5000, 10000];
-      var priceFlat = 1000;
-      var priceMax = 1000000;
-      var roomsMax = '100';
-      var capacityMin = '0';
-      var valueDefault = '1';
-      var minLength = 30;
-      var maxLenght = 100;
-      var actionUrl = 'https://js.dump.academy/keksobooking';
 
       formTitle.addEventListener('invalid', function () {
         if (formTitle.validity.tooShort) {
@@ -38,20 +38,20 @@
       });
 
       formType.addEventListener('change', function () {
-        window.synchronizeFields(formType, formPrice, types, pricesMin, setMinAttribute);
+        window.synchronizeFields(formType, formPrice, TYPES, PRICES_MIN, setMinAttribute);
       });
 
       formTimeIn.addEventListener('change', function () {
-        window.synchronizeFields(formTimeIn, formTimeOut, timeIns, timeOuts, setValue);
+        window.synchronizeFields(formTimeIn, formTimeOut, TIME_INS, TIME_OUTS, setValue);
       });
 
       formTimeOut.addEventListener('change', function () {
-        window.synchronizeFields(formTimeOut, formTimeIn, timeOuts, timeIns, setValue);
+        window.synchronizeFields(formTimeOut, formTimeIn, TIME_OUTS, TIME_INS, setValue);
       });
 
       formRooms.addEventListener('change', function () {
-        formCapacity.value = formRooms.value === roomsMax
-          ? capacityMin
+        formCapacity.value = formRooms.value === ROOM_MAX
+          ? CAPACITY_MIN
           : formRooms.value;
         deleteValuesDisabled(formCapacity);
         setValuesDisabled(formRooms.value);
@@ -108,17 +108,17 @@
         }
       }
 
-      setAttribute(form, 'action', actionUrl);
+      setAttribute(form, 'action', ACTION_URL);
       setReadOnlyField(formAddress);
       setRequiredField(formTitle);
-      setAttribute(formTitle, 'minlength', minLength);
-      setAttribute(formTitle, 'maxlength', maxLenght);
+      setAttribute(formTitle, 'MIN_LENGTH', MIN_LENGTH);
+      setAttribute(formTitle, 'maxlength', MAX_LENGTH);
       setRequiredField(formPrice);
-      setAttribute(formPrice, 'min', priceFlat);
-      setAttribute(formPrice, 'value', priceFlat);
-      setAttribute(formPrice, 'max', priceMax);
-      setValue(formCapacity, valueDefault);
-      setValuesDisabled(valueDefault);
+      setAttribute(formPrice, 'min', PRICE_FLAT);
+      setAttribute(formPrice, 'value', PRICE_FLAT);
+      setAttribute(formPrice, 'max', PRICE_MAX);
+      setValue(formCapacity, VALUE_DEFAULT);
+      setValuesDisabled(VALUE_DEFAULT);
     }
   };
 })();
