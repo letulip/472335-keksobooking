@@ -1,19 +1,19 @@
 'use strict';
 
 (function () {
-  window.findSimilar = function () {
-    var FILTER_DEFAULT = 'any';
-    var LOW_PRICE = 'low';
-    var LOW_PRICE_VALUE = 10000;
-    var MIDDLE_PRICE = 'middle';
-    var HIGH_PRICE = 'high';
-    var HIGH_PRICE_VALUE = 50000;
-    var LOAD_PATH = 'https://1510.dump.academy/keksobooking';
-    var filterPrice;
-    var noticeForm = document.querySelector('.notice__form');
-    var mapFilters = document.querySelector('.map__filters');
-    var adverts = [];
+  var FILTER_DEFAULT = 'any';
+  var LOW_PRICE = 'low';
+  var LOW_PRICE_VALUE = 10000;
+  var MIDDLE_PRICE = 'middle';
+  var HIGH_PRICE = 'high';
+  var HIGH_PRICE_VALUE = 50000;
+  var LOAD_PATH = 'https://1510.dump.academy/keksobooking';
+  var filterPrice;
+  var noticeForm = document.querySelector('.notice__form');
+  var mapFilter = document.querySelector('.map__filters');
+  var adverts = [];
 
+  window.findSimilar = function () {
     window.advert.onTypeChange = function () {
       window.util.debounce(updateAdverts);
     };
@@ -65,32 +65,32 @@
     }
 
     function isWifi(obj) {
-      var filterType = mapFilters.querySelector('#filter-wifi');
+      var filterType = mapFilter.querySelector('#filter-wifi');
       return isCheckedIncludes(filterType, obj);
     }
 
     function isDishwasher(obj) {
-      var filterType = mapFilters.querySelector('#filter-dishwasher');
+      var filterType = mapFilter.querySelector('#filter-dishwasher');
       return isCheckedIncludes(filterType, obj);
     }
 
     function isParking(obj) {
-      var filterType = mapFilters.querySelector('#filter-parking');
+      var filterType = mapFilter.querySelector('#filter-parking');
       return isCheckedIncludes(filterType, obj);
     }
 
     function isWasher(obj) {
-      var filterType = mapFilters.querySelector('#filter-washer');
+      var filterType = mapFilter.querySelector('#filter-washer');
       return isCheckedIncludes(filterType, obj);
     }
 
     function isElevator(obj) {
-      var filterType = mapFilters.querySelector('#filter-elevator');
+      var filterType = mapFilter.querySelector('#filter-elevator');
       return isCheckedIncludes(filterType, obj);
     }
 
     function isConditioner(obj) {
-      var filterType = mapFilters.querySelector('#filter-conditioner');
+      var filterType = mapFilter.querySelector('#filter-conditioner');
       return isCheckedIncludes(filterType, obj);
     }
 
@@ -99,22 +99,22 @@
     }
 
     function isGuests(value) {
-      var filterType = mapFilters.querySelector('#housing-guests');
+      var filterType = mapFilter.querySelector('#housing-guests');
       return isChecked(filterType, value.offer.guests.toString());
     }
 
     function isRooms(value) {
-      var filterType = mapFilters.querySelector('#housing-rooms');
+      var filterType = mapFilter.querySelector('#housing-rooms');
       return isChecked(filterType, value.offer.rooms.toString());
     }
 
     function isType(value) {
-      var filterType = mapFilters.querySelector('#housing-type');
+      var filterType = mapFilter.querySelector('#housing-type');
       return isChecked(filterType, value.offer.type);
     }
 
     function isPrice(value) {
-      var filterType = mapFilters.querySelector('#housing-price');
+      var filterType = mapFilter.querySelector('#housing-price');
       return isChecked(filterType, priceValue(value.offer.price));
     }
 

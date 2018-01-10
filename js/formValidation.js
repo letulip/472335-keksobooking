@@ -1,30 +1,30 @@
 'use strict';
 
 (function () {
+  var TIME_INS = ['12:00', '13:00', '14:00'];
+  var TIME_OUTS = ['12:00', '13:00', '14:00'];
+  var TYPES = ['flat', 'bungalo', 'house', 'palace'];
+  var PRICES_MIN = [1000, 0, 5000, 10000];
+  var PRICE_FLAT = 1000;
+  var PRICE_MAX = 1000000;
+  var ROOM_MAX = '100';
+  var CAPACITY_MIN = '0';
+  var VALUE_DEFAULT = '1';
+  var MIN_LENGTH = 30;
+  var MAX_LENGTH = 100;
+  var ACTION_URL = 'https://js.dump.academy/keksobooking';
+  var form = document.querySelector('.notice__form');
+  var formAddress = form.querySelector('#address');
+  var formTitle = form.querySelector('#title');
+  var formPrice = form.querySelector('#price');
+  var formTimeIn = form.querySelector('#timein');
+  var formTimeOut = form.querySelector('#timeout');
+  var formType = form.querySelector('#type');
+  var formRooms = form.querySelector('#room_number');
+  var formCapacity = form.querySelector('#capacity');
+
   window.formValidation = {
     formCheck: function () {
-      var TIME_INS = ['12:00', '13:00', '14:00'];
-      var TIME_OUTS = ['12:00', '13:00', '14:00'];
-      var TYPES = ['flat', 'bungalo', 'house', 'palace'];
-      var PRICES_MIN = [1000, 0, 5000, 10000];
-      var PRICE_FLAT = 1000;
-      var PRICE_MAX = 1000000;
-      var ROOM_MAX = '100';
-      var CAPACITY_MIN = '0';
-      var VALUE_DEFAULT = '1';
-      var MIN_LENGTH = 30;
-      var MAX_LENGTH = 100;
-      var ACTION_URL = 'https://js.dump.academy/keksobooking';
-      var form = document.querySelector('.notice__form');
-      var formAddress = form.querySelector('#address');
-      var formTitle = form.querySelector('#title');
-      var formPrice = form.querySelector('#price');
-      var formTimeIn = form.querySelector('#timein');
-      var formTimeOut = form.querySelector('#timeout');
-      var formType = form.querySelector('#type');
-      var formRooms = form.querySelector('#room_number');
-      var formCapacity = form.querySelector('#capacity');
-
       formTitle.addEventListener('invalid', function () {
         if (formTitle.validity.tooShort) {
           formTitle.setCustomValidity('Заголовок должен состоять минимум из 30-ти символов');

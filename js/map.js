@@ -12,6 +12,7 @@
   var map = document.querySelector('.map:not(.popup__close)');
   var noticeForm = document.querySelector('.notice__form');
   var mapPinMain = document.querySelector('.map__pin--main');
+  var mapArea = map.querySelector('.map__pins');
 
   mapPinMain.style.top = PIN_TOP_DEFAULT + 'px';
   mapPinMain.style.left = PIN_LEFT_DEFAULT + 'px';
@@ -28,7 +29,6 @@
     function onMouseMove(moveEvt) {
       moveEvt.preventDefault();
 
-      var mapArea = map.querySelector('.map__pins');
       var mapAreaCoords = mapArea.getBoundingClientRect();
       var mapPinMainCoords = mapPinMain.getBoundingClientRect();
 

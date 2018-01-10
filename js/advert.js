@@ -3,6 +3,7 @@
 (function () {
   var filters = document.querySelectorAll('.map__filter');
   var feature = document.querySelector('#housing-features');
+  var elements = feature.querySelectorAll('input[type=checkbox]');
   var newFeatures = [];
   var advert = {
     onTypeChange: function () {},
@@ -35,10 +36,7 @@
   });
 
   feature.addEventListener('change', function () {
-    var elements = feature.querySelectorAll('input[type=checkbox]');
-
     elements.forEach(checkFeatures);
-
     advert.onFeaturesChange(newFeatures);
   });
 

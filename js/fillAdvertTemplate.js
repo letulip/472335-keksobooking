@@ -4,9 +4,10 @@
   var IMG_WIDTH = 50;
   var IMG_HEIGHT = 70;
   var ADVERT_COUNT = 5;
+  var similarAdvertTemplateContent = document.querySelector('template').content;
+  var similarPinElement = document.querySelector('.map__pins');
 
   function createAdvert(advert) {
-    var similarAdvertTemplateContent = document.querySelector('template').content;
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
     advertContent.querySelector('.map__pin img').src = advert.author.avatar;
     advertContent.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
@@ -53,13 +54,14 @@
 
   function addPictures(element, photosArray) {
     var inner = element.querySelector('.popup__pictures li');
-    element.querySelector('.popup__pictures').removeChild(inner);
+    var pictures = element.querySelector('.popup__pictures');
+    pictures.removeChild(inner);
     photosArray.forEach(function (item) {
       var li = document.createElement('li');
       var img = new Image();
       img.style.width = IMG_WIDTH + 'px';
       img.style.height = IMG_HEIGHT + 'px';
-      element.querySelector('.popup__pictures').appendChild(li).appendChild(img).src = item;
+      pictures.appendChild(li).appendChild(img).src = item;
     });
   }
 
@@ -78,7 +80,6 @@
         item.remove();
       });
       var fragment = document.createDocumentFragment();
-      var similarPinElement = document.querySelector('.map__pins');
       advertsArray.slice(0, ADVERT_COUNT).forEach(function (item) {
         fragment.appendChild(createAdvert(item));
       });
