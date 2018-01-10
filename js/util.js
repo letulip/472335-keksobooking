@@ -20,6 +20,11 @@
         action(evt);
       }
     },
+    isEnterEvent: function (evt, action) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        action(evt);
+      }
+    },
     removeClassName: function (element, className) {
       element.classList.remove(className);
     },

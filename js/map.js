@@ -17,6 +17,7 @@
   mapPinMain.style.top = PIN_TOP_DEFAULT + 'px';
   mapPinMain.style.left = PIN_LEFT_DEFAULT + 'px';
   mapPinMain.draggable = true;
+  mapPinMain.tabIndex = 0;
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -91,7 +92,11 @@
   });
 
   mapPinMain.addEventListener('mouseup', mouseUpInit);
+  mapPinMain.addEventListener('keydown', onEnterInit);
 
+  function onEnterInit(evt) {
+    window.util.isEnterEvent(evt, mouseUpInit);
+  }
 
   map.addEventListener('keydown', function (evt) {
     window.util.isEnterOrEscEvent(evt, window.card.showPopup.bind(evt));
@@ -104,6 +109,7 @@
     window.setAddress();
     window.util.formFieldsetShow();
     mapPinMain.removeEventListener('mouseup', mouseUpInit);
+    mapPinMain.addEventListener('keydown', onEnterInit);
   }
 
   window.util.formFieldsetHide();

@@ -15,9 +15,11 @@
 
   function createAdvert(advert) {
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
+    var pin = advertContent.querySelector('.map__pin');
     advertContent.querySelector('.map__pin img').src = advert.author.avatar;
-    advertContent.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
-    advertContent.querySelector('.map__pin').style.top = getCoordinates(advert.location.y - VERTICAL_SHIFT);
+    pin.style.left = getCoordinates(advert.location.x);
+    pin.style.top = getCoordinates(advert.location.y - VERTICAL_SHIFT);
+    pin.tabIndex = 0;
     advertContent.querySelector('.popup__avatar').src = advert.author.avatar;
     advertContent.querySelector('h3').textContent = advert.offer.title;
     advertContent.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
