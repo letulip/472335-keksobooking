@@ -48,47 +48,15 @@
           && isPrice(item)
           && isRooms(item)
           && isGuests(item)
-          && isWifi(item)
-          && isDishwasher(item)
-          && isParking(item)
-          && isWasher(item)
-          && isElevator(item)
-          && isConditioner(item);
+          && isFeatures(item);
       });
     }
 
-    function isCheckedIncludes(filterType, obj) {
-      return !filterType.checked || filterType.checked && obj.offer.features.includes(filterType.value);
-    }
-
-    function isWifi(obj) {
-      var filterType = mapFilter.querySelector('#filter-wifi');
-      return isCheckedIncludes(filterType, obj);
-    }
-
-    function isDishwasher(obj) {
-      var filterType = mapFilter.querySelector('#filter-dishwasher');
-      return isCheckedIncludes(filterType, obj);
-    }
-
-    function isParking(obj) {
-      var filterType = mapFilter.querySelector('#filter-parking');
-      return isCheckedIncludes(filterType, obj);
-    }
-
-    function isWasher(obj) {
-      var filterType = mapFilter.querySelector('#filter-washer');
-      return isCheckedIncludes(filterType, obj);
-    }
-
-    function isElevator(obj) {
-      var filterType = mapFilter.querySelector('#filter-elevator');
-      return isCheckedIncludes(filterType, obj);
-    }
-
-    function isConditioner(obj) {
-      var filterType = mapFilter.querySelector('#filter-conditioner');
-      return isCheckedIncludes(filterType, obj);
+    function isFeatures(obj) {
+      var checkedFeatures = mapFilter.querySelectorAll('input:checked');
+      return Array.prototype.every.call(checkedFeatures, function (checkedFeature) {
+        return obj.offer.features.includes(checkedFeature.value);
+      });
     }
 
     function isChecked(filterType, value) {
