@@ -8,8 +8,8 @@
   var noticeForm = document.querySelector('.notice__form');
   var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMain = document.querySelector('.map__pin--main');
-  var minCoords = 10;
-  var maxCoords = 265;
+  var minCoord = 10;
+  var maxCoord = 265;
   var pinLeftDefault = 600;
   var pinTopDefault = 376;
 
@@ -43,7 +43,7 @@
       };
 
       function setTopCoords() {
-        if (mapPinMainCoords.top > mapAreaCoords.top + minCoords) {
+        if (mapPinMainCoords.top > mapAreaCoords.top + minCoord) {
           if (mapPinMainCoords.top <= 0) {
             mapPinMain.style.top = (0 - mapAreaCoords.top + PIN_SHIFT) + 'px';
           } else {
@@ -55,11 +55,11 @@
       }
 
       function setBottomCoords() {
-        if (mapPinMainCoords.bottom >= mapAreaCoords.bottom - maxCoords) {
+        if (mapPinMainCoords.bottom >= mapAreaCoords.bottom - maxCoord) {
           if (mapAreaCoords.top < 0) {
-            mapPinMain.style.top = (0 - mapAreaCoords.top + mapAreaCoords.bottom - maxCoords - PIN_SHIFT) + 'px';
+            mapPinMain.style.top = (0 - mapAreaCoords.top + mapAreaCoords.bottom - maxCoord - PIN_SHIFT) + 'px';
           } else {
-            mapPinMain.style.top = (mapAreaCoords.bottom - maxCoords - PIN_SHIFT) + 'px';
+            mapPinMain.style.top = (mapAreaCoords.bottom - maxCoord - PIN_SHIFT) + 'px';
           }
         }
       }

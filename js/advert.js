@@ -4,9 +4,9 @@
   var filters = document.querySelector('.map__filters');
   var type = filters.querySelector('#housing-type');
   var price = filters.querySelector('#housing-price');
-  var rooms = filters.querySelector('#housing-rooms');
-  var guests = filters.querySelector('#housing-guests');
-  var features = filters.querySelector('#housing-features');
+  var room = filters.querySelector('#housing-rooms');
+  var guest = filters.querySelector('#housing-guests');
+  var feature = filters.querySelector('#housing-features');
   var newFeatures = [];
   var advert = {
     onTypeChange: function () {},
@@ -24,16 +24,16 @@
     var newPrice = price.value;
     advert.onPriceChange(newPrice);
   });
-  rooms.addEventListener('change', function () {
-    var newRooms = rooms.value;
+  room.addEventListener('change', function () {
+    var newRooms = room.value;
     advert.onRoomsChange(newRooms);
   });
-  guests.addEventListener('change', function () {
-    var newGuests = guests.value;
+  guest.addEventListener('change', function () {
+    var newGuests = guest.value;
     advert.onGuestsChange(newGuests);
   });
-  features.addEventListener('change', function () {
-    var elements = features.querySelectorAll('input[type=checkbox]');
+  feature.addEventListener('change', function () {
+    var elements = feature.querySelectorAll('input[type=checkbox]');
 
     elements.forEach(checkingFeatures);
 
