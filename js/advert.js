@@ -1,12 +1,8 @@
 'use strict';
 
 (function () {
-  var filters = document.querySelector('.map__filters');
-  var type = filters.querySelector('#housing-type');
-  var price = filters.querySelector('#housing-price');
-  var room = filters.querySelector('#housing-rooms');
-  var guest = filters.querySelector('#housing-guests');
-  var feature = filters.querySelector('#housing-features');
+  var filters = document.querySelectorAll('.map__filter');
+  var feature = document.querySelector('#housing-features');
   var newFeatures = [];
   var advert = {
     onTypeChange: function () {},
@@ -16,22 +12,28 @@
     onFeaturesChange: function () {}
   };
 
-  type.addEventListener('change', function () {
-    var newType = type.value;
-    advert.onTypeChange(newType);
+  filters.forEach(function (item) {
+    item.addEventListener('change', function () {
+      var newItem = item.value;
+      switch (item.id) {
+        case 'housing-type':
+          advert.onTypeChange(newItem);
+          break;
+        case 'housing-price':
+          advert.onPriceChange(newItem);
+          break;
+        case 'housing-rooms':
+          advert.onRoomsChange(newItem);
+          break;
+        case 'housing-guests':
+          advert.onGuestsChange(newItem);
+          break;
+        default:
+
+      }
+    });
   });
-  price.addEventListener('change', function () {
-    var newPrice = price.value;
-    advert.onPriceChange(newPrice);
-  });
-  room.addEventListener('change', function () {
-    var newRooms = room.value;
-    advert.onRoomsChange(newRooms);
-  });
-  guest.addEventListener('change', function () {
-    var newGuests = guest.value;
-    advert.onGuestsChange(newGuests);
-  });
+
   feature.addEventListener('change', function () {
     var elements = feature.querySelectorAll('input[type=checkbox]');
 

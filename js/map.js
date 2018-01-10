@@ -104,7 +104,7 @@
   });
 
   function mouseUpInit() {
-    window.similar();
+    window.findSimilar();
     window.util.removeClassName(map, MAP_FADED);
     window.util.removeClassName(noticeForm, NOTICE_FORM_DISABLED);
     window.setAddress();
