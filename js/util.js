@@ -5,7 +5,6 @@
   var HIDDEN = 'hidden';
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
-  var NUM_OF_ADVERTS = 5;
   var DEBOUNCE_INTERVAL = 500;
   var lastTimeout;
   var fieldsetElements = document.querySelectorAll('.form__element');
@@ -48,9 +47,6 @@
         window.clearTimeout(lastTimeout);
       }
       lastTimeout = window.setTimeout(func, DEBOUNCE_INTERVAL);
-    },
-    getNumberOfAdverts: function () {
-      return NUM_OF_ADVERTS;
     }
   };
 })();
