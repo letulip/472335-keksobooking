@@ -2,14 +2,14 @@
 
 (function () {
   var PIN_SHIFT = 40;
-  var PIN_SHIFT_TOP = 140;
+  var PIN_SHIFT_TOP = 50;
   var map = document.querySelector('.map:not(.popup__close)');
   var mapFaded = 'map--faded';
   var noticeForm = document.querySelector('.notice__form');
   var noticeFormDisabled = 'notice__form--disabled';
   var mapPinMain = document.querySelector('.map__pin--main');
-  var minCoords = 100;
-  var maxCoords = 200;
+  var minCoords = 10;
+  var maxCoords = 265;
   var pinLeftDefault = 600;
   var pinTopDefault = 376;
 

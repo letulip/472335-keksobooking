@@ -16,11 +16,6 @@
         action(evt);
       }
     },
-    isEnterEvent: function (evt, action) {
-      if (evt.keyCode === ENTER_KEYCODE) {
-        action(evt);
-      }
-    },
     isEnterOrEscEvent: function (evt, action) {
       if (evt.keyCode === ENTER_KEYCODE || evt.keyCode === ESC_KEYCODE) {
         action(evt);
@@ -31,9 +26,6 @@
     },
     addClassName: function (element, className) {
       element.classList.add(className);
-    },
-    getRandomInt: function (min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
     },
     formFieldsetHide: function () {
       fieldsetElements.forEach(function (item) {
