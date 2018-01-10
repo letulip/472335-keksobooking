@@ -6,6 +6,11 @@
   var ADVERT_COUNT = 5;
   var similarAdvertTemplateContent = document.querySelector('template').content;
   var similarPinElement = document.querySelector('.map__pins');
+  var AdvertType = {
+    'flat': 'Квартира',
+    'house': 'Дом',
+    'bungalo': 'Бунгало'
+  };
 
   function createAdvert(advert) {
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
@@ -43,13 +48,7 @@
   }
 
   function getType(type) {
-    if (type === 'flat') {
-      return 'Квартира';
-    } else if (type === 'house') {
-      return 'Дом';
-    } else {
-      return 'Бунгало';
-    }
+    return AdvertType[type];
   }
 
   function addPictures(element, photosArray) {
