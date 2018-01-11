@@ -34,9 +34,7 @@
       var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
 
       mapPins.forEach(function (pin) {
-        pin.addEventListener('click', function (evt) {
-          window.card.showPopup(evt);
-        });
+        pin.addEventListener('click', window.card.showPopup);
       });
     }
 
