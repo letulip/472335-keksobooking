@@ -24,10 +24,8 @@
     advert.onFilterChange();
   });
 
-  window.advert = advert;
-
   window.findSimilar = function () {
-    window.advert.onFilterChange = function () {
+    advert.onFilterChange = function () {
       window.util.debounce(updateAdverts);
     };
 
@@ -98,17 +96,17 @@
     }
 
     function errorHandler(errorMessage) {
-      var node = document.createElement('div');
-      node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-      node.style.position = 'absolute';
-      node.style.left = 0;
-      node.style.right = 0;
-      node.style.fontSize = '30px';
+      var divError = document.createElement('div');
+      divError.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+      divError.style.position = 'absolute';
+      divError.style.left = 0;
+      divError.style.right = 0;
+      divError.style.fontSize = '30px';
 
-      node.textContent = errorMessage;
-      document.body.insertAdjacentElement('afterbegin', node);
-      node.addEventListener('click', function () {
-        document.body.removeChild(node);
+      divError.textContent = errorMessage;
+      document.body.insertAdjacentElement('afterbegin', divError);
+      divError.addEventListener('click', function () {
+        document.body.removeChild(divError);
       });
     }
 

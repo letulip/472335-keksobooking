@@ -12,6 +12,7 @@
   var VALUE_DEFAULT = '1';
   var MIN_LENGTH = 30;
   var MAX_LENGTH = 100;
+  var DISABLED = 'disabled';
   var ACTION_URL = 'https://js.dump.academy/keksobooking';
   var form = document.querySelector('.notice__form');
   var formAddress = form.querySelector('#address');
@@ -83,28 +84,28 @@
 
       function deleteValuesDisabled(fieldId) {
         for (var i = 0; i < fieldId.options.length; i++) {
-          removeAttribute(fieldId.options[i], 'disabled');
+          removeAttribute(fieldId.options[i], DISABLED);
         }
       }
 
       function setValuesDisabled(defaultValue) {
         switch (defaultValue) {
           case formCapacity.options[0].value:
-            setAttribute(formCapacity.options[3], 'disabled');
+            setAttribute(formCapacity.options[3], DISABLED);
             break;
           case formCapacity.options[1].value:
-            setAttribute(formCapacity.options[0], 'disabled');
-            setAttribute(formCapacity.options[3], 'disabled');
+            setAttribute(formCapacity.options[0], DISABLED);
+            setAttribute(formCapacity.options[3], DISABLED);
             break;
           case formCapacity.options[2].value:
-            setAttribute(formCapacity.options[0], 'disabled');
-            setAttribute(formCapacity.options[1], 'disabled');
-            setAttribute(formCapacity.options[3], 'disabled');
+            setAttribute(formCapacity.options[0], DISABLED);
+            setAttribute(formCapacity.options[1], DISABLED);
+            setAttribute(formCapacity.options[3], DISABLED);
             break;
           default:
-            setAttribute(formCapacity.options[0], 'disabled');
-            setAttribute(formCapacity.options[1], 'disabled');
-            setAttribute(formCapacity.options[2], 'disabled');
+            setAttribute(formCapacity.options[0], DISABLED);
+            setAttribute(formCapacity.options[1], DISABLED);
+            setAttribute(formCapacity.options[2], DISABLED);
         }
       }
 

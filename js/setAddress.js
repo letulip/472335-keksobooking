@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  // var HORIZONTAL_SHIFT = 32;
   var VERTICAL_SHIFT = 54;
   var HORIZONTAL_SHIFT = 0;
   var mapPinMain = document.querySelector('.map__pin--main');

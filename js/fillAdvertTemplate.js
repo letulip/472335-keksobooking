@@ -35,9 +35,9 @@
   }
 
   function getFeatures(element, features) {
-    var popupFeatures = element.querySelector('.popup__features');
-    var popupFeaturesChildren = popupFeatures.querySelectorAll('li');
-    popupFeaturesChildren.forEach(function (child) {
+    var popupFeature = element.querySelector('.popup__features');
+    var popupFeatureChildren = popupFeature.querySelectorAll('li');
+    popupFeatureChildren.forEach(function (child) {
       child.remove();
     });
     var fragment = document.createDocumentFragment();
