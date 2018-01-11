@@ -109,7 +109,7 @@
     window.setAddress();
     window.util.formFieldsetShow();
     mapPinMain.removeEventListener('mouseup', mouseUpInit);
-    mapPinMain.addEventListener('keydown', onEnterInit);
+    mapPinMain.removeEventListener('keydown', onEnterInit);
   }
 
   window.util.formFieldsetHide();
