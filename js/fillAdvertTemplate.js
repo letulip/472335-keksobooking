@@ -5,13 +5,13 @@
   var IMG_HEIGHT = 70;
   var ADVERT_COUNT = 5;
   var VERTICAL_SHIFT = 41;
+  var ADVERT_TYPE = {
+    flat: 'Квартира',
+    house: 'Дом',
+    bungalo: 'Бунгало'
+  };
   var similarAdvertTemplateContent = document.querySelector('template').content;
   var similarPinElement = document.querySelector('.map__pins');
-  var AdvertType = {
-    'flat': 'Квартира',
-    'house': 'Дом',
-    'bungalo': 'Бунгало'
-  };
 
   function createAdvert(advert) {
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
@@ -51,7 +51,7 @@
   }
 
   function getType(type) {
-    return AdvertType[type];
+    return ADVERT_TYPE[type];
   }
 
   function addPictures(element, photosArray) {
