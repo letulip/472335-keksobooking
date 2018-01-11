@@ -15,11 +15,6 @@
         action(evt);
       }
     },
-    isEnterOrEscEvent: function (evt, action) {
-      if (evt.keyCode === ENTER_KEYCODE || evt.keyCode === ESC_KEYCODE) {
-        action(evt);
-      }
-    },
     isEnterEvent: function (evt, action) {
       if (evt.keyCode === ENTER_KEYCODE) {
         action(evt);

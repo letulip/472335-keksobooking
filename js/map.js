@@ -98,10 +98,6 @@
     window.util.isEnterEvent(evt, mouseUpInit);
   }
 
-  map.addEventListener('keydown', function (evt) {
-    window.util.isEnterOrEscEvent(evt, window.card.showPopup.bind(evt));
-  });
-
   function mouseUpInit() {
     window.findSimilar();
     window.util.removeClassName(map, MAP_FADED);
