@@ -45,7 +45,7 @@
 
       function setTopCoords() {
         if (parseInt(mapPinMainCoords.top, 10) > parseInt(mapAreaCoords.top, 10) + MIN_COORD) {
-          mapPinMain.style.top = (parseInt(mapPinMainCoords.top, 10) <= 0)
+          mapPinMain.style.top = (parseInt(mapPinMainCoords.top, 10) < 0)
             ? (0 - parseInt(mapAreaCoords.top, 10) + PIN_SHIFT) + 'px'
             : (parseInt(mapPinMain.offsetTop, 10) - shift.y) + 'px';
         } else {
