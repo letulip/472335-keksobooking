@@ -1,10 +1,10 @@
 'use strict';
 
 (function () {
-  var PIN_SHIFT = 40;
-  var PIN_SHIFT_TOP = 50;
-  var MIN_COORD = 15;
-  var MAX_COORD = 230;
+  var PIN_SHIFT = 33;
+  var PIN_SHIFT_TOP = 49;
+  var MIN_COORD = 14;
+  var MAX_COORD = 227;
   var PIN_LEFT_DEFAULT = 600;
   var PIN_TOP_DEFAULT = 376;
   var MAP_FADED = 'map--faded';
@@ -44,20 +44,20 @@
       };
 
       function setTopCoords() {
-        if (mapPinMainCoords.top > mapAreaCoords.top + MIN_COORD) {
-          mapPinMain.style.top = (mapPinMainCoords.top <= 0)
-            ? (0 - mapAreaCoords.top + PIN_SHIFT) + 'px'
-            : (mapPinMain.offsetTop - shift.y) + 'px';
+        if (parseInt(mapPinMainCoords.top, 10) > parseInt(mapAreaCoords.top, 10) + MIN_COORD) {
+          mapPinMain.style.top = (parseInt(mapPinMainCoords.top, 10) <= 0)
+            ? (0 - parseInt(mapAreaCoords.top, 10) + PIN_SHIFT) + 'px'
+            : (parseInt(mapPinMain.offsetTop, 10) - shift.y) + 'px';
         } else {
-          mapPinMain.style.top = (mapAreaCoords.top + PIN_SHIFT_TOP) + 'px';
+          mapPinMain.style.top = (parseInt(mapAreaCoords.top, 10) + PIN_SHIFT_TOP) + 'px';
         }
       }
 
       function setBottomCoords() {
-        if (mapPinMainCoords.bottom >= mapAreaCoords.bottom - MAX_COORD) {
+        if (parseInt(mapPinMainCoords.bottom, 10) >= parseInt(mapAreaCoords.bottom, 10) - MAX_COORD) {
           mapPinMain.style.top = (mapAreaCoords.top < 0)
-            ? (0 - mapAreaCoords.top + mapAreaCoords.bottom - MAX_COORD - PIN_SHIFT) + 'px'
-            : (mapAreaCoords.bottom - MAX_COORD - PIN_SHIFT) + 'px';
+            ? (0 - parseInt(mapAreaCoords.top, 10) + parseInt(mapAreaCoords.bottom, 10) - MAX_COORD - PIN_SHIFT) + 'px'
+            : (parseInt(mapAreaCoords.bottom, 10) - MAX_COORD - PIN_SHIFT) + 'px';
         }
       }
 
