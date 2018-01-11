@@ -108,18 +108,17 @@
   }
 
   setAttribute(form, 'action', ACTION_URL);
+  setReadOnlyField(formAddress);
+  setRequiredField(formTitle);
+  setAttribute(formTitle, 'minlength', MIN_LENGTH);
+  setAttribute(formTitle, 'maxlength', MAX_LENGTH);
+  setRequiredField(formPrice);
+  setAttribute(formPrice, 'min', PRICE_FLAT);
+  setAttribute(formPrice, 'max', PRICE_MAX);
 
   window.form = {
     check: function () {
-
-      setReadOnlyField(formAddress);
-      setRequiredField(formTitle);
-      setAttribute(formTitle, 'minlength', MIN_LENGTH);
-      setAttribute(formTitle, 'maxlength', MAX_LENGTH);
-      setRequiredField(formPrice);
-      setAttribute(formPrice, 'min', PRICE_FLAT);
       setAttribute(formPrice, 'value', PRICE_FLAT);
-      setAttribute(formPrice, 'max', PRICE_MAX);
       setValue(formCapacity, VALUE_DEFAULT);
       setValuesDisabled(VALUE_DEFAULT);
     }
