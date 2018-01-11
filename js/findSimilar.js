@@ -8,7 +8,6 @@
   var HIGH_PRICE = 'high';
   var HIGH_PRICE_VALUE = 50000;
   var URL_PATH = 'https://1510.dump.academy/keksobooking';
-  var filterPrice;
   var noticeForm = document.querySelector('.notice__form');
   var mapFilter = document.querySelector('.map__filters');
   var guest = mapFilter.querySelector('#housing-guests');
@@ -76,13 +75,13 @@
     }
 
     function priceValue(value) {
-      if (value <= LOW_PRICE_VALUE && filterPrice === LOW_PRICE) {
+      if (value < LOW_PRICE_VALUE) {
         return LOW_PRICE;
       }
-      if (value >= LOW_PRICE_VALUE && value <= HIGH_PRICE_VALUE && filterPrice === MIDDLE_PRICE) {
+      if (value >= LOW_PRICE_VALUE && value < HIGH_PRICE_VALUE) {
         return MIDDLE_PRICE;
       }
-      if (value >= HIGH_PRICE_VALUE && filterPrice === HIGH_PRICE) {
+      if (value >= HIGH_PRICE_VALUE) {
         return HIGH_PRICE;
       }
       return FILTER_DEFAULT;
