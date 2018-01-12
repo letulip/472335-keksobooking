@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var DISABLED = 'disabled';
   var HIDDEN = 'hidden';
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
@@ -28,12 +27,12 @@
     },
     formFieldsetHide: function () {
       fieldsetElements.forEach(function (item) {
-        window.util.addClassName(item, DISABLED);
+        item.disabled = true;
       });
     },
     formFieldsetShow: function () {
       fieldsetElements.forEach(function (item) {
-        window.util.removeClassName(item, DISABLED);
+        item.disabled = false;
       });
     },
     popupHide: function (popup) {
