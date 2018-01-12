@@ -13,11 +13,15 @@
   var noticeForm = document.querySelector('.notice__form');
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapArea = map.querySelector('.map__pins');
+  var btnSubmit = document.querySelector('.form__submit');
+  var btnReset = document.querySelector('.form__reset');
 
   mapPinMain.style.top = PIN_TOP_DEFAULT + 'px';
   mapPinMain.style.left = PIN_LEFT_DEFAULT + 'px';
   mapPinMain.draggable = true;
   mapPinMain.tabIndex = 0;
+  btnSubmit.tabIndex = 0;
+  btnReset.tabIndex = 0;
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
