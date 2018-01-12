@@ -12,24 +12,25 @@
   photoContainer.appendChild(list);
   var advertPhotos = photoContainer.querySelector('.advert-photos');
   var uploadPhotos = document.querySelector('.form__photo-container .upload');
-  var imagesChooser = document.querySelector('#images');
+  var imageChooser = document.querySelector('#images');
   var preview = document.querySelector('.notice__preview img');
 
   avatarChooser.addEventListener('change', uploadAvatar);
-  imagesChooser.addEventListener('change', uploadPhoto);
+  imageChooser.addEventListener('change', uploadPhoto);
 
   function setStylesElements() {
     avatarUploader.style.position = 'relative';
     avatarChooser.style.left = 0;
     avatarChooser.style.opacity = 0;
+    avatarChooser.style.width = '220px';
     avatarChooser.style.height = '100%';
     list.style.display = 'flex';
     list.style.listStyle = 'none';
     uploadPhotos.style.position = 'relative';
-    imagesChooser.style.left = 0;
-    imagesChooser.style.opacity = 0;
-    imagesChooser.style.height = '100%';
-    imagesChooser.style.width = '100%';
+    imageChooser.style.left = 0;
+    imageChooser.style.opacity = 0;
+    imageChooser.style.height = '100%';
+    imageChooser.style.width = '100%';
   }
 
   function upload(file, callback, param1, param2) {
@@ -68,7 +69,7 @@
   }
 
   function uploadPhoto() {
-    var file = imagesChooser.files[0];
+    var file = imageChooser.files[0];
 
     upload(file, advertPhotoRender, IMG_HEIGHT, IMG_WIDTH);
   }

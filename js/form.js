@@ -21,7 +21,7 @@
   var formTimeIn = form.querySelector('#timein');
   var formTimeOut = form.querySelector('#timeout');
   var formType = form.querySelector('#type');
-  var formRooms = form.querySelector('#room_number');
+  var formRoom = form.querySelector('#room_number');
   var formCapacity = form.querySelector('#capacity');
 
   formTitle.addEventListener('invalid', function () {
@@ -48,12 +48,12 @@
     window.synchronizeFields(formTimeOut, formTimeIn, TIME_OUTS, TIME_INS, setValue);
   });
 
-  formRooms.addEventListener('change', function () {
-    formCapacity.value = formRooms.value === ROOM_MAX
+  formRoom.addEventListener('change', function () {
+    formCapacity.value = formRoom.value === ROOM_MAX
       ? CAPACITY_MIN
-      : formRooms.value;
+      : formRoom.value;
     deleteValuesDisabled(formCapacity);
-    setValuesDisabled(formRooms.value);
+    setValuesDisabled(formRoom.value);
   });
 
   function setValuesDisabled(defaultValue) {
@@ -113,12 +113,12 @@
   setAttribute(formTitle, 'minlength', MIN_LENGTH);
   setAttribute(formTitle, 'maxlength', MAX_LENGTH);
   setRequiredField(formPrice);
-  setAttribute(formPrice, 'min', PRICE_FLAT);
   setAttribute(formPrice, 'max', PRICE_MAX);
 
   window.form = {
     check: function () {
       setAttribute(formPrice, 'value', PRICE_FLAT);
+      setAttribute(formPrice, 'min', PRICE_FLAT);
       setValue(formCapacity, VALUE_DEFAULT);
       setValuesDisabled(VALUE_DEFAULT);
     }
