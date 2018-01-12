@@ -1,12 +1,25 @@
 'use strict';
 
 (function () {
+  var IMG_WIDTH = 50;
+  var IMG_HEIGHT = 70;
+  var ADVERT_COUNT = 5;
+  var VERTICAL_SHIFT = 41;
+  var ADVERT_TYPE = {
+    flat: 'Квартира',
+    house: 'Дом',
+    bungalo: 'Бунгало'
+  };
+  var similarAdvertTemplateContent = document.querySelector('template').content;
+  var similarPinElement = document.querySelector('.map__pins');
+
   function createAdvert(advert) {
-    var similarAdvertTemplateContent = document.querySelector('template').content;
     var advertContent = similarAdvertTemplateContent.cloneNode(true);
+    var pin = advertContent.querySelector('.map__pin');
     advertContent.querySelector('.map__pin img').src = advert.author.avatar;
-    advertContent.querySelector('.map__pin').style.left = getCoordinates(advert.location.x);
-    advertContent.querySelector('.map__pin').style.top = getCoordinates(advert.location.y);
+    pin.style.left = getCoordinates(advert.location.x);
+    pin.style.top = getCoordinates(advert.location.y - VERTICAL_SHIFT);
+    pin.tabIndex = 0;
     advertContent.querySelector('.popup__avatar').src = advert.author.avatar;
     advertContent.querySelector('h3').textContent = advert.offer.title;
     advertContent.querySelector('p small').textContent = 'Координаты на карте: ' + advert.offer.address;
@@ -17,14 +30,14 @@
     advertContent.querySelector('h4 + p + p').textContent = 'Заезд после ' + advert.offer.checkin + ', выезд до ' + advert.offer.checkout;
     getFeatures(advertContent, advert.offer.features);
     advertContent.querySelector('.popup__features + p').textContent = 'Описание: ' + advert.offer.description;
-    picturesAdding(advertContent, advert.offer.photos);
+    addPictures(advertContent, advert.offer.photos);
     return advertContent;
   }
 
   function getFeatures(element, features) {
-    var popupFeatures = element.querySelector('.popup__features');
-    var popupFeaturesChildren = popupFeatures.querySelectorAll('li');
-    popupFeaturesChildren.forEach(function (child) {
+    var popupFeature = element.querySelector('.popup__features');
+    var popupFeatureChildren = popupFeature.querySelectorAll('li');
+    popupFeatureChildren.forEach(function (child) {
       child.remove();
     });
     var fragment = document.createDocumentFragment();
@@ -38,27 +51,20 @@
   }
 
   function getType(type) {
-    if (type === 'flat') {
-      return 'Квартира';
-    } else if (type === 'house') {
-      return 'Дом';
-    } else {
-      return 'Бунгало';
-    }
+    return ADVERT_TYPE[type];
   }
 
-  function picturesAdding(element, photosArray) {
+  function addPictures(element, photosArray) {
     var inner = element.querySelector('.popup__pictures li');
-    element.querySelector('.popup__pictures').removeChild(inner);
-    for (var i = 0; i < photosArray.length; i++) {
-      var imgWidth = 50;
-      var imgHeight = 70;
+    var pictures = element.querySelector('.popup__pictures');
+    pictures.removeChild(inner);
+    photosArray.forEach(function (item) {
       var li = document.createElement('li');
       var img = new Image();
-      img.style.width = imgWidth + 'px';
-      img.style.height = imgHeight + 'px';
-      element.querySelector('.popup__pictures').appendChild(li).appendChild(img).src = photosArray[i];
-    }
+      img.style.width = IMG_WIDTH + 'px';
+      img.style.height = IMG_HEIGHT + 'px';
+      pictures.appendChild(li).appendChild(img).src = item;
+    });
   }
 
   function getCoordinates(locationCoords) {
@@ -76,15 +82,9 @@
         item.remove();
       });
       var fragment = document.createDocumentFragment();
-      var similarPinElement = document.querySelector('.map__pins');
-      var advertsCount = 5;
-      var arrayLength = advertsArray.length;
-      if (arrayLength > advertsCount) {
-        arrayLength = advertsCount;
-      }
-      for (var i = 0; i < arrayLength; i++) {
-        fragment.appendChild(createAdvert(advertsArray[i]));
-      }
+      advertsArray.slice(0, ADVERT_COUNT).forEach(function (item) {
+        fragment.appendChild(createAdvert(item));
+      });
       similarPinElement.appendChild(fragment);
     }
   };
