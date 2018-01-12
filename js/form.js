@@ -9,7 +9,7 @@
   var PRICE_MAX = 1000000;
   var ROOM_MAX = '100';
   var CAPACITY_MIN = '0';
-  var VALUE_DEFAULT = '1';
+  var DEFAULT_GUEST = '1';
   var MIN_LENGTH = 30;
   var MAX_LENGTH = 100;
   var DISABLED = 'disabled';
@@ -114,13 +114,14 @@
   setAttribute(formTitle, 'maxlength', MAX_LENGTH);
   setRequiredField(formPrice);
   setAttribute(formPrice, 'max', PRICE_MAX);
+  setAttribute(formPrice, 'value', PRICE_FLAT);
+  setAttribute(formPrice, 'min', PRICE_FLAT);
+  setValue(formCapacity, DEFAULT_GUEST);
+  setValuesDisabled(DEFAULT_GUEST);
 
   window.form = {
-    check: function () {
-      setAttribute(formPrice, 'value', PRICE_FLAT);
-      setAttribute(formPrice, 'min', PRICE_FLAT);
-      setValue(formCapacity, VALUE_DEFAULT);
-      setValuesDisabled(VALUE_DEFAULT);
+    setRoomCapacity: function () {
+      setValuesDisabled(DEFAULT_GUEST);
     }
   };
 })();

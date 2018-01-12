@@ -110,7 +110,6 @@
     window.backend.load(URL_PATH, successHandler, errorHandler);
 
     noticeForm.addEventListener('submit', function (evt) {
-      window.form.check();
       window.backend.save(new FormData(noticeForm), function () {
         window.restoreForm();
       }, errorHandler);

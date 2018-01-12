@@ -113,5 +113,5 @@
   }
 
   window.util.formFieldsetHide();
-  window.form.check();
+  window.form.setRoomCapacity();
 }());

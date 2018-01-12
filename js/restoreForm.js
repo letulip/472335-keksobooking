@@ -21,12 +21,13 @@
     window.setAddress();
     type.value = DEFAULT_TYPE;
     price.value = DEFAULT_PRICE;
+    price.min = DEFAULT_PRICE;
     timeIn.value = DEFAULT_TIME;
     timeOut.value = DEFAULT_TIME;
     roomNumber.value = DEFAULT_ROOM;
     roomCapacity.value = DEFAULT_GUEST;
     description.value = '';
 
-    window.form.check();
+    window.form.setRoomCapacity();
   };
 })();
