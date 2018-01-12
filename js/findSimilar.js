@@ -116,5 +116,9 @@
       }, errorHandler);
       evt.preventDefault();
     });
+    noticeForm.addEventListener('reset', function (evt) {
+      window.restoreForm();
+      evt.preventDefault();
+    });
   };
 })();
