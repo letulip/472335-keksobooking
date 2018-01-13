@@ -8,13 +8,13 @@
   var avatarChooser = document.querySelector('#avatar');
   var photoContainer = document.querySelector('.form__photo-container');
   var list = document.createElement('ul');
-  list.classList.add('advert-photos');
-  photoContainer.appendChild(list);
   var advertPhotos = photoContainer.querySelector('.advert-photos');
   var uploadPhotos = document.querySelector('.form__photo-container .upload');
   var imageChooser = document.querySelector('#images');
   var preview = document.querySelector('.notice__preview img');
 
+  list.classList.add('advert-photos');
+  photoContainer.appendChild(list);
   avatarChooser.addEventListener('change', uploadAvatar);
   imageChooser.addEventListener('change', uploadPhoto);
 
